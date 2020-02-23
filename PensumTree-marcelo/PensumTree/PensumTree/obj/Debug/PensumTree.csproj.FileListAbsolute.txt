@@ -1,1 +1,16 @@
 C:\Users\Pedro\Desktop\PED\PensumTree-marcelo\PensumTree\PensumTree\bin\Debug\PensumTree.exe.config
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree-marcelo\PensumTree\PensumTree\obj\Debug\PensumTree.csprojAssemblyReference.cache
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree-marcelo\PensumTree\PensumTree\obj\Debug\PensumTree.Form1.resources
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree-marcelo\PensumTree\PensumTree\obj\Debug\PensumTree.MantenimientoCarrera.resources
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree-marcelo\PensumTree\PensumTree\obj\Debug\PensumTree.MantenimientoEscuela.resources
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree-marcelo\PensumTree\PensumTree\obj\Debug\PensumTree.MantenimientoFacultad.resources
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree-marcelo\PensumTree\PensumTree\obj\Debug\PensumTree.MantenimientoMaterias.resources
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree-marcelo\PensumTree\PensumTree\obj\Debug\PensumTree.MantenimientoPensum.resources
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree-marcelo\PensumTree\PensumTree\obj\Debug\PensumTree.MantenimientoPlan.resources
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree-marcelo\PensumTree\PensumTree\obj\Debug\PensumTree.MantenimientoTipoCarrera.resources
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree-marcelo\PensumTree\PensumTree\obj\Debug\PensumTree.csproj.GenerateResource.cache
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree-marcelo\PensumTree\PensumTree\bin\Debug\PensumTree.exe.config
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree-marcelo\PensumTree\PensumTree\bin\Debug\PensumTree.exe
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree-marcelo\PensumTree\PensumTree\bin\Debug\PensumTree.pdb
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree-marcelo\PensumTree\PensumTree\obj\Debug\PensumTree.exe
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree-marcelo\PensumTree\PensumTree\obj\Debug\PensumTree.pdb
