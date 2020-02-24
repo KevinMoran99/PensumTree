@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="pensumModelStoreContainer" CdmEntityContainer="pensumEntities">
+    <EntitySetMapping Name="carreras">
+      <EntityTypeMapping TypeName="pensumModel.carrera">
+        <MappingFragment StoreEntitySet="carrera">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="idFacultad" ColumnName="idFacultad" />
+          <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="escuelas">
+      <EntityTypeMapping TypeName="pensumModel.escuela">
+        <MappingFragment StoreEntitySet="escuela">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="facultads">
+      <EntityTypeMapping TypeName="pensumModel.facultad">
+        <MappingFragment StoreEntitySet="facultad">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="materias">
+      <EntityTypeMapping TypeName="pensumModel.materia">
+        <MappingFragment StoreEntitySet="materia">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="uv" ColumnName="uv" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="primerCiclo" ColumnName="primerCiclo" />
+          <ScalarProperty Name="segundoCiclo" ColumnName="segundoCiclo" />
+          <ScalarProperty Name="lab" ColumnName="lab" />
+          <ScalarProperty Name="electiva" ColumnName="electiva" />
+          <ScalarProperty Name="idEscuela" ColumnName="idEscuela" />
+          <ScalarProperty Name="idPrerreq1" ColumnName="idPrerreq1" />
+          <ScalarProperty Name="idPrerreq2" ColumnName="idPrerreq2" />
+          <ScalarProperty Name="idPrerreq3" ColumnName="idPrerreq3" />
+          <ScalarProperty Name="idPrerreq4" ColumnName="idPrerreq4" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pensums">
+      <EntityTypeMapping TypeName="pensumModel.pensum">
+        <MappingFragment StoreEntitySet="pensum">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idPlan" ColumnName="idPlan" />
+          <ScalarProperty Name="idMateria" ColumnName="idMateria" />
+          <ScalarProperty Name="corr" ColumnName="corr" />
+          <ScalarProperty Name="ciclo" ColumnName="ciclo" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="plans">
+      <EntityTypeMapping TypeName="pensumModel.plan">
+        <MappingFragment StoreEntitySet="plan">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idCarrera" ColumnName="idCarrera" />
+          <ScalarProperty Name="inicio" ColumnName="inicio" />
+          <ScalarProperty Name="fin" ColumnName="fin" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipo_carrera">
+      <EntityTypeMapping TypeName="pensumModel.tipo_carrera">
+        <MappingFragment StoreEntitySet="tipo_carrera">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="minUv" ColumnName="minUv" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

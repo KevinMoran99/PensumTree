@@ -12,9 +12,18 @@ namespace PensumTree
 {
     public partial class Form1 : Form
     {
+        //Tutotial Setup EntityFramework: https://www.imaginaformacion.com/tutorial/como-conectar-entity-framework-con-mysql/
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MantenimientoFacultad frm = new MantenimientoFacultad();
+            frm.Show();
+            this.Hide();
         }
     }
 }

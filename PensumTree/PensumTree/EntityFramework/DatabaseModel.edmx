@@ -1,0 +1,632 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="pensumModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="carrera">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idFacultad" Type="uint" Nullable="false" />
+          <Property Name="idTipo" Type="uint" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="escuela">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="facultad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="materia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="uv" Type="uint" Nullable="false" />
+          <Property Name="codigo" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="primerCiclo" Type="bit" Nullable="false" />
+          <Property Name="segundoCiclo" Type="bit" Nullable="false" />
+          <Property Name="lab" Type="bit" Nullable="false" />
+          <Property Name="electiva" Type="bit" Nullable="false" />
+          <Property Name="idEscuela" Type="uint" Nullable="false" />
+          <Property Name="idPrerreq1" Type="uint" />
+          <Property Name="idPrerreq2" Type="uint" />
+          <Property Name="idPrerreq3" Type="uint" />
+          <Property Name="idPrerreq4" Type="uint" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pensum">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPlan" Type="uint" Nullable="false" />
+          <Property Name="idMateria" Type="uint" Nullable="false" />
+          <Property Name="corr" Type="uint" Nullable="false" />
+          <Property Name="ciclo" Type="uint" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="plan">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCarrera" Type="uint" Nullable="false" />
+          <Property Name="inicio" Type="uint" Nullable="false" />
+          <Property Name="fin" Type="uint" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo_carrera">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="minUv" Type="uint" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="carrera_ibfk_1">
+          <End Role="facultad" Type="Self.facultad" Multiplicity="1" />
+          <End Role="carrera" Type="Self.carrera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="facultad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="carrera">
+              <PropertyRef Name="idFacultad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="carrera_ibfk_2">
+          <End Role="tipo_carrera" Type="Self.tipo_carrera" Multiplicity="1" />
+          <End Role="carrera" Type="Self.carrera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_carrera">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="carrera">
+              <PropertyRef Name="idTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materia_ibfk_1">
+          <End Role="escuela" Type="Self.escuela" Multiplicity="1" />
+          <End Role="materia" Type="Self.materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="escuela">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materia">
+              <PropertyRef Name="idEscuela" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materia_ibfk_2">
+          <End Role="materia" Type="Self.materia" Multiplicity="0..1" />
+          <End Role="materia1" Type="Self.materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materia1">
+              <PropertyRef Name="idPrerreq1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materia_ibfk_3">
+          <End Role="materia" Type="Self.materia" Multiplicity="0..1" />
+          <End Role="materia1" Type="Self.materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materia1">
+              <PropertyRef Name="idPrerreq2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materia_ibfk_4">
+          <End Role="materia" Type="Self.materia" Multiplicity="0..1" />
+          <End Role="materia1" Type="Self.materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materia1">
+              <PropertyRef Name="idPrerreq3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materia_ibfk_5">
+          <End Role="materia" Type="Self.materia" Multiplicity="0..1" />
+          <End Role="materia1" Type="Self.materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materia1">
+              <PropertyRef Name="idPrerreq4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pensum_ibfk_1">
+          <End Role="plan" Type="Self.plan" Multiplicity="1" />
+          <End Role="pensum" Type="Self.pensum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="plan">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pensum">
+              <PropertyRef Name="idPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pensum_ibfk_2">
+          <End Role="materia" Type="Self.materia" Multiplicity="1" />
+          <End Role="pensum" Type="Self.pensum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pensum">
+              <PropertyRef Name="idMateria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="plan_ibfk_1">
+          <End Role="carrera" Type="Self.carrera" Multiplicity="1" />
+          <End Role="plan" Type="Self.plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carrera">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="plan">
+              <PropertyRef Name="idCarrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="pensumModelStoreContainer">
+          <EntitySet Name="carrera" EntityType="Self.carrera" Schema="pensum" store:Type="Tables" />
+          <EntitySet Name="escuela" EntityType="Self.escuela" Schema="pensum" store:Type="Tables" />
+          <EntitySet Name="facultad" EntityType="Self.facultad" Schema="pensum" store:Type="Tables" />
+          <EntitySet Name="materia" EntityType="Self.materia" Schema="pensum" store:Type="Tables" />
+          <EntitySet Name="pensum" EntityType="Self.pensum" Schema="pensum" store:Type="Tables" />
+          <EntitySet Name="plan" EntityType="Self.plan" Schema="pensum" store:Type="Tables" />
+          <EntitySet Name="tipo_carrera" EntityType="Self.tipo_carrera" Schema="pensum" store:Type="Tables" />
+          <AssociationSet Name="carrera_ibfk_1" Association="Self.carrera_ibfk_1">
+            <End Role="facultad" EntitySet="facultad" />
+            <End Role="carrera" EntitySet="carrera" />
+          </AssociationSet>
+          <AssociationSet Name="carrera_ibfk_2" Association="Self.carrera_ibfk_2">
+            <End Role="tipo_carrera" EntitySet="tipo_carrera" />
+            <End Role="carrera" EntitySet="carrera" />
+          </AssociationSet>
+          <AssociationSet Name="materia_ibfk_1" Association="Self.materia_ibfk_1">
+            <End Role="escuela" EntitySet="escuela" />
+            <End Role="materia" EntitySet="materia" />
+          </AssociationSet>
+          <AssociationSet Name="materia_ibfk_2" Association="Self.materia_ibfk_2">
+            <End Role="materia" EntitySet="materia" />
+            <End Role="materia1" EntitySet="materia" />
+          </AssociationSet>
+          <AssociationSet Name="materia_ibfk_3" Association="Self.materia_ibfk_3">
+            <End Role="materia" EntitySet="materia" />
+            <End Role="materia1" EntitySet="materia" />
+          </AssociationSet>
+          <AssociationSet Name="materia_ibfk_4" Association="Self.materia_ibfk_4">
+            <End Role="materia" EntitySet="materia" />
+            <End Role="materia1" EntitySet="materia" />
+          </AssociationSet>
+          <AssociationSet Name="materia_ibfk_5" Association="Self.materia_ibfk_5">
+            <End Role="materia" EntitySet="materia" />
+            <End Role="materia1" EntitySet="materia" />
+          </AssociationSet>
+          <AssociationSet Name="pensum_ibfk_1" Association="Self.pensum_ibfk_1">
+            <End Role="plan" EntitySet="plan" />
+            <End Role="pensum" EntitySet="pensum" />
+          </AssociationSet>
+          <AssociationSet Name="pensum_ibfk_2" Association="Self.pensum_ibfk_2">
+            <End Role="materia" EntitySet="materia" />
+            <End Role="pensum" EntitySet="pensum" />
+          </AssociationSet>
+          <AssociationSet Name="plan_ibfk_1" Association="Self.plan_ibfk_1">
+            <End Role="carrera" EntitySet="carrera" />
+            <End Role="plan" EntitySet="plan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="pensumModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="carrera">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idFacultad" Type="Int64" Nullable="false" />
+          <Property Name="idTipo" Type="Int64" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="facultad" Relationship="Self.carrera_ibfk_1" FromRole="carrera" ToRole="facultad" />
+          <NavigationProperty Name="tipo_carrera" Relationship="Self.carrera_ibfk_2" FromRole="carrera" ToRole="tipo_carrera" />
+          <NavigationProperty Name="plans" Relationship="Self.plan_ibfk_1" FromRole="carrera" ToRole="plan" />
+        </EntityType>
+        <EntityType Name="escuela">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="materias" Relationship="Self.materia_ibfk_1" FromRole="escuela" ToRole="materia" />
+        </EntityType>
+        <EntityType Name="facultad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="carreras" Relationship="Self.carrera_ibfk_1" FromRole="facultad" ToRole="carrera" />
+        </EntityType>
+        <EntityType Name="materia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uv" Type="Int64" Nullable="false" />
+          <Property Name="codigo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="primerCiclo" Type="Boolean" Nullable="false" />
+          <Property Name="segundoCiclo" Type="Boolean" Nullable="false" />
+          <Property Name="lab" Type="Boolean" Nullable="false" />
+          <Property Name="electiva" Type="Boolean" Nullable="false" />
+          <Property Name="idEscuela" Type="Int64" Nullable="false" />
+          <Property Name="idPrerreq1" Type="Int64" />
+          <Property Name="idPrerreq2" Type="Int64" />
+          <Property Name="idPrerreq3" Type="Int64" />
+          <Property Name="idPrerreq4" Type="Int64" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="escuela" Relationship="Self.materia_ibfk_1" FromRole="materia" ToRole="escuela" />
+          <NavigationProperty Name="materia1" Relationship="Self.materia_ibfk_2" FromRole="materia" ToRole="materia1" />
+          <NavigationProperty Name="materia2" Relationship="Self.materia_ibfk_2" FromRole="materia1" ToRole="materia" />
+          <NavigationProperty Name="materia11" Relationship="Self.materia_ibfk_3" FromRole="materia" ToRole="materia1" />
+          <NavigationProperty Name="materia3" Relationship="Self.materia_ibfk_3" FromRole="materia1" ToRole="materia" />
+          <NavigationProperty Name="materia12" Relationship="Self.materia_ibfk_4" FromRole="materia" ToRole="materia1" />
+          <NavigationProperty Name="materia4" Relationship="Self.materia_ibfk_4" FromRole="materia1" ToRole="materia" />
+          <NavigationProperty Name="materia13" Relationship="Self.materia_ibfk_5" FromRole="materia" ToRole="materia1" />
+          <NavigationProperty Name="materia5" Relationship="Self.materia_ibfk_5" FromRole="materia1" ToRole="materia" />
+          <NavigationProperty Name="pensums" Relationship="Self.pensum_ibfk_2" FromRole="materia" ToRole="pensum" />
+        </EntityType>
+        <EntityType Name="pensum">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPlan" Type="Int64" Nullable="false" />
+          <Property Name="idMateria" Type="Int64" Nullable="false" />
+          <Property Name="corr" Type="Int64" Nullable="false" />
+          <Property Name="ciclo" Type="Int64" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="materia" Relationship="Self.pensum_ibfk_2" FromRole="pensum" ToRole="materia" />
+          <NavigationProperty Name="plan" Relationship="Self.pensum_ibfk_1" FromRole="pensum" ToRole="plan" />
+        </EntityType>
+        <EntityType Name="plan">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCarrera" Type="Int64" Nullable="false" />
+          <Property Name="inicio" Type="Int64" Nullable="false" />
+          <Property Name="fin" Type="Int64" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="carrera" Relationship="Self.plan_ibfk_1" FromRole="plan" ToRole="carrera" />
+          <NavigationProperty Name="pensums" Relationship="Self.pensum_ibfk_1" FromRole="plan" ToRole="pensum" />
+        </EntityType>
+        <EntityType Name="tipo_carrera">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="minUv" Type="Int64" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="carreras" Relationship="Self.carrera_ibfk_2" FromRole="tipo_carrera" ToRole="carrera" />
+        </EntityType>
+        <Association Name="carrera_ibfk_1">
+          <End Role="facultad" Type="Self.facultad" Multiplicity="1" />
+          <End Role="carrera" Type="Self.carrera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="facultad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="carrera">
+              <PropertyRef Name="idFacultad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="carrera_ibfk_2">
+          <End Role="tipo_carrera" Type="Self.tipo_carrera" Multiplicity="1" />
+          <End Role="carrera" Type="Self.carrera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_carrera">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="carrera">
+              <PropertyRef Name="idTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="plan_ibfk_1">
+          <End Role="carrera" Type="Self.carrera" Multiplicity="1" />
+          <End Role="plan" Type="Self.plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carrera">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="plan">
+              <PropertyRef Name="idCarrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materia_ibfk_1">
+          <End Role="escuela" Type="Self.escuela" Multiplicity="1" />
+          <End Role="materia" Type="Self.materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="escuela">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materia">
+              <PropertyRef Name="idEscuela" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materia_ibfk_2">
+          <End Role="materia" Type="Self.materia" Multiplicity="0..1" />
+          <End Role="materia1" Type="Self.materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materia1">
+              <PropertyRef Name="idPrerreq1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materia_ibfk_3">
+          <End Role="materia" Type="Self.materia" Multiplicity="0..1" />
+          <End Role="materia1" Type="Self.materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materia1">
+              <PropertyRef Name="idPrerreq2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materia_ibfk_4">
+          <End Role="materia" Type="Self.materia" Multiplicity="0..1" />
+          <End Role="materia1" Type="Self.materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materia1">
+              <PropertyRef Name="idPrerreq3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materia_ibfk_5">
+          <End Role="materia" Type="Self.materia" Multiplicity="0..1" />
+          <End Role="materia1" Type="Self.materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="materia1">
+              <PropertyRef Name="idPrerreq4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pensum_ibfk_2">
+          <End Role="materia" Type="Self.materia" Multiplicity="1" />
+          <End Role="pensum" Type="Self.pensum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pensum">
+              <PropertyRef Name="idMateria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pensum_ibfk_1">
+          <End Role="plan" Type="Self.plan" Multiplicity="1" />
+          <End Role="pensum" Type="Self.pensum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="plan">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pensum">
+              <PropertyRef Name="idPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="pensumEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="carreras" EntityType="Self.carrera" />
+          <EntitySet Name="escuelas" EntityType="Self.escuela" />
+          <EntitySet Name="facultads" EntityType="Self.facultad" />
+          <EntitySet Name="materias" EntityType="Self.materia" />
+          <EntitySet Name="pensums" EntityType="Self.pensum" />
+          <EntitySet Name="plans" EntityType="Self.plan" />
+          <EntitySet Name="tipo_carrera" EntityType="Self.tipo_carrera" />
+          <AssociationSet Name="carrera_ibfk_1" Association="Self.carrera_ibfk_1">
+            <End Role="facultad" EntitySet="facultads" />
+            <End Role="carrera" EntitySet="carreras" />
+          </AssociationSet>
+          <AssociationSet Name="carrera_ibfk_2" Association="Self.carrera_ibfk_2">
+            <End Role="tipo_carrera" EntitySet="tipo_carrera" />
+            <End Role="carrera" EntitySet="carreras" />
+          </AssociationSet>
+          <AssociationSet Name="plan_ibfk_1" Association="Self.plan_ibfk_1">
+            <End Role="carrera" EntitySet="carreras" />
+            <End Role="plan" EntitySet="plans" />
+          </AssociationSet>
+          <AssociationSet Name="materia_ibfk_1" Association="Self.materia_ibfk_1">
+            <End Role="escuela" EntitySet="escuelas" />
+            <End Role="materia" EntitySet="materias" />
+          </AssociationSet>
+          <AssociationSet Name="materia_ibfk_2" Association="Self.materia_ibfk_2">
+            <End Role="materia" EntitySet="materias" />
+            <End Role="materia1" EntitySet="materias" />
+          </AssociationSet>
+          <AssociationSet Name="materia_ibfk_3" Association="Self.materia_ibfk_3">
+            <End Role="materia" EntitySet="materias" />
+            <End Role="materia1" EntitySet="materias" />
+          </AssociationSet>
+          <AssociationSet Name="materia_ibfk_4" Association="Self.materia_ibfk_4">
+            <End Role="materia" EntitySet="materias" />
+            <End Role="materia1" EntitySet="materias" />
+          </AssociationSet>
+          <AssociationSet Name="materia_ibfk_5" Association="Self.materia_ibfk_5">
+            <End Role="materia" EntitySet="materias" />
+            <End Role="materia1" EntitySet="materias" />
+          </AssociationSet>
+          <AssociationSet Name="pensum_ibfk_2" Association="Self.pensum_ibfk_2">
+            <End Role="materia" EntitySet="materias" />
+            <End Role="pensum" EntitySet="pensums" />
+          </AssociationSet>
+          <AssociationSet Name="pensum_ibfk_1" Association="Self.pensum_ibfk_1">
+            <End Role="plan" EntitySet="plans" />
+            <End Role="pensum" EntitySet="pensums" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="pensumModelStoreContainer" CdmEntityContainer="pensumEntities">
+          <EntitySetMapping Name="carreras">
+            <EntityTypeMapping TypeName="pensumModel.carrera">
+              <MappingFragment StoreEntitySet="carrera">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idFacultad" ColumnName="idFacultad" />
+                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="escuelas">
+            <EntityTypeMapping TypeName="pensumModel.escuela">
+              <MappingFragment StoreEntitySet="escuela">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="facultads">
+            <EntityTypeMapping TypeName="pensumModel.facultad">
+              <MappingFragment StoreEntitySet="facultad">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materias">
+            <EntityTypeMapping TypeName="pensumModel.materia">
+              <MappingFragment StoreEntitySet="materia">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="uv" ColumnName="uv" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="primerCiclo" ColumnName="primerCiclo" />
+                <ScalarProperty Name="segundoCiclo" ColumnName="segundoCiclo" />
+                <ScalarProperty Name="lab" ColumnName="lab" />
+                <ScalarProperty Name="electiva" ColumnName="electiva" />
+                <ScalarProperty Name="idEscuela" ColumnName="idEscuela" />
+                <ScalarProperty Name="idPrerreq1" ColumnName="idPrerreq1" />
+                <ScalarProperty Name="idPrerreq2" ColumnName="idPrerreq2" />
+                <ScalarProperty Name="idPrerreq3" ColumnName="idPrerreq3" />
+                <ScalarProperty Name="idPrerreq4" ColumnName="idPrerreq4" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pensums">
+            <EntityTypeMapping TypeName="pensumModel.pensum">
+              <MappingFragment StoreEntitySet="pensum">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idPlan" ColumnName="idPlan" />
+                <ScalarProperty Name="idMateria" ColumnName="idMateria" />
+                <ScalarProperty Name="corr" ColumnName="corr" />
+                <ScalarProperty Name="ciclo" ColumnName="ciclo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="plans">
+            <EntityTypeMapping TypeName="pensumModel.plan">
+              <MappingFragment StoreEntitySet="plan">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idCarrera" ColumnName="idCarrera" />
+                <ScalarProperty Name="inicio" ColumnName="inicio" />
+                <ScalarProperty Name="fin" ColumnName="fin" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_carrera">
+            <EntityTypeMapping TypeName="pensumModel.tipo_carrera">
+              <MappingFragment StoreEntitySet="tipo_carrera">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="minUv" ColumnName="minUv" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

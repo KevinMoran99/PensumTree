@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ab475a1f73ef4add9e32966725d13a9c" Name="Diagram1">
+        <EntityTypeShape EntityType="pensumModel.carrera" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="pensumModel.escuela" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="pensumModel.facultad" Width="1.5" PointX="1.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="pensumModel.materia" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="pensumModel.pensum" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="pensumModel.plan" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="pensumModel.tipo_carrera" Width="1.5" PointX="1.5" PointY="15.25" IsExpanded="true" />
+        <AssociationConnector Association="pensumModel.carrera_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="pensumModel.carrera_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="pensumModel.plan_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="pensumModel.materia_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="pensumModel.materia_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="pensumModel.materia_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="pensumModel.materia_ibfk_4" ManuallyRouted="false" />
+        <AssociationConnector Association="pensumModel.materia_ibfk_5" ManuallyRouted="false" />
+        <AssociationConnector Association="pensumModel.pensum_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="pensumModel.pensum_ibfk_1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
