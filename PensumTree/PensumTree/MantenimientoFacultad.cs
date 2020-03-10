@@ -54,6 +54,7 @@ namespace PensumTree
         //Rellena los campos de la facultad que se seleccione del datagrid
         private void fillSelectedData(facultad currentFac)
         {
+            
             txtNombre.Text = currentFac.nombre;
             if (currentFac.estado)
             {
