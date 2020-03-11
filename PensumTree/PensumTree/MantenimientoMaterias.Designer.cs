@@ -212,6 +212,7 @@
             this.dgvMaterias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMaterias.Size = new System.Drawing.Size(903, 361);
             this.dgvMaterias.TabIndex = 57;
+            this.dgvMaterias.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMaterias_CellClick);
             // 
             // btnAgregar
             // 
@@ -332,6 +333,7 @@
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(221, 20);
             this.txtBuscar.TabIndex = 71;
+            this.txtBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscar_KeyPress);
             // 
             // MantenimientoMaterias
             // 
@@ -370,6 +372,8 @@
             this.Name = "MantenimientoMaterias";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MantenimientoMaterias";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MantenimientoMaterias_FormClosed);
+            this.Load += new System.EventHandler(this.MantenimientoMaterias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMaterias)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

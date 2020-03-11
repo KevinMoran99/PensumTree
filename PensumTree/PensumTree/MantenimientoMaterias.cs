@@ -20,7 +20,11 @@ namespace PensumTree
         private static MateriaController materiaController = new MateriaController();
         private List<materia> materias = new List<materia>();
 
-        private facultad selectedMateria= null;
+        private materia selectedMateria= null;
+
+        private int[] columnsToChange = { 0, 1, 2, 3,4,5,6,7,13,14,16,18,20,22,23};
+        private int[] columnsToHide = {8,9,10,11,12,15,17,19,21 };
+        private string[] titlesforColumns = { "ID", "Nombre", "UV", "Código", "Ciclo Impar", "Ciclo Par", "Laboratorio", "Electiva","Estado", "Escuela", "Pre-requisito1", "Pre-requisito2", "Pre-requisito3", "Pre-requisito4", "Pensum" };
         public MantenimientoMaterias()
         {
             InitializeComponent();
@@ -36,8 +40,8 @@ namespace PensumTree
                 dgvMaterias.DataSource = materias;
 
                 //Modificando propiedades del datagrid
-                //FormUtils.changeTitlesForDgv(titlesforColumns, columnsToChange, dgvFacultades);
-                //FormUtils.hideColumnsForDgv(columnsToHide, dgvFacultades);
+                FormUtils.changeTitlesForDgv(titlesforColumns, columnsToChange, dgvMaterias);
+                FormUtils.hideColumnsForDgv(columnsToHide, dgvMaterias);
                 return;
             }
             MessageBox.Show("Error al cargar los datos de materias", "Error",
@@ -51,11 +55,11 @@ namespace PensumTree
             txtNombre.Text = currentMat.nombre;
             txtCodigo.Text = currentMat.codigo;
             txtUV.Text =Convert.ToString(currentMat.uv);
-            cbxEscuela.SelectedItem = currentMat.idEscuela;
-            cbxPreReq1.SelectedItem = currentMat.idPrerreq1;
-            cbxPreReq2.SelectedItem = currentMat.idPrerreq2;
-            cbxPreReq3.SelectedItem = currentMat.idPrerreq3;
-            cbxPreReq4.SelectedItem = currentMat.idPrerreq4;
+            cbxEscuela.SelectedItem = currentMat.escuela;
+            cbxPreReq1.SelectedItem = currentMat.materia2;
+            cbxPreReq2.SelectedItem = currentMat.materia3;
+            cbxPreReq3.SelectedItem = currentMat.materia4;
+            cbxPreReq4.SelectedItem = currentMat.materia5;
 
             if (currentMat.primerCiclo)
             {
@@ -215,18 +219,107 @@ namespace PensumTree
                 new ToValidate(txtUV, new ControlValidator[]{ FormValidators.isNumber},
                 new string[]{"Solo se aceptan datos numericos"}),
 
-                new ToValidate(cbxEscuela, new ControlValidator[] {FormValidators.isSelected},
-                new string[]{"Seleccione una escuela "}),
+               // new ToValidate(cbxEscuela, new ControlValidator[] {FormValidators.isSelected},
+                //new string[]{"Seleccione una escuela "}),
 
-                new ToValidate(cbxPreReq1, new ControlValidator[]{ FormValidators.isSelected},
-                new string[]{"Seleccione una materia pre-requisito"})
+                //new ToValidate(cbxPreReq1, new ControlValidator[]{ FormValidators.isSelected},
+                //new string[]{"Seleccione una materia pre-requisito"})
             };
             return validators;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            try
+            {
+                //Obteniendo la lista de validaciones para este form, y procediendo a validar
+                List<ControlErrorProvider> errorProvider = FormValidators.validFormTest(getValidators());
+                bool isValid = errorProvider == null;
+                //Si se pasan todas las validaciones, se procede a guardar la información
+                if (isValid)
+                {
+                    //Si no se ha seleccionado ninguna facultad, se crea un nuevo registro
+                    if (selectedMateria == null)
+                    {
+                        saveData();
+                        try
+                        {
+                            cleanForm();
+                        }
+                        catch (Exception ex)
+                        {
+                            FormUtils.defaultErrorMessage(ex);
+                        }
+                    }
 
+                }
+                else
+                {
+                    //Si no se pasan las validaciones, se muestran los mensajes de error
+                    this.errorProvider.Clear();
+                    MessageBox.Show("Algunos datos ingresados son inválidos.\n" +
+                        "Pase el puntero sobre los íconos de error para ver los detalles de cada campo.", "Error al ingresar datos",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    foreach (ControlErrorProvider controlErrorProvider in errorProvider)
+                    {
+                        this.errorProvider.SetError(controlErrorProvider.ControlName,
+                            controlErrorProvider.ErrorMessage);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                FormUtils.defaultErrorMessage(ex);
+            }
+        }
+
+        private void MantenimientoMaterias_Load(object sender, EventArgs e)
+        {
+            //Al cargarse el form, lo primero que debe hacer es cargar la lista de facultades
+            try
+            {
+                loadTable();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error al cargar",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                filterData();
+            }
+            catch (Exception ex)
+            {
+                FormUtils.defaultErrorMessage(ex);
+            }
+        }
+
+        private void dgvMaterias_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            try
+            {
+                int index = e.RowIndex;
+                if (index >= 0)
+                {
+                    selectedMateria = materias[index];
+                    fillSelectedData(selectedMateria);
+                }
+            }
+            catch (Exception ex)
+            {
+                FormUtils.defaultErrorMessage(ex);
+            }
+        }
+
+        private void MantenimientoMaterias_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
