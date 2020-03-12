@@ -55,15 +55,24 @@ namespace PensumTree
             Operation<materia> getMateriasOperation = materiaController.getActiveRecords();
             Operation<escuela> getEscuelasOperation = escuelaController.getActiveRecords();
 
-            if (getMateriasOperation.State && getEscuelasOperation.State)
+            if (getEscuelasOperation.State)
+            {
+                escuelas = getEscuelasOperation.Data;
+                cbxEscuela.DataSource = escuelas;
+            }
+            else
+            {
+                MessageBox.Show("Error al cargar los datos de las escuelas", "Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (getMateriasOperation.State)
             {
                 materias = getMateriasOperation.Data;
-                escuelas = getEscuelasOperation.Data;
                 cbxPreReq1.DataSource = materias;
                 cbxPreReq2.DataSource = materias;
                 cbxPreReq3.DataSource = materias;
                 cbxPreReq4.DataSource = materias;
-                cbxEscuela.DataSource = escuelas;
             }
             else
             {
@@ -249,8 +258,8 @@ namespace PensumTree
                 new ToValidate(cbxEscuela, new ControlValidator[] {FormValidators.isSelected},
                 new string[]{"Seleccione una escuela "}),
 
-                new ToValidate(cbxPreReq1, new ControlValidator[]{ FormValidators.isSelected},
-                new string[]{"Seleccione una materia pre-requisito"})
+               // new ToValidate(cbxPreReq1, new ControlValidator[]{ FormValidators.isSelected},
+                //new string[]{"Seleccione una materia pre-requisito"})
             };
             return validators;
         }
