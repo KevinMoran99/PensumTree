@@ -17,8 +17,10 @@ namespace PensumTree
 {
     public partial class MantenimientoMaterias : Form
     {
+        private static EscuelaController escuelaController = new EscuelaController();
         private static MateriaController materiaController = new MateriaController();
         private List<materia> materias = new List<materia>();
+        private List<escuela> escuelas = new List<escuela>();
 
         private materia selectedMateria= null;
 
@@ -48,6 +50,27 @@ namespace PensumTree
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        private void loadCbx()
+        {
+            Operation<materia> getMateriasOperation = materiaController.getActiveRecords();
+            Operation<escuela> getEscuelasOperation = escuelaController.getActiveRecords();
+
+            if (getMateriasOperation.State && getEscuelasOperation.State)
+            {
+                materias = getMateriasOperation.Data;
+                escuelas = getEscuelasOperation.Data;
+                cbxPreReq1.DataSource = materias;
+                cbxPreReq2.DataSource = materias;
+                cbxPreReq3.DataSource = materias;
+                cbxPreReq4.DataSource = materias;
+                cbxEscuela.DataSource = escuelas;
+            }
+            else
+            {
+                MessageBox.Show("Error al cargar los datos de materias pre-requisitos", "Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         //Rellena los campos de la facultad que se seleccione del datagrid
         private void fillSelectedData(materia currentMat)
@@ -178,6 +201,10 @@ namespace PensumTree
             btnAgregar.Text = "Agregar";
             selectedMateria = null;
             errorProvider.Clear();
+            chPar.Checked = false;
+            chImpar.Checked = false;
+            chElectiva.Checked = false;
+            chLab.Checked = false;
         }
 
         //Retorna la lista de textbox que contiene el formulario
@@ -219,11 +246,11 @@ namespace PensumTree
                 new ToValidate(txtUV, new ControlValidator[]{ FormValidators.isNumber},
                 new string[]{"Solo se aceptan datos numericos"}),
 
-               // new ToValidate(cbxEscuela, new ControlValidator[] {FormValidators.isSelected},
-                //new string[]{"Seleccione una escuela "}),
+                new ToValidate(cbxEscuela, new ControlValidator[] {FormValidators.isSelected},
+                new string[]{"Seleccione una escuela "}),
 
-                //new ToValidate(cbxPreReq1, new ControlValidator[]{ FormValidators.isSelected},
-                //new string[]{"Seleccione una materia pre-requisito"})
+                new ToValidate(cbxPreReq1, new ControlValidator[]{ FormValidators.isSelected},
+                new string[]{"Seleccione una materia pre-requisito"})
             };
             return validators;
         }
@@ -242,16 +269,12 @@ namespace PensumTree
                     if (selectedMateria == null)
                     {
                         saveData();
-                        try
-                        {
-                            cleanForm();
-                        }
-                        catch (Exception ex)
-                        {
-                            FormUtils.defaultErrorMessage(ex);
-                        }
                     }
-
+                    //Si se había seleccionado una facultad, se modifica dicho registro
+                    else
+                    {
+                        updateData(selectedMateria);
+                    }
                 }
                 else
                 {
@@ -279,6 +302,7 @@ namespace PensumTree
             try
             {
                 loadTable();
+                loadCbx();
             }
             catch (Exception ex)
             {
@@ -320,6 +344,18 @@ namespace PensumTree
         private void MantenimientoMaterias_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                cleanForm();
+            }
+            catch (Exception ex)
+            {
+                FormUtils.defaultErrorMessage(ex);
+            }
         }
     }
 }

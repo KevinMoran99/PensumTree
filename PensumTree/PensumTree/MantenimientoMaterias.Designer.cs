@@ -48,7 +48,7 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.dgvMaterias = new System.Windows.Forms.DataGridView();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnEditar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.rdbActivo = new System.Windows.Forms.RadioButton();
@@ -225,15 +225,16 @@
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.button1_Click);
             // 
-            // btnEditar
+            // btnLimpiar
             // 
-            this.btnEditar.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.Location = new System.Drawing.Point(685, 204);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(172, 36);
-            this.btnEditar.TabIndex = 59;
-            this.btnEditar.Text = "Editar";
-            this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiar.Location = new System.Drawing.Point(685, 204);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(172, 36);
+            this.btnLimpiar.TabIndex = 59;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // label3
             // 
@@ -349,7 +350,7 @@
             this.Controls.Add(this.rdbActivo);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.btnEditar);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dgvMaterias);
             this.Controls.Add(this.lblTitulo);
@@ -401,7 +402,7 @@
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.DataGridView dgvMaterias;
         private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.RadioButton rdbActivo;
