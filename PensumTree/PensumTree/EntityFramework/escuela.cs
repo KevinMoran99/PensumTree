@@ -26,5 +26,11 @@ namespace PensumTree.EntityFramework
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<materia> materias { get; set; }
+
+        override
+          public string ToString()
+        {
+            return nombre;
+        }
     }
 }
