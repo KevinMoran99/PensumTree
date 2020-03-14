@@ -21,7 +21,7 @@ namespace PensumTree
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MantenimientoFacultad frm = new MantenimientoFacultad();
+            MantenimientoPensum2 frm = new MantenimientoPensum2();
             frm.Show();
             this.Hide();
         }

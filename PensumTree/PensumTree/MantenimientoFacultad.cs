@@ -211,7 +211,7 @@ namespace PensumTree
             ToValidate[] validators =
             {
                 new ToValidate(txtNombre, new ControlValidator[] { FormValidators.hasText },
-                new string[] { "Ingresa un nombre para la facultad" })
+                new string[] { "Ingresa un nombre para la facultad" }),
             };
             return validators;
         }
