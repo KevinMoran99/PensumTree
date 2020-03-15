@@ -98,6 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CarreraController.cs" />
     <Compile Include="EntityFramework\carrera.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>

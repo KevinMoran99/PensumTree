@@ -28,49 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
+            this.components = new System.ComponentModel.Container();
+            this.cmbFacultades = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnEditar = new System.Windows.Forms.Button();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.dgvCarreras = new System.Windows.Forms.DataGridView();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cmbTipos = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.rdbInactivo = new System.Windows.Forms.RadioButton();
+            this.rdbActivo = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.mySqlDataAdapter1 = new MySql.Data.MySqlClient.MySqlDataAdapter();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCarreras)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
-            // comboBox5
+            // cmbFacultades
             // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(289, 92);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(171, 21);
-            this.comboBox5.TabIndex = 108;
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(718, 153);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(172, 36);
-            this.button3.TabIndex = 106;
-            this.button3.Text = "Eliminar";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // comboBox8
-            // 
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Location = new System.Drawing.Point(503, 168);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(192, 21);
-            this.comboBox8.TabIndex = 105;
+            this.cmbFacultades.FormattingEnabled = true;
+            this.cmbFacultades.Location = new System.Drawing.Point(289, 92);
+            this.cmbFacultades.Name = "cmbFacultades";
+            this.cmbFacultades.Size = new System.Drawing.Size(171, 21);
+            this.cmbFacultades.TabIndex = 108;
             // 
             // label3
             // 
@@ -82,33 +69,36 @@
             this.label3.TabIndex = 104;
             this.label3.Text = "Filtro";
             // 
-            // button2
+            // btnEditar
             // 
-            this.button2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(718, 99);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(172, 36);
-            this.button2.TabIndex = 103;
-            this.button2.Text = "Editar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnEditar.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditar.Location = new System.Drawing.Point(718, 99);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(172, 36);
+            this.btnEditar.TabIndex = 103;
+            this.btnEditar.Text = "Limpiar";
+            this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.BtnEditar_Click);
             // 
-            // button1
+            // btnAgregar
             // 
-            this.button1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(718, 48);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(172, 36);
-            this.button1.TabIndex = 102;
-            this.button1.Text = "Agregar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAgregar.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.Location = new System.Drawing.Point(718, 48);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(172, 36);
+            this.btnAgregar.TabIndex = 102;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.BtnAgregar_Click);
             // 
-            // dataGridView1
+            // dgvCarreras
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(28, 217);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(922, 374);
-            this.dataGridView1.TabIndex = 101;
+            this.dgvCarreras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCarreras.Location = new System.Drawing.Point(28, 217);
+            this.dgvCarreras.Name = "dgvCarreras";
+            this.dgvCarreras.Size = new System.Drawing.Size(922, 374);
+            this.dgvCarreras.TabIndex = 101;
+            this.dgvCarreras.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvCarreras_CellClick);
             // 
             // lblTitulo
             // 
@@ -120,21 +110,13 @@
             this.lblTitulo.TabIndex = 100;
             this.lblTitulo.Text = "Carrera";
             // 
-            // comboBox3
+            // cmbTipos
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(289, 125);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
-            this.comboBox3.TabIndex = 99;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(289, 168);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 98;
+            this.cmbTipos.FormattingEnabled = true;
+            this.cmbTipos.Location = new System.Drawing.Point(289, 125);
+            this.cmbTipos.Name = "cmbTipos";
+            this.cmbTipos.Size = new System.Drawing.Size(121, 21);
+            this.cmbTipos.TabIndex = 99;
             // 
             // label6
             // 
@@ -176,36 +158,93 @@
             this.label11.TabIndex = 92;
             this.label11.Text = "Facultad:";
             // 
-            // textBox1
+            // txtNombre
             // 
-            this.textBox1.Location = new System.Drawing.Point(289, 59);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(296, 20);
-            this.textBox1.TabIndex = 109;
+            this.txtNombre.Location = new System.Drawing.Point(289, 59);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(296, 20);
+            this.txtNombre.TabIndex = 109;
+            // 
+            // rdbInactivo
+            // 
+            this.rdbInactivo.AutoSize = true;
+            this.rdbInactivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbInactivo.Location = new System.Drawing.Point(307, 164);
+            this.rdbInactivo.Name = "rdbInactivo";
+            this.rdbInactivo.Size = new System.Drawing.Size(91, 28);
+            this.rdbInactivo.TabIndex = 156;
+            this.rdbInactivo.Text = "Inactivo";
+            this.rdbInactivo.UseVisualStyleBackColor = true;
+            // 
+            // rdbActivo
+            // 
+            this.rdbActivo.AutoSize = true;
+            this.rdbActivo.Checked = true;
+            this.rdbActivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbActivo.Location = new System.Drawing.Point(216, 164);
+            this.rdbActivo.Name = "rdbActivo";
+            this.rdbActivo.Size = new System.Drawing.Size(79, 28);
+            this.rdbActivo.TabIndex = 155;
+            this.rdbActivo.TabStop = true;
+            this.rdbActivo.Text = "Activo";
+            this.rdbActivo.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(81, 164);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 23);
+            this.label1.TabIndex = 154;
+            this.label1.Text = "Estado:";
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Location = new System.Drawing.Point(504, 168);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(164, 20);
+            this.txtBuscar.TabIndex = 157;
+            this.txtBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtBuscar_KeyPress);
+            // 
+            // mySqlDataAdapter1
+            // 
+            this.mySqlDataAdapter1.DeleteCommand = null;
+            this.mySqlDataAdapter1.InsertCommand = null;
+            this.mySqlDataAdapter1.SelectCommand = null;
+            this.mySqlDataAdapter1.UpdateCommand = null;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // MantenimientoCarrera
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(969, 604);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.comboBox5);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.comboBox8);
+            this.Controls.Add(this.txtBuscar);
+            this.Controls.Add(this.rdbInactivo);
+            this.Controls.Add(this.rdbActivo);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtNombre);
+            this.Controls.Add(this.cmbFacultades);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.btnEditar);
+            this.Controls.Add(this.btnAgregar);
+            this.Controls.Add(this.dgvCarreras);
             this.Controls.Add(this.lblTitulo);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.cmbTipos);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label11);
             this.Name = "MantenimientoCarrera";
             this.Text = "MantenimientoCarrera";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MantenimientoCarrera_FormClosed);
+            this.Load += new System.EventHandler(this.MantenimientoCarrera_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCarreras)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,20 +252,23 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.ComboBox comboBox8;
+        private System.Windows.Forms.ComboBox cmbFacultades;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.DataGridView dgvCarreras;
         private System.Windows.Forms.Label lblTitulo;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cmbTipos;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.RadioButton rdbInactivo;
+        private System.Windows.Forms.RadioButton rdbActivo;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtBuscar;
+        private MySql.Data.MySqlClient.MySqlDataAdapter mySqlDataAdapter1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

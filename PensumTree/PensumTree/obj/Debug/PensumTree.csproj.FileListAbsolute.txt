@@ -44,3 +44,34 @@ X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\bin\Debug\Renci
 X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.csproj.CopyComplete
 X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.exe
 X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.pdb
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\PensumTree.exe.config
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\PensumTree.exe
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\PensumTree.pdb
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\EntityFramework.dll
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\Google.Protobuf.dll
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\MySql.Data.dll
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\MySql.Data.EntityFramework.dll
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\Renci.SshNet.dll
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\Ubiety.Dns.Core.dll
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\EntityFramework.xml
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\Google.Protobuf.xml
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\MySql.Data.xml
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\MySql.Data.EntityFramework.xml
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\bin\Debug\Renci.SshNet.xml
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.csprojAssemblyReference.cache
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.Form1.resources
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.MantenimientoCarrera.resources
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.MantenimientoEscuela.resources
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.MantenimientoFacultad.resources
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.MantenimientoMaterias.resources
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.MantenimientoPensum.resources
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.MantenimientoPlan.resources
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.MantenimientoTipoCarrera.resources
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.csproj.GenerateResource.cache
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.csproj.CoreCompileInputs.cache
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.csproj.CopyComplete
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.exe
+C:\Users\RonaldNolasco\Desktop\code\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.pdb
