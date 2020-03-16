@@ -54,5 +54,11 @@ namespace PensumTree.EntityFramework
         public virtual materia materia5 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pensum> pensums { get; set; }
+
+        override
+            public string ToString()
+        {
+            return nombre;
+        }
     }
 }

@@ -7,6 +7,15 @@ namespace PensumTree.Controllers
 {
     class FacultadController : Controller<facultad>
     {
+        //Aquí encontrarán un método por cada una de las operaciones CRUD:
+        //Create: addRecord
+        //Read:   getRecords (y su variante getActiveRecords que devuelve solamente registros con estado activo)
+        //Update: updateRecord
+        //Delete: deleteRecord (este realmente no se usa porque manejamos estados en cada tabla)
+
+        //Literal, solo copien y peguen estos métodos en sus controladores, y cámbien toda cosa que
+        //diga 'facultad' o derivados por el nombre del objeto que estén trabajando
+
         public Operation<facultad> addRecord(facultad f)
         {
             try
