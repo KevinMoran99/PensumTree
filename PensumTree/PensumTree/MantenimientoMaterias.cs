@@ -24,9 +24,9 @@ namespace PensumTree
 
         private materia selectedMateria= null;
 
-        private int[] columnsToChange = { 0, 1, 2, 3,4,5,6,7,13,14,16,18,20,22,23};
-        private int[] columnsToHide = {8,9,10,11,12,15,17,19,21 };
-        private string[] titlesforColumns = { "ID", "Nombre", "UV", "Código", "Ciclo Impar", "Ciclo Par", "Laboratorio", "Electiva","Estado", "Escuela", "Pre-requisito1", "Pre-requisito2", "Pre-requisito3", "Pre-requisito4", "Pensum" };
+        private int[] columnsToChange = { 0, 1, 2, 3,4,5,6,7,13,14,16,18,20,22};
+        private int[] columnsToHide = {8,9,10,11,12,15,17,19,21,23 };
+        private string[] titlesforColumns = { "ID", "Nombre", "UV", "Código", "Ciclo Impar", "Ciclo Par", "Laboratorio", "Electiva","Estado", "Escuela", "Pre-requisito1", "Pre-requisito2", "Pre-requisito3", "Pre-requisito4" };
         public MantenimientoMaterias()
         {
             InitializeComponent();
@@ -97,17 +97,33 @@ namespace PensumTree
             {
                 chImpar.Checked = true;
             }
+            else
+            {
+                chImpar.Checked = false;
+            }
             if (currentMat.segundoCiclo)
             {
                 chPar.Checked = true;
+            }
+            else
+            {
+                chPar.Checked = false;
             }
             if (currentMat.electiva)
             {
                 chElectiva.Checked = true;
             }
+            else
+            {
+                chElectiva.Checked = false;
+            }
             if (currentMat.lab)
             {
                 chLab.Checked = true;
+            }
+            else
+            {
+                chLab.Checked = false;
             }
             if (currentMat.estado)
             {
@@ -131,7 +147,7 @@ namespace PensumTree
                 segundoCiclo= chPar.Checked,
                 lab= chLab.Checked,
                 electiva= chElectiva.Checked,
-                idEscuela=((materia) cbxEscuela.SelectedValue).idEscuela,
+                idEscuela=((escuela) cbxEscuela.SelectedValue).id,
                 idPrerreq1= ((materia)cbxPreReq1.SelectedValue).idPrerreq1,
                 idPrerreq2= ((materia)cbxPreReq2.SelectedValue).idPrerreq2,
                 idPrerreq3= ((materia)cbxPreReq3.SelectedValue).idPrerreq3,
