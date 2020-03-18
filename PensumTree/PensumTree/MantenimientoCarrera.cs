@@ -68,7 +68,7 @@ namespace PensumTree
         {
             txtNombre.Text = currentCarr.nombre;
             cmbFacultades.SelectedItem = currentCarr.facultad;
-            cmbFacultades.SelectedItem = currentCarr.tipo_carrera;
+            cmbTipos.SelectedItem = currentCarr.tipo_carrera;
             if (currentCarr.estado)
             {
                 rdbActivo.Checked = true;
@@ -163,6 +163,9 @@ namespace PensumTree
         {
             ToValidate[] validators =
             {
+                new ToValidate(txtNombre, new ControlValidator[] { FormValidators.hasText },
+                new string[] { "Ingresa un nombre para la carrera" }),
+
                 new ToValidate(cmbFacultades, new ControlValidator[] {FormValidators.isSelected},
                 new string[]{"Seleccione una facultad "}),
             };
@@ -274,6 +277,13 @@ namespace PensumTree
             {
                 FormUtils.defaultErrorMessage(ex);
             }
+        }
+
+        private void MenúToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1 frm = new Form1();
+            frm.Show();
+            this.Hide();
         }
     }
 }
