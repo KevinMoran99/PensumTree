@@ -110,6 +110,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddMateria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddMateria.Designer.cs">
+      <DependentUpon>AddMateria.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\EscuelaController.cs" />
     <Compile Include="Controllers\MateriaController.cs" />
 	<Compile Include="Controllers\CarreraController.cs" />
@@ -153,6 +159,7 @@
     <Compile Include="Graphics\NetNode.Designer.cs">
       <DependentUpon>NetNode.cs</DependentUpon>
     </Compile>
+    <Compile Include="IAgregarMateria.cs" />
     <Compile Include="MantenimientoCarrera.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +220,12 @@
     <Compile Include="EntityFramework\plan.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModuloPensum.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloPensum.Designer.cs">
+      <DependentUpon>ModuloPensum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="EntityFramework\tipo_carrera.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
@@ -226,6 +239,9 @@
     <Compile Include="Utils\FormValidators.cs" />
     <Compile Include="Utils\RegularExpression.cs" />
     <Compile Include="Utils\Validators.cs" />
+    <EmbeddedResource Include="AddMateria.resx">
+      <DependentUpon>AddMateria.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -255,6 +271,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MantenimientoTipoCarrera.resx">
       <DependentUpon>MantenimientoTipoCarrera.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloPensum.resx">
+      <DependentUpon>ModuloPensum.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

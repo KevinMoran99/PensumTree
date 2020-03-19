@@ -25,7 +25,7 @@ namespace PensumTree
         }
 
         private void MantenimientoPensum2_Click(object sender, EventArgs e)
-        {
+        {/*
             materia mat = new materia
             {
                 nombre = "Calculo Integral",
@@ -70,7 +70,7 @@ namespace PensumTree
                 pensum.AddEdge(edge);
             }
 
-            current = node;
+            current = node;*/
         }
 
         private void button1_Click(object sender, EventArgs e)
