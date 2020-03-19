@@ -39,7 +39,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtUV = new System.Windows.Forms.TextBox();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.cbxEscuela = new System.Windows.Forms.ComboBox();
             this.cbxPreReq1 = new System.Windows.Forms.ComboBox();
             this.cbxPreReq2 = new System.Windows.Forms.ComboBox();
@@ -59,6 +58,7 @@
             this.chLab = new System.Windows.Forms.CheckBox();
             this.chElectiva = new System.Windows.Forms.CheckBox();
             this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.mtxtCodigo = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMaterias)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
@@ -147,13 +147,6 @@
             this.txtUV.Size = new System.Drawing.Size(105, 20);
             this.txtUV.TabIndex = 43;
             // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Location = new System.Drawing.Point(211, 124);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(105, 20);
-            this.txtCodigo.TabIndex = 45;
-            // 
             // cbxEscuela
             // 
             this.cbxEscuela.FormattingEnabled = true;
@@ -169,6 +162,7 @@
             this.cbxPreReq1.Name = "cbxPreReq1";
             this.cbxPreReq1.Size = new System.Drawing.Size(121, 21);
             this.cbxPreReq1.TabIndex = 52;
+            this.cbxPreReq1.SelectedIndexChanged += new System.EventHandler(this.cbxPreReq1_SelectedIndexChanged);
             // 
             // cbxPreReq2
             // 
@@ -177,6 +171,7 @@
             this.cbxPreReq2.Name = "cbxPreReq2";
             this.cbxPreReq2.Size = new System.Drawing.Size(121, 21);
             this.cbxPreReq2.TabIndex = 53;
+            this.cbxPreReq2.SelectedIndexChanged += new System.EventHandler(this.cbxPreReq2_SelectedIndexChanged);
             // 
             // cbxPreReq4
             // 
@@ -193,6 +188,7 @@
             this.cbxPreReq3.Name = "cbxPreReq3";
             this.cbxPreReq3.Size = new System.Drawing.Size(121, 21);
             this.cbxPreReq3.TabIndex = 55;
+            this.cbxPreReq3.SelectedIndexChanged += new System.EventHandler(this.cbxPreReq3_SelectedIndexChanged);
             // 
             // lblTitulo
             // 
@@ -336,11 +332,20 @@
             this.txtBuscar.TabIndex = 71;
             this.txtBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscar_KeyPress);
             // 
+            // mtxtCodigo
+            // 
+            this.mtxtCodigo.Location = new System.Drawing.Point(211, 124);
+            this.mtxtCodigo.Mask = "&&&000";
+            this.mtxtCodigo.Name = "mtxtCodigo";
+            this.mtxtCodigo.Size = new System.Drawing.Size(105, 20);
+            this.mtxtCodigo.TabIndex = 72;
+            // 
             // MantenimientoMaterias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(927, 704);
+            this.Controls.Add(this.mtxtCodigo);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.chElectiva);
             this.Controls.Add(this.chLab);
@@ -359,7 +364,6 @@
             this.Controls.Add(this.cbxPreReq2);
             this.Controls.Add(this.cbxPreReq1);
             this.Controls.Add(this.cbxEscuela);
-            this.Controls.Add(this.txtCodigo);
             this.Controls.Add(this.txtUV);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.label6);
@@ -393,7 +397,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtUV;
-        private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.ComboBox cbxEscuela;
         private System.Windows.Forms.ComboBox cbxPreReq1;
         private System.Windows.Forms.ComboBox cbxPreReq2;
@@ -413,5 +416,6 @@
         private System.Windows.Forms.CheckBox chImpar;
         private System.Windows.Forms.CheckBox chPar;
         private System.Windows.Forms.TextBox txtBuscar;
+        private System.Windows.Forms.MaskedTextBox mtxtCodigo;
     }
 }

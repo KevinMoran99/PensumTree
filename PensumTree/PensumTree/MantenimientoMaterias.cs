@@ -32,6 +32,57 @@ namespace PensumTree
             InitializeComponent();
         }
 
+        //Si retorna true, es porque hay una materia repetida
+        private bool isRepeated(materia current, List<materia> materias)
+        {
+            if (current==null)
+            {
+                return false;
+            }
+            //Verificando la materia actual con la lista de materias a comparar
+            foreach (materia m in materias)
+            {
+                if (current == m)
+                {
+                    return true;
+                }
+            }
+
+            //Si la materia actual no tuvo coincidencias, ahora toca comparar
+            //con los prerrequisitos de la materia, llamando el método recursivamente
+            if (current.materia2 != null)
+            {
+                if (isRepeated(current.materia2, materias))
+                {
+                    return true;
+                }
+            }
+            if (current.materia3 != null)
+            {
+                if (isRepeated(current.materia3, materias))
+                {
+                    return true;
+                }
+            }
+            if (current.materia4 != null)
+            {
+                if (isRepeated(current.materia4, materias))
+                {
+                    return true;
+                }
+            }
+            if (current.materia5 != null)
+            {
+                if (isRepeated(current.materia5, materias))
+                {
+                    return true;
+                }
+            }
+
+            //Si en ningún momento el método encontró coincidencias, retornamos false, indicando que todo cul
+            return false;
+        }
+
         //Obtiene la lista de facultades de la BD y la imprime en el datagrid
         private void loadTable()
         {
@@ -69,10 +120,24 @@ namespace PensumTree
             if (getMateriasOperation.State)
             {
                 materias = getMateriasOperation.Data;
-                cbxPreReq1.DataSource = materias;
-                cbxPreReq2.DataSource = materias;
-                cbxPreReq3.DataSource = materias;
-                cbxPreReq4.DataSource = materias;
+                materia[] materias1 = new materia[materias.Count];
+                materia[] materias2 = new materia[materias.Count];
+                materia[] materias3 = new materia[materias.Count];
+                materia[] materias4 = new materia[materias.Count];
+                materias.CopyTo(materias1);
+                materias.CopyTo(materias2);
+                materias.CopyTo(materias3);
+                materias.CopyTo(materias4);
+                cbxPreReq1.DataSource = materias1;
+                cbxPreReq2.DataSource = materias2;
+                cbxPreReq3.DataSource = materias3;
+                cbxPreReq4.DataSource = materias4;
+                cbxEscuela.SelectedIndex = -1;
+                cbxPreReq1.SelectedIndex = -1;
+                cbxPreReq2.SelectedIndex = -1;
+                cbxPreReq3.SelectedIndex = -1;
+                cbxPreReq4.SelectedIndex = -1;
+
             }
             else
             {
@@ -85,14 +150,16 @@ namespace PensumTree
         private void fillSelectedData(materia currentMat)
         {
             txtNombre.Text = currentMat.nombre;
-            txtCodigo.Text = currentMat.codigo;
+            mtxtCodigo.Text = currentMat.codigo;
             txtUV.Text =Convert.ToString(currentMat.uv);
             cbxEscuela.SelectedItem = currentMat.escuela;
             cbxPreReq1.SelectedItem = currentMat.materia2;
             cbxPreReq2.SelectedItem = currentMat.materia3;
             cbxPreReq3.SelectedItem = currentMat.materia4;
             cbxPreReq4.SelectedItem = currentMat.materia5;
-
+            cbxPreReq2.Enabled = (currentMat.materia2!=null);
+            cbxPreReq3.Enabled = (currentMat.materia3!= null);
+            cbxPreReq4.Enabled = (currentMat.materia4!= null);
             if (currentMat.primerCiclo)
             {
                 chImpar.Checked = true;
@@ -138,20 +205,53 @@ namespace PensumTree
         //Guarda una facultad en la BD
         private void saveData()
         {
+            long? a, b, c, d;
+            if (cbxPreReq1.SelectedIndex!=-1)
+            {
+                a = ((materia)cbxPreReq1.SelectedValue).id;
+            }
+            else
+            {
+                a = null;                   
+            }
+            if (cbxPreReq2.SelectedIndex!=-1)
+            {
+                b = ((materia)cbxPreReq2.SelectedValue).id;
+            }
+            else
+            {
+                b = null;
+            }
+            if (cbxPreReq3.SelectedIndex!=-1)
+            {
+                c = ((materia)cbxPreReq3.SelectedValue).id;
+            }
+            else
+            {
+                c = null;
+            }
+            if (cbxPreReq4.SelectedIndex!=-1)
+            {
+               d= ((materia)cbxPreReq4.SelectedValue).id;
+            }
+            else
+            {
+                d = null;
+            }
             materia tempMat = new materia
             {
                 nombre = txtNombre.Text,
-                codigo= txtCodigo.Text,
-                uv=Convert.ToInt64( txtUV.Text),
-                primerCiclo= chImpar.Checked,
-                segundoCiclo= chPar.Checked,
-                lab= chLab.Checked,
-                electiva= chElectiva.Checked,
-                idEscuela=((escuela) cbxEscuela.SelectedValue).id,
-                idPrerreq1= ((materia)cbxPreReq1.SelectedValue).idPrerreq1,
-                idPrerreq2= ((materia)cbxPreReq2.SelectedValue).idPrerreq2,
-                idPrerreq3= ((materia)cbxPreReq3.SelectedValue).idPrerreq3,
-                idPrerreq4= ((materia)cbxPreReq4.SelectedValue).idPrerreq4,
+                codigo = mtxtCodigo.Text,
+                uv = Convert.ToInt64(txtUV.Text),
+                primerCiclo = chImpar.Checked,
+                segundoCiclo = chPar.Checked,
+                lab = chLab.Checked,
+                electiva = chElectiva.Checked,
+                idEscuela = ((escuela)cbxEscuela.SelectedValue).id,
+                idPrerreq1 = a,
+                idPrerreq2 = b,
+                idPrerreq3 = c,
+                idPrerreq4 = d,
                 estado = rdbActivo.Checked
             };
             Operation<materia> operation = materiaController.addRecord(tempMat);
@@ -169,13 +269,42 @@ namespace PensumTree
         {
             currentMat.nombre = txtNombre.Text;
             currentMat.uv =Convert.ToInt64( txtUV.Text);
-            currentMat.codigo = txtCodigo.Text;
+            currentMat.codigo = mtxtCodigo.Text;
             currentMat.estado = rdbActivo.Checked;
-            currentMat.idEscuela = ((materia)cbxEscuela.SelectedValue).idEscuela;
-            currentMat.idPrerreq1 = ((materia)cbxPreReq1.SelectedValue).idPrerreq1;
-            currentMat.idPrerreq2 = ((materia)cbxPreReq2.SelectedValue).idPrerreq2;
-            currentMat.idPrerreq3 = ((materia)cbxPreReq3.SelectedValue).idPrerreq3;
-            currentMat.idPrerreq4 = ((materia)cbxPreReq4.SelectedValue).idPrerreq4;
+            currentMat.idEscuela = ((escuela)cbxEscuela.SelectedValue).id;
+
+            if (cbxPreReq1.SelectedIndex!= -1)
+            {
+                currentMat.idPrerreq1 = ((materia)cbxPreReq1.SelectedValue).idPrerreq1;
+            }
+            else
+            {
+                currentMat.idPrerreq1 = null;
+            }
+            if (cbxPreReq2.SelectedIndex!=-1)
+            {
+                currentMat.idPrerreq2 = ((materia)cbxPreReq2.SelectedValue).idPrerreq2;
+            }
+            else
+            {
+                currentMat.idPrerreq2 = null;
+            }
+            if (cbxPreReq3.SelectedIndex!=-1)
+            {
+                currentMat.idPrerreq3 = ((materia)cbxPreReq3.SelectedValue).idPrerreq3;
+            }
+            else
+            {
+                currentMat.idPrerreq3 = null;
+            }
+            if (cbxPreReq4.SelectedIndex!= -1)
+            {
+                currentMat.idPrerreq4 = ((materia)cbxPreReq4.SelectedValue).idPrerreq4;
+            }
+            else
+            {
+                currentMat.idPrerreq4 = null;
+            }
             currentMat.electiva = chElectiva.Checked;
             currentMat.lab = chLab.Checked;
             currentMat.primerCiclo = chImpar.Checked;
@@ -186,6 +315,7 @@ namespace PensumTree
                 MessageBox.Show("Materia actualizada con éxito", "Éxito",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 loadTable();
+                loadCbx();
                 cleanForm();
             }
             else
@@ -221,6 +351,7 @@ namespace PensumTree
         private void cleanForm()
         {
             FormUtils.clearTextbox(textControls());
+            mtxtCodigo.Text = "";
             rdbActivo.Checked = true;
             rdbInactivo.Checked = false;
             btnAgregar.Text = "Agregar";
@@ -230,6 +361,14 @@ namespace PensumTree
             chImpar.Checked = false;
             chElectiva.Checked = false;
             chLab.Checked = false;
+            cbxEscuela.SelectedIndex = -1;
+            cbxPreReq1.SelectedIndex = -1;
+            cbxPreReq2.SelectedIndex = -1;
+            cbxPreReq3.SelectedIndex = -1;
+            cbxPreReq4.SelectedIndex = -1;
+            cbxPreReq2.Enabled = false;
+            cbxPreReq3.Enabled = false;
+            cbxPreReq4.Enabled = false;
         }
 
         //Retorna la lista de textbox que contiene el formulario
@@ -240,7 +379,6 @@ namespace PensumTree
             Control[] controls =
             {
                 txtNombre,
-                txtCodigo,
                 txtUV
             };
             return controls;
@@ -265,7 +403,7 @@ namespace PensumTree
                 new ToValidate(txtNombre, new ControlValidator[] { FormValidators.hasText },
                 new string[] { "Ingrese un nombre para la materia" }),
 
-                new ToValidate(txtCodigo, new ControlValidator[]{FormValidators.hasText },
+                new ToValidate(mtxtCodigo, new ControlValidator[]{FormValidators.hasText },
                 new string[]{ "Ingrese un codigo para la materia"}),
 
                 new ToValidate(txtUV, new ControlValidator[]{ FormValidators.isNumber},
@@ -284,8 +422,60 @@ namespace PensumTree
         {
             try
             {
+                List<materia> materiasP = new List<materia>();
+                materiasP.Add((materia)(cbxPreReq2.SelectedItem));
+                materiasP.Add((materia)(cbxPreReq3.SelectedItem));
+                materiasP.Add((materia)(cbxPreReq4.SelectedItem));
+                if(isRepeated((materia)(cbxPreReq1.SelectedItem),materiasP))
+                {
+                    MessageBox.Show("Se encontraron conflictos en los pre-requisitos", "Error",
+                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                List<materia> materiasP1 = new List<materia>();
+                materiasP.Add((materia)(cbxPreReq1.SelectedItem));
+                materiasP.Add((materia)(cbxPreReq3.SelectedItem));
+                materiasP.Add((materia)(cbxPreReq4.SelectedItem));
+                if (isRepeated((materia)(cbxPreReq2.SelectedItem), materiasP))
+                {
+                    MessageBox.Show("Se encontraron conflictos en los pre-requisitos", "Error",
+                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                List<materia> materiasP2 = new List<materia>();
+                materiasP.Add((materia)(cbxPreReq1.SelectedItem));
+                materiasP.Add((materia)(cbxPreReq2.SelectedItem));
+                materiasP.Add((materia)(cbxPreReq4.SelectedItem));
+                if (isRepeated((materia)(cbxPreReq3.SelectedItem), materiasP))
+                {
+                    MessageBox.Show("Se encontraron conflictos en los pre-requisitos", "Error",
+                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                List<materia> materiasP3 = new List<materia>();
+                materiasP.Add((materia)(cbxPreReq1.SelectedItem));
+                materiasP.Add((materia)(cbxPreReq2.SelectedItem));
+                materiasP.Add((materia)(cbxPreReq3.SelectedItem));
+                if (isRepeated((materia)(cbxPreReq4.SelectedItem), materiasP))
+                {
+                    MessageBox.Show("Se encontraron conflictos en los pre-requisitos", "Error",
+                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 //Obteniendo la lista de validaciones para este form, y procediendo a validar
                 List<ControlErrorProvider> errorProvider = FormValidators.validFormTest(getValidators());
+                if (!(int.Parse(txtUV.Text)>=2 && int.Parse(txtUV.Text)<=20))
+                {
+                    if (errorProvider==null)
+                    {
+                        errorProvider = new List<ControlErrorProvider>();
+                    }
+
+                    errorProvider.Add(new ControlErrorProvider("Las UV solo pueden estar entre 2 y 20", txtUV));
+                }
+
                 bool isValid = errorProvider == null;
                 //Si se pasan todas las validaciones, se procede a guardar la información
                 if (isValid)
@@ -294,11 +484,13 @@ namespace PensumTree
                     if (selectedMateria == null)
                     {
                         saveData();
+                        loadCbx();
                     }
                     //Si se había seleccionado una facultad, se modifica dicho registro
                     else
                     {
                         updateData(selectedMateria);
+                        loadCbx();
                     }
                 }
                 else
@@ -328,6 +520,9 @@ namespace PensumTree
             {
                 loadTable();
                 loadCbx();
+                cbxPreReq2.Enabled = false;
+                cbxPreReq3.Enabled = false;
+                cbxPreReq4.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -357,6 +552,7 @@ namespace PensumTree
                 if (index >= 0)
                 {
                     selectedMateria = materias[index];
+                    btnAgregar.Text = "Modificar";
                     fillSelectedData(selectedMateria);
                 }
             }
@@ -381,6 +577,21 @@ namespace PensumTree
             {
                 FormUtils.defaultErrorMessage(ex);
             }
+        }
+
+        private void cbxPreReq1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbxPreReq2.Enabled = true;
+        }
+
+        private void cbxPreReq2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbxPreReq3.Enabled = true;
+        }
+
+        private void cbxPreReq3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbxPreReq4.Enabled = true;
         }
     }
 }
