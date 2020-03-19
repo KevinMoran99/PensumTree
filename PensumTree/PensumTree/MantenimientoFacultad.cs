@@ -46,7 +46,7 @@ namespace PensumTree
                 FormUtils.hideColumnsForDgv(columnsToHide, dgvFacultades);
                 return;
             }
-            MessageBox.Show("Error al cargar los datos de departamentos", "Error",
+            MessageBox.Show("Error al cargar los datos de facultades", "Error",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 

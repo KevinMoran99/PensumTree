@@ -21,7 +21,7 @@ namespace PensumTree
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MantenimientoMaterias frm = new MantenimientoMaterias();
+            MantenimientoEscuela frm = new MantenimientoEscuela();
             frm.Show();
             this.Hide();
         }
