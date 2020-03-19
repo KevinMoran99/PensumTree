@@ -32,7 +32,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtInicio = new System.Windows.Forms.TextBox();
             this.txtFin = new System.Windows.Forms.TextBox();
-            this.panelMaterias = new System.Windows.Forms.Panel();
+            this.panelCiclo1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.lblCiclo1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbCarrera = new System.Windows.Forms.ComboBox();
             this.rdbInactivo = new System.Windows.Forms.RadioButton();
@@ -40,9 +42,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnRegresar = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panelMaterias.SuspendLayout();
+            this.panelCiclos = new System.Windows.Forms.Panel();
+            this.panelCiclo1.SuspendLayout();
+            this.panelCiclos.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -81,15 +83,37 @@
             this.txtFin.Size = new System.Drawing.Size(104, 26);
             this.txtFin.TabIndex = 3;
             // 
-            // panelMaterias
+            // panelCiclo1
             // 
-            this.panelMaterias.AutoScroll = true;
-            this.panelMaterias.Controls.Add(this.button1);
-            this.panelMaterias.Controls.Add(this.label4);
-            this.panelMaterias.Location = new System.Drawing.Point(12, 91);
-            this.panelMaterias.Name = "panelMaterias";
-            this.panelMaterias.Size = new System.Drawing.Size(1112, 604);
-            this.panelMaterias.TabIndex = 4;
+            this.panelCiclo1.AutoScroll = true;
+            this.panelCiclo1.Controls.Add(this.button1);
+            this.panelCiclo1.Location = new System.Drawing.Point(15, 37);
+            this.panelCiclo1.Name = "panelCiclo1";
+            this.panelCiclo1.Size = new System.Drawing.Size(253, 567);
+            this.panelCiclo1.TabIndex = 4;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(85, 14);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(56, 47);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "+";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // lblCiclo1
+            // 
+            this.lblCiclo1.AutoSize = true;
+            this.lblCiclo1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.lblCiclo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCiclo1.Location = new System.Drawing.Point(95, 5);
+            this.lblCiclo1.Margin = new System.Windows.Forms.Padding(5);
+            this.lblCiclo1.Name = "lblCiclo1";
+            this.lblCiclo1.Size = new System.Drawing.Size(61, 24);
+            this.lblCiclo1.TabIndex = 0;
+            this.lblCiclo1.Text = "Ciclo I";
             // 
             // label3
             // 
@@ -164,34 +188,22 @@
             this.btnRegresar.Text = "Regresar";
             this.btnRegresar.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // panelCiclos
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(80, 25);
-            this.label4.Margin = new System.Windows.Forms.Padding(5);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 24);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Ciclo I";
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(84, 66);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(56, 47);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "+";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.panelCiclos.AutoScroll = true;
+            this.panelCiclos.Controls.Add(this.lblCiclo1);
+            this.panelCiclos.Controls.Add(this.panelCiclo1);
+            this.panelCiclos.Location = new System.Drawing.Point(12, 89);
+            this.panelCiclos.Name = "panelCiclos";
+            this.panelCiclos.Size = new System.Drawing.Size(1112, 624);
+            this.panelCiclos.TabIndex = 159;
             // 
             // ModuloPensum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1136, 707);
+            this.ClientSize = new System.Drawing.Size(1136, 716);
+            this.Controls.Add(this.panelCiclos);
             this.Controls.Add(this.btnRegresar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.rdbInactivo);
@@ -199,15 +211,16 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cmbCarrera);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.panelMaterias);
             this.Controls.Add(this.txtFin);
             this.Controls.Add(this.txtInicio);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Location = new System.Drawing.Point(50, -50);
             this.Name = "ModuloPensum";
             this.Text = "Creación de pensum";
-            this.panelMaterias.ResumeLayout(false);
-            this.panelMaterias.PerformLayout();
+            this.panelCiclo1.ResumeLayout(false);
+            this.panelCiclos.ResumeLayout(false);
+            this.panelCiclos.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,7 +232,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtInicio;
         private System.Windows.Forms.TextBox txtFin;
-        private System.Windows.Forms.Panel panelMaterias;
+        private System.Windows.Forms.Panel panelCiclo1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbCarrera;
         private System.Windows.Forms.RadioButton rdbInactivo;
@@ -227,7 +240,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnRegresar;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblCiclo1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panelCiclos;
     }
 }

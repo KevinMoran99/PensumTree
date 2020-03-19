@@ -15,7 +15,7 @@ namespace PensumTree.Graphics
     {
         materia mat;
         pensum matInscrita;
-        MantenimientoPensum2 parent;
+        ModuloPensum parent;
 
         public int corr;
         int X;
@@ -27,7 +27,7 @@ namespace PensumTree.Graphics
         }
 
         //Constructor a usar cuando se esté agregando una nueva materia al pensum
-        public NetNode(MantenimientoPensum2 parent, materia materia)
+        public NetNode(ModuloPensum parent, materia materia)
         {
             InitializeComponent();
 
