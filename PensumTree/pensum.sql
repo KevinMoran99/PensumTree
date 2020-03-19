@@ -1,5 +1,5 @@
 create database pensum;
-
+use pensum;
 create table facultad(
 	id int unsigned not null primary key AUTO_INCREMENT,
     nombre varchar(255) not null,
