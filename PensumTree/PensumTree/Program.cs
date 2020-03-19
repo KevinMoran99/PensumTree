@@ -16,7 +16,7 @@ namespace PensumTree
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ModuloPensum());
+            Application.Run(new Form1());
         }
     }
 }

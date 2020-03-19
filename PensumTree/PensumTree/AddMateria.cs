@@ -73,25 +73,41 @@ namespace PensumTree
         private void filterData()
         {
             string value = txtBuscar.Text;
-            escuela filtro = (escuela)cbxEscuela.SelectedItem;
-            long id = filtro.id;
+            
+
+            List<materia> tempMateria;
+
+            if (cbxEscuela.SelectedIndex != -1)
+            {
+                escuela filtro = (escuela)cbxEscuela.SelectedItem;
+                long id = filtro.id;
+                tempMateria = new List<materia>();
+                foreach (materia m in materias)
+                {
+                    if (m.idEscuela == id)
+                    {
+                        tempMateria.Add(m);
+                    }
+                }
+                dgvMaterias.DataSource = tempMateria;
+                materias = tempMateria;
+            }
+
             if (!value.Equals(""))
             {
-                List<materia> tempMateria = new List<materia>();
+                tempMateria = new List<materia>();
                 foreach (materia m in materias)
                 {
                     if (m.nombre.ToLower().Contains(value))
                     {
-                        if(m.idEscuela== id)
-                        {
-                            tempMateria.Add(m);
-                        }  
+                        tempMateria.Add(m);
                     }
                 }
-                dgvMaterias.DataSource = null;
                 dgvMaterias.DataSource = tempMateria;
+                materias = tempMateria;
             }
-            else
+
+            if(cbxEscuela.SelectedIndex == -1 && value.Equals(""))
             {
                 loadTable();
             }
@@ -101,8 +117,9 @@ namespace PensumTree
         {
             try
             {
-                loadTable();
                 loadCbx();
+                cbxEscuela.SelectedIndex = -1;
+                //El loadtable se dispara cuando el index de cbxEscuela cambia
             }
             catch (Exception ex)
             {
@@ -144,31 +161,7 @@ namespace PensumTree
 
         private void cbxEscuela_SelectedValueChanged(object sender, EventArgs e)
         {
-            try
-            {
-                escuela filtro = (escuela)cbxEscuela.SelectedItem;
-                long id = filtro.id;
-                if (!id.Equals(""))
-                {
-                    List<materia> tempMateria = new List<materia>();
-                    foreach (materia m in materias)
-                    {
-                        if (m.idEscuela==id)
-                        {
-                                tempMateria.Add(m);
-                        }
-                    }
-                    dgvMaterias.DataSource = tempMateria;
-                }
-                else
-                {
-                    loadTable();
-                }
-            }  
-           catch (Exception ex)
-            {
-                MessageBox.Show("Error al filtrar carrera");
-            }
+            
             
         }
 
@@ -176,6 +169,24 @@ namespace PensumTree
         {
             caller.Selected(selectedMateria);
             this.Dispose();
+        }
+
+        private void dgvMaterias_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void cbxEscuela_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                loadTable();
+                filterData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al filtrar carrera");
+            }
         }
     }
 }

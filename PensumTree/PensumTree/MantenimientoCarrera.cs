@@ -133,6 +133,7 @@ namespace PensumTree
                     }
                 }
                 dgvCarreras.DataSource = tempCarreras;
+                carreras = tempCarreras;
             }
             else
             {

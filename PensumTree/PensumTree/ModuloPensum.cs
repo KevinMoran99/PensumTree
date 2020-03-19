@@ -70,6 +70,12 @@ namespace PensumTree
             buscarMateria();
             switch (((Button)sender).Name.ToString())  //Este switch registra a que ciclo se tiene que agregar la materia
             {                                          //Segun el ciclo busca las coordenadas y el número de materias que ya tiene ese ciclo
+                case "btnCiclo1":
+                    cont = cont1;
+                    y = y1;
+                    cont1++;
+                    y1 += 115;
+                    break;
                 case "btnCiclo2":
                     cont = cont2;
                     y = y2;
@@ -154,7 +160,7 @@ namespace PensumTree
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (cont1 < 6)
+            /*if (cont1 < 6)
             {
 
                 Button temp = new Button();
@@ -178,7 +184,7 @@ namespace PensumTree
             else
             {
                 button1.Visible = false;
-            }
+            }*/
 
         }
 
@@ -218,7 +224,7 @@ namespace PensumTree
                 btemp.Location = new Point(87, 14);
                 btemp.Name = "btnCiclo" + num_btn.ToString();
                 btemp.Text = "+";
-                btemp.Font = button1.Font;
+                btemp.Font = btnCiclo1.Font;
                 btemp.Click += new EventHandler(handlerComun_Click);
                 num_btn++;
                 temp.Controls.Add(btemp);

@@ -86,3 +86,5 @@ X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\bin\Debug\Quick
 X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.Graphics.NetNode.resources
 X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.MantenimientoPensum2.resources
 X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.Properties.Resources.resources
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.AddMateria.resources
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.ModuloPensum.resources

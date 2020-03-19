@@ -33,7 +33,7 @@
             this.txtInicio = new System.Windows.Forms.TextBox();
             this.txtFin = new System.Windows.Forms.TextBox();
             this.panelCiclo1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCiclo1 = new System.Windows.Forms.Button();
             this.lblCiclo1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbCarrera = new System.Windows.Forms.ComboBox();
@@ -86,22 +86,22 @@
             // panelCiclo1
             // 
             this.panelCiclo1.AutoScroll = true;
-            this.panelCiclo1.Controls.Add(this.button1);
+            this.panelCiclo1.Controls.Add(this.btnCiclo1);
             this.panelCiclo1.Location = new System.Drawing.Point(15, 37);
             this.panelCiclo1.Name = "panelCiclo1";
             this.panelCiclo1.Size = new System.Drawing.Size(253, 567);
             this.panelCiclo1.TabIndex = 4;
             // 
-            // button1
+            // btnCiclo1
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(85, 14);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(56, 47);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "+";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnCiclo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCiclo1.Location = new System.Drawing.Point(85, 14);
+            this.btnCiclo1.Name = "btnCiclo1";
+            this.btnCiclo1.Size = new System.Drawing.Size(56, 47);
+            this.btnCiclo1.TabIndex = 1;
+            this.btnCiclo1.Text = "+";
+            this.btnCiclo1.UseVisualStyleBackColor = true;
+            this.btnCiclo1.Click += new System.EventHandler(this.handlerComun_Click);
             // 
             // lblCiclo1
             // 
@@ -241,7 +241,7 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnRegresar;
         private System.Windows.Forms.Label lblCiclo1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCiclo1;
         private System.Windows.Forms.Panel panelCiclos;
     }
 }

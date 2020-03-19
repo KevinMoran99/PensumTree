@@ -350,6 +350,7 @@ namespace PensumTree
                     }
                 }
                 dgvMaterias.DataSource = tempMateria;
+                materias = tempMateria;
             }
             else
             {

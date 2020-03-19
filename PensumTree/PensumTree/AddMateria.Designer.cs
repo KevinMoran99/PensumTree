@@ -63,6 +63,7 @@
             this.dgvMaterias.Size = new System.Drawing.Size(903, 235);
             this.dgvMaterias.TabIndex = 72;
             this.dgvMaterias.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMaterias_CellClick);
+            this.dgvMaterias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMaterias_CellContentClick);
             // 
             // cbxEscuela
             // 
@@ -71,6 +72,7 @@
             this.cbxEscuela.Name = "cbxEscuela";
             this.cbxEscuela.Size = new System.Drawing.Size(158, 21);
             this.cbxEscuela.TabIndex = 76;
+            this.cbxEscuela.SelectedIndexChanged += new System.EventHandler(this.cbxEscuela_SelectedIndexChanged);
             this.cbxEscuela.SelectedValueChanged += new System.EventHandler(this.cbxEscuela_SelectedValueChanged);
             // 
             // label2

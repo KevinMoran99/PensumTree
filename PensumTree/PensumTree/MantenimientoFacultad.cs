@@ -164,6 +164,7 @@ namespace PensumTree
                     }
                 }
                 dgvFacultades.DataSource = tempFacultades;
+                facultades = tempFacultades;
             }
             else
             {

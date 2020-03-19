@@ -63,7 +63,7 @@ namespace PensumTree
 
         private void Button7_Click(object sender, EventArgs e)
         {
-            MantenimientoPlan frm = new MantenimientoPlan();
+            ModuloPensum frm = new ModuloPensum();
             frm.Show();
             this.Hide();
         }

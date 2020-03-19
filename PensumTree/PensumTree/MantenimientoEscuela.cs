@@ -117,6 +117,7 @@ namespace PensumTree
                     }
                 }
                 dgvEscuelas.DataSource = tempEscuelas;
+                escuelas = tempEscuelas;
             }
             else
             {
