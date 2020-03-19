@@ -66,7 +66,7 @@ namespace PensumTree.Utils
 
         public static bool hasText(Control control)
         {   
-            if(control is TextBox)
+            if(control is TextBox|| control is MaskedTextBox)
                 return control.Text.Trim().Length > 0;
             throw new Exception("Invalid control for isEmpty Method");
         }
