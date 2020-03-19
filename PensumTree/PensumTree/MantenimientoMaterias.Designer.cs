@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MantenimientoMaterias));
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -43,14 +45,10 @@
             this.cbxPreReq4 = new System.Windows.Forms.ComboBox();
             this.cbxPreReq3 = new System.Windows.Forms.ComboBox();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.dgvMaterias = new System.Windows.Forms.DataGridView();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.menúToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
-            this.btnEliminar = new System.Windows.Forms.Button();
             this.rdbActivo = new System.Windows.Forms.RadioButton();
             this.rdbInactivo = new System.Windows.Forms.RadioButton();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
@@ -60,8 +58,11 @@
             this.chElectiva = new System.Windows.Forms.CheckBox();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.mtxtCodigo = new System.Windows.Forms.MaskedTextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menúToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMaterias)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label5
@@ -195,7 +196,7 @@
             // 
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.Location = new System.Drawing.Point(419, 9);
+            this.lblTitulo.Location = new System.Drawing.Point(417, 24);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(101, 29);
             this.lblTitulo.TabIndex = 56;
@@ -243,16 +244,6 @@
             this.label3.TabIndex = 60;
             this.label3.Text = "Filtro";
             // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(685, 258);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(172, 36);
-            this.btnEliminar.TabIndex = 62;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            // 
             // rdbActivo
             // 
             this.rdbActivo.AutoSize = true;
@@ -279,6 +270,7 @@
             // 
             // errorProvider
             // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
             // chPar
@@ -348,7 +340,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(927, 24);
-            this.menuStrip1.TabIndex = 63;
+            this.menuStrip1.TabIndex = 159;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // menúToolStripMenuItem
@@ -356,13 +348,14 @@
             this.menúToolStripMenuItem.Name = "menúToolStripMenuItem";
             this.menúToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.menúToolStripMenuItem.Text = "Menú";
-            this.menúToolStripMenuItem.Click += new System.EventHandler(this.MenúToolStripMenuItem_Click);
+            this.menúToolStripMenuItem.Click += new System.EventHandler(this.menúToolStripMenuItem_Click);
             // 
             // MantenimientoMaterias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(927, 704);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.mtxtCodigo);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.chElectiva);
@@ -371,7 +364,6 @@
             this.Controls.Add(this.chPar);
             this.Controls.Add(this.rdbInactivo);
             this.Controls.Add(this.rdbActivo);
-            this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnAgregar);
@@ -391,8 +383,6 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MantenimientoMaterias";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -429,7 +419,6 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.RadioButton rdbActivo;
         private System.Windows.Forms.RadioButton rdbInactivo;
         private System.Windows.Forms.ErrorProvider errorProvider;

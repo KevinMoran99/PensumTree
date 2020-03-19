@@ -7,6 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PensumTree.Controllers;
+using PensumTree.EntityFramework;
+using PensumTree.Models;
+using PensumTree.Utils;
+using static PensumTree.Utils.FormValidators;
 
 namespace PensumTree
 {
@@ -22,22 +27,29 @@ namespace PensumTree
         private int[] columnsToChange = { 0, 1, 2, 3,4,5,6,7,13,14,16,18,20,22};
         private int[] columnsToHide = {8,9,10,11,12,15,17,19,21,23 };
         private string[] titlesforColumns = { "ID", "Nombre", "UV", "Código", "Ciclo Impar", "Ciclo Par", "Laboratorio", "Electiva","Estado", "Escuela", "Pre-requisito1", "Pre-requisito2", "Pre-requisito3", "Pre-requisito4" };
-
         public MantenimientoMaterias()
         {
             InitializeComponent();
         }
 
-
         //Si retorna true, es porque hay una materia repetida
-        private bool isRepeated(materia current, List<materia> materias)
+        private bool isRepeated(materia current, List<materia> materiaList)
         {
+            if(selectedMateria != null)
+            {
+                //Si se intenta hacer un loop de prerrequisitos
+                if (selectedMateria == current)
+                {
+                    return true;
+                }
+            }
+
             if (current==null)
             {
                 return false;
             }
             //Verificando la materia actual con la lista de materias a comparar
-            foreach (materia m in materias)
+            foreach (materia m in materiaList)
             {
                 if (current == m)
                 {
@@ -49,28 +61,28 @@ namespace PensumTree
             //con los prerrequisitos de la materia, llamando el método recursivamente
             if (current.materia2 != null)
             {
-                if (isRepeated(current.materia2, materias))
+                if (isRepeated(current.materia2, materiaList))
                 {
                     return true;
                 }
             }
             if (current.materia3 != null)
             {
-                if (isRepeated(current.materia3, materias))
+                if (isRepeated(current.materia3, materiaList))
                 {
                     return true;
                 }
             }
             if (current.materia4 != null)
             {
-                if (isRepeated(current.materia4, materias))
+                if (isRepeated(current.materia4, materiaList))
                 {
                     return true;
                 }
             }
             if (current.materia5 != null)
             {
-                if (isRepeated(current.materia5, materias))
+                if (isRepeated(current.materia5, materiaList))
                 {
                     return true;
                 }
@@ -116,15 +128,15 @@ namespace PensumTree
 
             if (getMateriasOperation.State)
             {
-                materias = getMateriasOperation.Data;
-                materia[] materias1 = new materia[materias.Count];
-                materia[] materias2 = new materia[materias.Count];
-                materia[] materias3 = new materia[materias.Count];
-                materia[] materias4 = new materia[materias.Count];
-                materias.CopyTo(materias1);
-                materias.CopyTo(materias2);
-                materias.CopyTo(materias3);
-                materias.CopyTo(materias4);
+                List<materia> materiaList = getMateriasOperation.Data;
+                materia[] materias1 = new materia[materiaList.Count];
+                materia[] materias2 = new materia[materiaList.Count];
+                materia[] materias3 = new materia[materiaList.Count];
+                materia[] materias4 = new materia[materiaList.Count];
+                materiaList.CopyTo(materias1);
+                materiaList.CopyTo(materias2);
+                materiaList.CopyTo(materias3);
+                materiaList.CopyTo(materias4);
                 cbxPreReq1.DataSource = materias1;
                 cbxPreReq2.DataSource = materias2;
                 cbxPreReq3.DataSource = materias3;
@@ -257,6 +269,7 @@ namespace PensumTree
                 MessageBox.Show("Materia agregada con éxito", "Éxito",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 loadTable();
+                loadCbx();
                 cleanForm();
             }
         }
@@ -272,7 +285,7 @@ namespace PensumTree
 
             if (cbxPreReq1.SelectedIndex!= -1)
             {
-                currentMat.idPrerreq1 = ((materia)cbxPreReq1.SelectedValue).idPrerreq1;
+                currentMat.idPrerreq1 = ((materia)cbxPreReq1.SelectedValue).id;
             }
             else
             {
@@ -280,7 +293,7 @@ namespace PensumTree
             }
             if (cbxPreReq2.SelectedIndex!=-1)
             {
-                currentMat.idPrerreq2 = ((materia)cbxPreReq2.SelectedValue).idPrerreq2;
+                currentMat.idPrerreq2 = ((materia)cbxPreReq2.SelectedValue).id;
             }
             else
             {
@@ -288,7 +301,7 @@ namespace PensumTree
             }
             if (cbxPreReq3.SelectedIndex!=-1)
             {
-                currentMat.idPrerreq3 = ((materia)cbxPreReq3.SelectedValue).idPrerreq3;
+                currentMat.idPrerreq3 = ((materia)cbxPreReq3.SelectedValue).id;
             }
             else
             {
@@ -296,7 +309,7 @@ namespace PensumTree
             }
             if (cbxPreReq4.SelectedIndex!= -1)
             {
-                currentMat.idPrerreq4 = ((materia)cbxPreReq4.SelectedValue).idPrerreq4;
+                currentMat.idPrerreq4 = ((materia)cbxPreReq4.SelectedValue).id;
             }
             else
             {
@@ -431,10 +444,10 @@ namespace PensumTree
                 }
 
                 List<materia> materiasP1 = new List<materia>();
-                materiasP.Add((materia)(cbxPreReq1.SelectedItem));
-                materiasP.Add((materia)(cbxPreReq3.SelectedItem));
-                materiasP.Add((materia)(cbxPreReq4.SelectedItem));
-                if (isRepeated((materia)(cbxPreReq2.SelectedItem), materiasP))
+                materiasP1.Add((materia)(cbxPreReq1.SelectedItem));
+                materiasP1.Add((materia)(cbxPreReq3.SelectedItem));
+                materiasP1.Add((materia)(cbxPreReq4.SelectedItem));
+                if (isRepeated((materia)(cbxPreReq2.SelectedItem), materiasP1))
                 {
                     MessageBox.Show("Se encontraron conflictos en los pre-requisitos", "Error",
                      MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -442,20 +455,20 @@ namespace PensumTree
                 }
 
                 List<materia> materiasP2 = new List<materia>();
-                materiasP.Add((materia)(cbxPreReq1.SelectedItem));
-                materiasP.Add((materia)(cbxPreReq2.SelectedItem));
-                materiasP.Add((materia)(cbxPreReq4.SelectedItem));
-                if (isRepeated((materia)(cbxPreReq3.SelectedItem), materiasP))
+                materiasP2.Add((materia)(cbxPreReq1.SelectedItem));
+                materiasP2.Add((materia)(cbxPreReq2.SelectedItem));
+                materiasP2.Add((materia)(cbxPreReq4.SelectedItem));
+                if (isRepeated((materia)(cbxPreReq3.SelectedItem), materiasP2))
                 {
                     MessageBox.Show("Se encontraron conflictos en los pre-requisitos", "Error",
                      MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 List<materia> materiasP3 = new List<materia>();
-                materiasP.Add((materia)(cbxPreReq1.SelectedItem));
-                materiasP.Add((materia)(cbxPreReq2.SelectedItem));
-                materiasP.Add((materia)(cbxPreReq3.SelectedItem));
-                if (isRepeated((materia)(cbxPreReq4.SelectedItem), materiasP))
+                materiasP3.Add((materia)(cbxPreReq1.SelectedItem));
+                materiasP3.Add((materia)(cbxPreReq2.SelectedItem));
+                materiasP3.Add((materia)(cbxPreReq3.SelectedItem));
+                if (isRepeated((materia)(cbxPreReq4.SelectedItem), materiasP3))
                 {
                     MessageBox.Show("Se encontraron conflictos en los pre-requisitos", "Error",
                      MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -463,14 +476,28 @@ namespace PensumTree
                 }
                 //Obteniendo la lista de validaciones para este form, y procediendo a validar
                 List<ControlErrorProvider> errorProvider = FormValidators.validFormTest(getValidators());
-                if (!(int.Parse(txtUV.Text)>=2 && int.Parse(txtUV.Text)<=20))
+                try
                 {
-                    if (errorProvider==null)
+                    if (!(int.Parse(txtUV.Text) >= 2 && int.Parse(txtUV.Text) <= 20))
+                    {
+                        if (errorProvider == null)
+                        {
+                            errorProvider = new List<ControlErrorProvider>();
+                        }
+
+                        errorProvider.Add(new ControlErrorProvider("Las UV solo pueden estar entre 2 y 20", txtUV));
+                    }
+                }
+                catch { }
+
+                if (!mtxtCodigo.MaskCompleted)
+                {
+                    if (errorProvider == null)
                     {
                         errorProvider = new List<ControlErrorProvider>();
                     }
 
-                    errorProvider.Add(new ControlErrorProvider("Las UV solo pueden estar entre 2 y 20", txtUV));
+                    errorProvider.Add(new ControlErrorProvider("El formato del código no es válido", mtxtCodigo));
                 }
 
                 bool isValid = errorProvider == null;
@@ -481,13 +508,11 @@ namespace PensumTree
                     if (selectedMateria == null)
                     {
                         saveData();
-                        loadCbx();
                     }
                     //Si se había seleccionado una facultad, se modifica dicho registro
                     else
                     {
                         updateData(selectedMateria);
-                        loadCbx();
                     }
                 }
                 else
@@ -564,11 +589,16 @@ namespace PensumTree
             Application.Exit();
         }
 
-        private void MenúToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            Form1 frm = new Form1();
-            frm.Show();
-            this.Hide();
+            try
+            {
+                cleanForm();
+            }
+            catch (Exception ex)
+            {
+                FormUtils.defaultErrorMessage(ex);
+            }
         }
 
         private void cbxPreReq1_SelectedIndexChanged(object sender, EventArgs e)
@@ -584,6 +614,13 @@ namespace PensumTree
         private void cbxPreReq3_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbxPreReq4.Enabled = true;
+        }
+
+        private void menúToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1 frm = new Form1();
+            frm.Show();
+            this.Hide();
         }
     }
 }
