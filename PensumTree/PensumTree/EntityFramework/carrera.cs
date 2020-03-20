@@ -30,5 +30,11 @@ namespace PensumTree.EntityFramework
         public virtual tipo_carrera tipo_carrera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<plan> plans { get; set; }
+
+        override
+        public string ToString()
+        {
+            return nombre;
+        }
     }
 }

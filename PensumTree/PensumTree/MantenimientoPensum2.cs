@@ -25,8 +25,8 @@ namespace PensumTree
         }
 
         private void MantenimientoPensum2_Click(object sender, EventArgs e)
-        {/*
-            materia mat = new materia
+        {
+            /*materia mat = new materia
             {
                 nombre = "Calculo Integral",
                 uv = 4,

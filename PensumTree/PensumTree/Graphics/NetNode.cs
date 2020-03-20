@@ -13,13 +13,19 @@ namespace PensumTree.Graphics
 {
     public partial class NetNode : UserControl
     {
-        materia mat;
+        
         pensum matInscrita;
         ModuloPensum parent;
 
-        public int corr;
-        int X;
-        int Y;
+        private materia mat;
+        private int corr;
+        private int x;
+        private int y;
+
+        public materia Mat { get => mat; set => mat = value; }
+        public int Corr { get => corr; set => corr = value; }
+        public int X { get => x; set => x = value; }
+        public int Y { get => y; set => y = value; }
 
         public NetNode()
         {
@@ -27,24 +33,31 @@ namespace PensumTree.Graphics
         }
 
         //Constructor a usar cuando se esté agregando una nueva materia al pensum
-        public NetNode(ModuloPensum parent, materia materia)
+        public NetNode(ModuloPensum parent, materia materia, int X, int Y)
         {
             InitializeComponent();
 
-            mat = materia;
+            Mat = materia;
             this.parent = parent;
+            this.X = X;
+            this.Y = Y;
 
             //TODO: Hacer código para determinar el correlativo y setearselo a lblCorr
 
-            lblCodigo.Text = mat.codigo;
-            lblNombre.Text = mat.nombre;
-            lblUv.Text = mat.uv.ToString() + " UV";
+            lblCodigo.Text = Mat.codigo;
+            lblNombre.Text = Mat.nombre;
+            lblUv.Text = Mat.uv.ToString() + " UV";
 
-            if (mat.nombre.Length <= 25)
+            if(mat.materia2 == null) //Si la materia no tiene prerrequisitos
+            {
+                lblPrerreq.Text = "Bachillerato";
+            }
+
+            if (Mat.nombre.Length <= 23)
             {
                 lblNombre.Font = new Font("Sans Serif", 14);
             }
-            if (mat.nombre.Length > 25 && mat.nombre.Length <=50)
+            if (Mat.nombre.Length > 23 && Mat.nombre.Length <=50)
             {
                 lblNombre.Font = new Font("Sans Serif", 11);
             }
@@ -86,13 +99,13 @@ namespace PensumTree.Graphics
             if (!materia.primerCiclo)
             {
                 this.Controls.Remove(pcbCiclo1);
-                pcbCiclo2.Location = new Point(pcbCiclo2.Location.X - 36, pcbCiclo2.Location.Y);
-                pcbLab.Location = new Point(pcbLab.Location.X - 36, pcbLab.Location.Y);
+                pcbCiclo2.Location = new Point(pcbCiclo2.Location.X - 26, pcbCiclo2.Location.Y);
+                pcbLab.Location = new Point(pcbLab.Location.X - 26, pcbLab.Location.Y);
             }
             if (!materia.segundoCiclo)
             {
                 this.Controls.Remove(pcbCiclo2);
-                pcbLab.Location = new Point(pcbLab.Location.X - 36, pcbLab.Location.Y);
+                pcbLab.Location = new Point(pcbLab.Location.X - 26, pcbLab.Location.Y);
             }
             if (!materia.lab)
             {
@@ -110,27 +123,70 @@ namespace PensumTree.Graphics
             {
                 this.BackColor = Color.White;
             }
+
+            //MessageBox.Show("[" + X + "," + Y + "]");
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            try
+            /*try
             {
                 parent.current = parent.pensum.InEdge(this, 0).Source;
             }
             catch
             {
                 parent.current = null;
-            }
+            }*/
+            DialogResult dialogResult = MessageBox.Show("¿Desea eliminar esta materia del pensum? Si lo hace, todas las materias que dependan de ella también serán eliminadas.", "Eliminar materia", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            List<NetNode> nodesToDelete = new List<NetNode>();
-
-            deleteNodeAndChildren(this, ref nodesToDelete);
-
-            foreach (NetNode node in nodesToDelete)
+            if (dialogResult == DialogResult.Yes)
             {
-                parent.Controls.Remove(node);
-                parent.pensum.RemoveVertex(node);
+
+                List<NetNode> nodesToDelete = new List<NetNode>();
+
+                deleteNodeAndChildren(this, ref nodesToDelete);
+
+                //Eliminando la materia y todas las materias que dependían de ella
+                foreach (NetNode node in nodesToDelete)
+                {
+                    //Obteniendo el nombre del panel padre del nodo actual
+                    Panel parentPanel = (Panel)(parent.Controls.Find("panelCiclo" + (node.X + 1), true)[0]);
+
+                    //Reubicando los controles que estaban bajo el nodo que será eliminado
+                    foreach(Control c in parentPanel.Controls)
+                    {
+                        if (c.Location.Y > node.Location.Y)
+                        {
+                            c.Location = new Point(c.Location.X, c.Location.Y - 115);
+                        }
+                        
+                    }
+
+                    //Reubicando la posición lógica de las materias en la matriz posición
+                    for (int y = node.y; y < 7; y++)
+                    {
+                        try
+                        {
+                            parent.positionMatrix[node.x, y] = parent.positionMatrix[node.x, y + 1];
+                            parent.positionMatrix[node.x, y].Y = y;
+                        }
+                        catch(Exception ex) { if (true) { } }
+                    }
+
+                    //Disminuyendo las variables helper del método que agrega materias
+                    parent.arrayCont[node.X]--;
+                    parent.arrayY[node.X] -= 115;
+                    //Haciendo visible al botón del panel en caso de que sea invisible
+                    ((Button)(parentPanel.Controls.Find("btnCiclo" + (node.x + 1), true)[0])).Visible = true;
+
+                    //Removiendo la materia del form y del grafo
+                    parentPanel.Controls.Remove(node);
+                    parent.pensum.RemoveVertex(node);
+
+                }
+
+                //Actualizando los correlativos de todas las materias
+                parent.actualizarCorr();
             }
         }
 
@@ -140,7 +196,11 @@ namespace PensumTree.Graphics
             {
                 deleteNodeAndChildren(ed.Target, ref nodesToDelete);
             }
-            nodesToDelete.Add(node);
+
+            if(!nodesToDelete.Contains(node))
+            {
+                nodesToDelete.Add(node);
+            }
         }
 
         private void NetNode_DoubleClick(object sender, EventArgs e)
@@ -164,6 +224,16 @@ namespace PensumTree.Graphics
             foreach (var ed in parent.pensum.InEdges(node))
             {
                 paintNodeAndParents(ed.Source, color);
+            }
+        }
+
+        public void setCorr(int corr, string prerreqCors)
+        {
+            this.corr = corr;
+            lblCorr.Text = corr.ToString();
+            if (!prerreqCors.Equals(""))
+            {
+                lblPrerreq.Text = prerreqCors;
             }
         }
 

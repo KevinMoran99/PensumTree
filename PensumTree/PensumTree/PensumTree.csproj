@@ -118,7 +118,9 @@
     </Compile>
     <Compile Include="Controllers\EscuelaController.cs" />
     <Compile Include="Controllers\MateriaController.cs" />
-	<Compile Include="Controllers\CarreraController.cs" />
+    <Compile Include="Controllers\CarreraController.cs" />
+    <Compile Include="Controllers\PensumController.cs" />
+    <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="EntityFramework\carrera.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>

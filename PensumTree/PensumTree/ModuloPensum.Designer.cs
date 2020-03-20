@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtInicio = new System.Windows.Forms.TextBox();
@@ -43,8 +44,10 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnRegresar = new System.Windows.Forms.Button();
             this.panelCiclos = new System.Windows.Forms.Panel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelCiclo1.SuspendLayout();
             this.panelCiclos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -173,20 +176,22 @@
             this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardar.Location = new System.Drawing.Point(773, 26);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(130, 33);
+            this.btnGuardar.Size = new System.Drawing.Size(193, 33);
             this.btnGuardar.TabIndex = 157;
-            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Text = "Guardar cambios";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnRegresar
             // 
             this.btnRegresar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegresar.Location = new System.Drawing.Point(915, 26);
+            this.btnRegresar.Location = new System.Drawing.Point(994, 26);
             this.btnRegresar.Name = "btnRegresar";
             this.btnRegresar.Size = new System.Drawing.Size(130, 33);
             this.btnRegresar.TabIndex = 158;
             this.btnRegresar.Text = "Regresar";
             this.btnRegresar.UseVisualStyleBackColor = true;
+            this.btnRegresar.Click += new System.EventHandler(this.btnRegresar_Click);
             // 
             // panelCiclos
             // 
@@ -197,6 +202,11 @@
             this.panelCiclos.Name = "panelCiclos";
             this.panelCiclos.Size = new System.Drawing.Size(1112, 624);
             this.panelCiclos.TabIndex = 159;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider1.ContainerControl = this;
             // 
             // ModuloPensum
             // 
@@ -218,9 +228,12 @@
             this.Location = new System.Drawing.Point(50, -50);
             this.Name = "ModuloPensum";
             this.Text = "Creación de pensum";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ModuloPensum_FormClosed);
+            this.Load += new System.EventHandler(this.ModuloPensum_Load);
             this.panelCiclo1.ResumeLayout(false);
             this.panelCiclos.ResumeLayout(false);
             this.panelCiclos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,5 +256,6 @@
         private System.Windows.Forms.Label lblCiclo1;
         private System.Windows.Forms.Button btnCiclo1;
         private System.Windows.Forms.Panel panelCiclos;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
