@@ -24,8 +24,12 @@ namespace PensumTree
 
         private static CarreraController carreraController = new CarreraController();
         private static FacultadController facultadController = new FacultadController();
+        private static TipoCarreraController tipoCarreraController = new TipoCarreraController();
+        
         private List<facultad> facultades = new List<facultad>();
         private List<carrera> carreras = new List<carrera>();
+        private List<tipo_carrera> tipo_carreras = new List<tipo_carrera>();
+
         private carrera selectedCarrera = null;
 
         private int[] columnsToHide = { 2, 3, 7  };
@@ -51,6 +55,8 @@ namespace PensumTree
         private void loadCbx()
         {
             Operation<facultad> getFacultades = facultadController.getActiveRecords();
+            Operation<tipo_carrera> getTipoCarreras = tipoCarreraController.getActiveRecords();
+
 
             if (getFacultades.State)
             {
@@ -60,6 +66,17 @@ namespace PensumTree
             else
             {
                 MessageBox.Show("Error al cargar los datos de las facultades", "Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (getTipoCarreras.State)
+            {
+                tipo_carreras = getTipoCarreras.Data;
+                cmbTipos.DataSource = tipo_carreras;
+            }
+            else
+            {
+                MessageBox.Show("Error al cargar los datos de los tipos de carrera", "Error",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -85,7 +102,7 @@ namespace PensumTree
             {
                 nombre = txtNombre.Text,
                 idFacultad = ((facultad)cmbFacultades.SelectedValue).id,
-                idTipo = 1, //It will be filled when the model of tipo carrera is completed, while is hardcoded
+                idTipo = ((tipo_carrera)cmbTipos.SelectedValue).id,
                 estado = rdbActivo.Checked
             };
             Operation<carrera> operation =  carreraController.addRecord(tempCarr);
@@ -102,7 +119,7 @@ namespace PensumTree
         {
             currentCarr.nombre = txtNombre.Text;
             currentCarr.idFacultad = ((facultad)cmbFacultades.SelectedValue).id;
-            currentCarr.idTipo = 1;
+            currentCarr.idTipo = ((tipo_carrera)cmbTipos.SelectedValue).id;
             currentCarr.estado = rdbActivo.Checked;
 
             Operation<carrera> operation = carreraController.updateRecord(currentCarr);
