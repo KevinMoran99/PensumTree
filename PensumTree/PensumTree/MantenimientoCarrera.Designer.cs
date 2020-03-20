@@ -96,9 +96,11 @@
             // 
             // dgvCarreras
             // 
+            this.dgvCarreras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCarreras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCarreras.Location = new System.Drawing.Point(28, 217);
             this.dgvCarreras.Name = "dgvCarreras";
+            this.dgvCarreras.ReadOnly = true;
             this.dgvCarreras.Size = new System.Drawing.Size(922, 374);
             this.dgvCarreras.TabIndex = 101;
             this.dgvCarreras.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvCarreras_CellClick);

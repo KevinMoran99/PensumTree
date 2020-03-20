@@ -87,6 +87,7 @@
             this.dgvEscuelas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEscuelas.Location = new System.Drawing.Point(12, 205);
             this.dgvEscuelas.Name = "dgvEscuelas";
+            this.dgvEscuelas.ReadOnly = true;
             this.dgvEscuelas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEscuelas.Size = new System.Drawing.Size(627, 308);
             this.dgvEscuelas.TabIndex = 156;

@@ -54,6 +54,7 @@
             this.dgvPensum.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPensum.Location = new System.Drawing.Point(12, 117);
             this.dgvPensum.Name = "dgvPensum";
+            this.dgvPensum.ReadOnly = true;
             this.dgvPensum.Size = new System.Drawing.Size(922, 474);
             this.dgvPensum.TabIndex = 83;
             this.dgvPensum.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPensum_CellClick);

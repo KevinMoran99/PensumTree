@@ -177,6 +177,20 @@ namespace PensumTree
             {
                 //Obteniendo la lista de validaciones para este form, y procediendo a validar
                 List<ControlErrorProvider> errorProvider = FormValidators.validFormTest(getValidators());
+                try
+                {
+                    if (!(int.Parse(txtUV.Text) >= 80 && int.Parse(txtUV.Text) <= 200))
+                    {
+                        if (errorProvider == null)
+                        {
+                            errorProvider = new List<ControlErrorProvider>();
+                        }
+
+                        errorProvider.Add(new ControlErrorProvider("Las UV solo pueden estar entre 8 y 200", txtUV));
+                    }
+                }
+                catch { }
+
                 bool isValid = errorProvider == null;
                 //Si se pasan todas las validaciones, se procede a guardar la información
                 if (isValid)
