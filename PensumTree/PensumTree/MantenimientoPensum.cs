@@ -75,7 +75,7 @@ namespace PensumTree
                 int index = e.RowIndex;
                 if (index >= 0)
                 {
-                    ModuloPensum frm = new ModuloPensum(plans[index]);
+                    VistaPensum frm = new VistaPensum(plans[index]);
                     frm.Show();
                     this.Hide();
                 }

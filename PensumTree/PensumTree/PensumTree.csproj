@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -162,6 +162,12 @@
     <Compile Include="Graphics\NetNode.Designer.cs">
       <DependentUpon>NetNode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Graphics\GraphNode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Graphics\GraphNode.Designer.cs">
+      <DependentUpon>GraphNode.cs</DependentUpon>
+    </Compile>
     <Compile Include="IAgregarMateria.cs" />
     <Compile Include="MantenimientoCarrera.cs">
       <SubType>Form</SubType>
@@ -242,6 +248,12 @@
     <Compile Include="Utils\FormValidators.cs" />
     <Compile Include="Utils\RegularExpression.cs" />
     <Compile Include="Utils\Validators.cs" />
+    <Compile Include="VistaPensum.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VistaPensum.Designer.cs">
+      <DependentUpon>VistaPensum.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddMateria.resx">
       <DependentUpon>AddMateria.cs</DependentUpon>
     </EmbeddedResource>
@@ -250,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Graphics\NetNode.resx">
       <DependentUpon>NetNode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Graphics\GraphNode.resx">
+      <DependentUpon>GraphNode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MantenimientoCarrera.resx">
       <DependentUpon>MantenimientoCarrera.cs</DependentUpon>
@@ -281,6 +296,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VistaPensum.resx">
+      <DependentUpon>VistaPensum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -337,5 +355,4 @@
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
-
 </Project>

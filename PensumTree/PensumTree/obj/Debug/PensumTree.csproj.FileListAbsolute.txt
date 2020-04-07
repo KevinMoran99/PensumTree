@@ -101,3 +101,5 @@ X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\obj\Debug\Pensu
 X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.csproj.CopyComplete
 X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.exe
 X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.pdb
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.Graphics.GraphNode.resources
+X:\Documentos\0-UDB\2020 C1\PED\PensumTree\PensumTree\PensumTree\obj\Debug\PensumTree.VistaPensum.resources
