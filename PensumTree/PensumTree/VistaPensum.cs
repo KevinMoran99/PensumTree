@@ -427,11 +427,18 @@ namespace PensumTree
             Application.Exit();
         }
 
+        //Tabla hash que servirá de helper para mostrar los tooltips de los círculos de salto
+        //Key: Rectangle que representa la posición que debe tener el mouse para que se muestre el tooltip (osea, la ubicación del círculo)
+        //Value: El nombre de la materia que representa el círculo, la cual será mostrada en el tooltip
         Hashtable tooltips = new Hashtable();
 
         private void panelGrafo_Paint(object sender, PaintEventArgs e)
         {
+            //Vaciando la tabla de tooltips
+            tooltips.Clear();
+
             //Lista que contiene todos los "circulos de salto" que ya han sido renderizados (esto para evitar que dos circulos se rendericen uno encima de otro)
+            //(De hecho no los contiene a todos, solamente contiene a los que se renderizan sobre los vértices, porque con los que se renderizan bajo ellos no hay problemas de colisión)
             List<Rectangle> occupiedSpaces = new List<Rectangle>();
 
             //Color y anchura de las aristas
@@ -472,7 +479,8 @@ namespace PensumTree
                         //Dibujando el círculo de salto que sale del padre
                         Rectangle rect = new Rectangle((int)x1Far - 12, (int)y1 + 10, 25, 25);
 
-                        //tooltips.Add(child.Target.Mat.nombre, rect);
+                        //Añadiendo este círculo a la tabla de tooltips
+                        tooltips.Add(rect, child.Target.Mat.nombre);
 
                         e.Graphics.DrawLine(pen, x1Far, y1, x1Far, y1 + 10);
                         e.Graphics.FillEllipse(Brushes.ForestGreen, rect);
@@ -508,7 +516,8 @@ namespace PensumTree
                         rect = new Rectangle((int)x2Far - 12, (int)y2 - 35, 25, 25);
                         occupiedSpaces.Add(rect);
 
-                        //tooltips.Add(node.Mat.nombre, rect);
+                        //Añadiendo este círculo a la tabla de tooltips
+                        tooltips.Add(rect, node.Mat.nombre);
 
                         //Finalmente, se dibuja el círculo
                         e.Graphics.DrawLine(pen, x2Far, y2 - 10, x2Far, y2);
@@ -527,26 +536,36 @@ namespace PensumTree
 
                     }
                 }
-                
             }
 
         }
 
         private void panelGrafo_Click(object sender, EventArgs e)
         {
+            
         }
 
+        //Tooltip para los círculos de salto
+        ToolTip tt = new ToolTip();
         private void panelGrafo_MouseMove(object sender, MouseEventArgs e)
         {
 
-            if (e.Location.X > 20 && e.Location.X < 50 && e.Location.Y > 20 && e.Location.Y < 50)
-            {
-                ToolTip tt = new ToolTip();
+            ICollection rectangles = tooltips.Keys;
+            //Por defecto, el tooltip se desactiva
+            tt.Active = false;
 
-                tt.IsBalloon = true;
-                tt.Show("caca", panelGrafo, e.Location, 5000);
-                
+            //Iterando entre las posiciones de todos los círculos de salto
+            foreach (Rectangle rect in rectangles)
+            {
+                //Si el puntero del mouse se encuentra sobre uno de los círculos de salto, debe mostrarse un tooltip con el nombre de la materia que ese círculo representa
+                if (e.Location.X > rect.X && e.Location.X < rect.X + rect.Width && e.Location.Y > rect.Y  && e.Location.Y < rect.Y + rect.Height)
+                {
+                    tt.Active = true;
+                    tt.IsBalloon = true;
+                    tt.Show(tooltips[rect].ToString(), panelGrafo, e.Location, 1000);
+                }
             }
+
         }
 
         private void panelGrafo_MouseEnter(object sender, EventArgs e)
