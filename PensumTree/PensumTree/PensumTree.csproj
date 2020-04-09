@@ -156,6 +156,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Graphics\LevelLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Graphics\LevelLabel.Designer.cs">
+      <DependentUpon>LevelLabel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Graphics\NetNode.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -259,6 +265,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Graphics\LevelLabel.resx">
+      <DependentUpon>LevelLabel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Graphics\NetNode.resx">
       <DependentUpon>NetNode.cs</DependentUpon>

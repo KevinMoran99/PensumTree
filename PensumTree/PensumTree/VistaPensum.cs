@@ -179,6 +179,118 @@ namespace PensumTree
             actualizarCorr();
         }
 
+        private int getNodeLevel(GraphNode node)
+        {
+            int level = 1;
+            foreach (Edge<GraphNode> edge in pensum.InEdges(node))
+            {
+                level = getNodeLevel(edge.Source);
+                level++;
+            }
+            return level;
+        }
+
+        //Ésta variable determina hasta qué valor lógico en X se han renderizado nodos.
+        //Los siguientes nodos a renderizar deberan hacerlo en valores de X superiores a este máximo
+        //Los valores lógicos de esta variable se van incrementando de dos en dos
+        private int currentMaxX = -2;
+
+        private int addNodeToGraphView(GraphNode node, int currentY)
+        {
+            if (!panelGrafo.Contains(node.Sub))
+            {
+                //Agregando el nodo al panel
+                panelGrafo.Controls.Add(node.Sub);
+
+                //Determinando la posición lógica del nodo en función de la posición de los nodos que ya fueron renderizados
+                node.Sub.X = currentMaxX + 2;
+                node.Sub.Y = currentY + 1;
+
+                //Helper que nos ayuda a determinar si el nodo actual tiene más hijos pendientes de renderizar
+                int childrenToDisplayCount = 0;
+
+                //Estas variables servirán para recalcular el valor lógico de X para que quede centrado en relación a sus hijos
+                int leftLimit = -2;
+                int rightLimit = 0;
+
+                //Iterando entre los hijos del nodo
+                foreach (Edge<GraphNode> child in pensum.OutEdges(node))
+                {
+                    //Las operaciones se llevarán a cabo solamente si el nodo en cuestión no ha sido renderizado aún
+                    if (!panelGrafo.Contains(child.Target.Sub))
+                    {
+                        //Agregando a los hijos del nodo recursivamente. La función nos devuelve la posición X del hijo.
+                        int childX = addNodeToGraphView(child.Target, currentY + 1);
+                        childrenToDisplayCount++;
+
+                        //Almacenando la posición X del primer y último hijo del nodo actual para luego recalcular la posición X de éste
+                        if(leftLimit == -2)
+                        {
+                            leftLimit = childX;
+                        }
+                        rightLimit = childX;
+                    }
+                }
+                //Si el nodo actual no tenía hijos pendientes de renderizar, la variable currentMaxX debe incrementar
+                if (childrenToDisplayCount == 0)
+                {
+                    currentMaxX++;
+                    currentMaxX++;
+                }
+                else
+                {
+                    //Si el nodo actual tenía hijos pendientes de renderizar (los cuales en este punto ya fueron renderizados),
+                    //recalculamos su posición lógica en X para que esté centrada en relación a sus hijos
+                    node.Sub.X = (leftLimit + rightLimit) / 2;
+                }
+            }
+
+            //Dándole al nodo su posición real en base a su posición lógica
+            node.Sub.Location = new Point(50 + 125 * node.Sub.X, 30 + 150 * node.Sub.Y);
+
+            //Devolviendo la posición X del nodo
+            return node.Sub.X;
+        }
+
+        private void generateGraphVisualization()
+        {
+            int maxLevel = 1;
+
+            //Calculando cantidad de niveles del grafo
+            foreach(GraphNode node in pensum.Vertices)
+            {
+                if(pensum.OutDegree(node) == 0)
+                {
+                    int level = getNodeLevel(node);
+                    
+                    if (level > maxLevel)
+                    {
+                        maxLevel = level;
+                    }
+                }
+            }
+
+            //Renderizando un identificador lateral para cada label
+            int levelY = 10;
+            for(int i = 1; i <= maxLevel; i++)
+            {
+                LevelLabel lbl = new LevelLabel(i);
+                lbl.Location = new Point(10, levelY);
+                panelGrafo.Controls.Add(lbl);
+
+                levelY += 151;
+            }
+
+            //Renderizando los vértices del grafo
+            foreach (GraphNode node in pensum.Vertices)
+            {
+                addNodeToGraphView(node, -1);
+            }
+
+            //Llamando a refresh para renderizar las aristas del grafo
+            panelGrafo.Refresh();
+        }
+
         //loadElements es una variable que genera los labels y panels para los ciclos 
         //(los genero así por el espacio que utilizan y asi poder activar el scroll)
         private void loadElements()
@@ -248,6 +360,7 @@ namespace PensumTree
 
                 loadPensumList();
                 generatePensumFromList();
+                generateGraphVisualization();
             }
         }
 
@@ -299,5 +412,36 @@ namespace PensumTree
             Application.Exit();
         }
 
+        private void panelGrafo_Paint(object sender, PaintEventArgs e)
+        {
+            Pen pen = new Pen(Color.Gray, 1.5f);
+
+            foreach(GraphNode node in pensum.Vertices)
+            {
+                float x1 = node.Sub.Location.X + 105;
+                float y1 = node.Sub.Location.Y + 107;
+
+                float x1Far = x1 + 20;
+
+                foreach (Edge<GraphNode> child in pensum.OutEdges(node))
+                {
+                    float x2 = child.Target.Sub.Location.X + 105;
+                    float y2 = child.Target.Sub.Location.Y;
+
+                    double module = Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
+
+                    if (module < 1000)
+                    {
+                        e.Graphics.DrawLine(pen, x1, y1, x2, y2);
+                    }
+                    else
+                    {
+                        e.Graphics.DrawLine(pen, x1Far, y1, x1Far, y1 + 20);
+                        x1Far += 20;
+                    }
+                }
+            }
+
+        }
     }
 }

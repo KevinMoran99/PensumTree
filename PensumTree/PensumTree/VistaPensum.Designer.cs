@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.panelCiclo1 = new System.Windows.Forms.Panel();
             this.lblCiclo1 = new System.Windows.Forms.Label();
             this.btnRegresar = new System.Windows.Forms.Button();
             this.panelCiclos = new System.Windows.Forms.Panel();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.lblTitle = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -42,7 +40,6 @@
             this.btnExport = new System.Windows.Forms.Button();
             this.btnCargar = new System.Windows.Forms.Button();
             this.panelCiclos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -53,7 +50,7 @@
             this.panelCiclo1.AutoScroll = true;
             this.panelCiclo1.Location = new System.Drawing.Point(15, 37);
             this.panelCiclo1.Name = "panelCiclo1";
-            this.panelCiclo1.Size = new System.Drawing.Size(253, 567);
+            this.panelCiclo1.Size = new System.Drawing.Size(253, 520);
             this.panelCiclo1.TabIndex = 4;
             // 
             // lblCiclo1
@@ -86,13 +83,8 @@
             this.panelCiclos.Controls.Add(this.panelCiclo1);
             this.panelCiclos.Location = new System.Drawing.Point(6, 3);
             this.panelCiclos.Name = "panelCiclos";
-            this.panelCiclos.Size = new System.Drawing.Size(1076, 624);
+            this.panelCiclos.Size = new System.Drawing.Size(1076, 564);
             this.panelCiclos.TabIndex = 159;
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.errorProvider1.ContainerControl = this;
             // 
             // lblTitle
             // 
@@ -111,7 +103,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 89);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1112, 624);
+            this.tabControl1.Size = new System.Drawing.Size(1112, 599);
             this.tabControl1.TabIndex = 161;
             // 
             // tabPage1
@@ -121,7 +113,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1104, 598);
+            this.tabPage1.Size = new System.Drawing.Size(1104, 573);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Vista de malla";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -132,17 +124,19 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1104, 598);
+            this.tabPage2.Size = new System.Drawing.Size(1104, 573);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Vista de grafo";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // panelGrafo
             // 
+            this.panelGrafo.AutoScroll = true;
             this.panelGrafo.Location = new System.Drawing.Point(6, 6);
             this.panelGrafo.Name = "panelGrafo";
-            this.panelGrafo.Size = new System.Drawing.Size(1092, 586);
+            this.panelGrafo.Size = new System.Drawing.Size(1092, 560);
             this.panelGrafo.TabIndex = 0;
+            this.panelGrafo.Paint += new System.Windows.Forms.PaintEventHandler(this.panelGrafo_Paint);
             // 
             // btnExport
             // 
@@ -168,7 +162,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1136, 716);
+            this.ClientSize = new System.Drawing.Size(1136, 691);
             this.Controls.Add(this.btnCargar);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.tabControl1);
@@ -181,7 +175,6 @@
             this.Load += new System.EventHandler(this.VistaPensum_Load);
             this.panelCiclos.ResumeLayout(false);
             this.panelCiclos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -194,7 +187,6 @@
         private System.Windows.Forms.Button btnRegresar;
         private System.Windows.Forms.Label lblCiclo1;
         private System.Windows.Forms.Panel panelCiclos;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;

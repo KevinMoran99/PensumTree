@@ -21,19 +21,22 @@ namespace PensumTree.Graphics
         private int corr;
         private int x;
         private int y;
+        private GraphNode main = null;
+        private GraphNode sub = null;
 
         public materia Mat { get => mat; set => mat = value; }
         public int Corr { get => corr; set => corr = value; }
         public int X { get => x; set => x = value; }
         public int Y { get => y; set => y = value; }
+        public GraphNode Sub { get => sub; set => sub = value; }
+        public GraphNode Main { get => main; set => main = value; }
 
         public GraphNode()
         {
             InitializeComponent();
         }
 
-        //Constructor a usar cuando se esté agregando una nueva materia al pensum
-        public GraphNode(VistaPensum parent, materia materia, int X, int Y)
+        private void constructor(VistaPensum parent, materia materia, int X, int Y)
         {
             InitializeComponent();
 
@@ -48,7 +51,7 @@ namespace PensumTree.Graphics
             lblNombre.Text = Mat.nombre;
             lblUv.Text = Mat.uv.ToString() + " UV";
 
-            if(mat.materia2 == null) //Si la materia no tiene prerrequisitos
+            if (mat.materia2 == null) //Si la materia no tiene prerrequisitos
             {
                 lblPrerreq.Text = "Bachillerato";
             }
@@ -57,7 +60,7 @@ namespace PensumTree.Graphics
             {
                 lblNombre.Font = new Font("Sans Serif", 14);
             }
-            if (Mat.nombre.Length > 23 && Mat.nombre.Length <=50)
+            if (Mat.nombre.Length > 23 && Mat.nombre.Length <= 50)
             {
                 lblNombre.Font = new Font("Sans Serif", 11);
             }
@@ -113,15 +116,55 @@ namespace PensumTree.Graphics
             }
         }
 
+
+        //Al crear un nodo, internamente se crean dos nodos idénticos: El main, que será el que será agregado al TAD grafo
+        //y que será mostrado en la vista de malla, y el sub, que será mostrado en la vista de grafo pero no estará directamente
+        //enlazado al TAD grafo. En su lugar, cada main y sub estarán estrechamente relacionados para que ambos funcionen como si de
+        //uno solo se tratase.
+
+        //Constructor para nodo main
+        public GraphNode(VistaPensum parent, materia materia, int X, int Y)
+        {
+            constructor(parent, materia, X, Y);
+
+            Sub = new GraphNode(parent, materia, -2, -1, this);
+            
+        }
+
+        //Constructor para nodo sub
+        public GraphNode(VistaPensum parent, materia materia, int X, int Y, GraphNode mainNode)
+        {
+            constructor(parent, materia, X, Y);
+
+            Main = mainNode;
+
+        }
+
         private void TreeNode_Click(object sender, EventArgs e)
         {
             if (this.BackColor == Color.White)
             {
                 this.BackColor = Color.Khaki;
+                if(sub != null)
+                {
+                    this.sub.BackColor = Color.Khaki;
+                }
+                else
+                {
+                    this.main.BackColor = Color.Khaki;
+                }
             }
             else
             {
                 this.BackColor = Color.White;
+                if (sub != null)
+                {
+                    this.sub.BackColor = Color.White;
+                }
+                else
+                {
+                    this.main.BackColor = Color.White;
+                }
             }
 
             //MessageBox.Show("[" + X + "," + Y + "]");
@@ -138,12 +181,27 @@ namespace PensumTree.Graphics
             {
                 color = Color.White;
             }
-            paintNodeAndParents(this, color);
+            if(sub != null)
+            {
+                paintNodeAndParents(this, color);
+            }
+            else
+            {
+                paintNodeAndParents(main, color);
+            }
         }
 
         private void paintNodeAndParents(GraphNode node, Color color)
         {
             node.BackColor = color;
+            if (node.sub != null)
+            {
+                node.sub.BackColor = color;
+            }
+            else
+            {
+                node.main.BackColor = color;
+            }
 
             foreach (var ed in parent.pensum.InEdges(node))
             {
@@ -158,6 +216,12 @@ namespace PensumTree.Graphics
             if (!prerreqCors.Equals(""))
             {
                 lblPrerreq.Text = prerreqCors;
+            }
+            //Si es main
+            if(sub != null)
+            {
+                //Duplicando correlativos a sub
+                sub.setCorr(corr, prerreqCors);
             }
         }
 
