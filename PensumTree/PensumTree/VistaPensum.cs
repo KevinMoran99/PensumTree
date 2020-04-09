@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -281,6 +282,20 @@ namespace PensumTree
                 levelY += 151;
             }
 
+            //Renderizando primero los vertices que no tienen hijos
+            /*foreach (GraphNode node in pensum.Vertices)
+            {
+                if (pensum.OutDegree(node) == 0 && pensum.InDegree(node) == 0)
+                {
+                    panelGrafo.Controls.Add(node.Sub);
+                    node.Sub.X = currentMaxX + 2;
+                    node.Sub.Y = 0;
+                    currentMaxX++;
+                    currentMaxX++;
+                    node.Sub.Location = new Point(50 + 125 * node.Sub.X, 30 + 150 * node.Sub.Y);
+                }
+            }*/
+
             //Renderizando los vértices del grafo
             foreach (GraphNode node in pensum.Vertices)
             {
@@ -412,35 +427,135 @@ namespace PensumTree
             Application.Exit();
         }
 
+        Hashtable tooltips = new Hashtable();
+
         private void panelGrafo_Paint(object sender, PaintEventArgs e)
         {
+            //Lista que contiene todos los "circulos de salto" que ya han sido renderizados (esto para evitar que dos circulos se rendericen uno encima de otro)
+            List<Rectangle> occupiedSpaces = new List<Rectangle>();
+
+            //Color y anchura de las aristas
             Pen pen = new Pen(Color.Gray, 1.5f);
 
-            foreach(GraphNode node in pensum.Vertices)
+            //Recorriendo todos los vértices
+            foreach (GraphNode node in pensum.Vertices)
             {
+                //Coordenadas en las que inician la aristas para este vértice
                 float x1 = node.Sub.Location.X + 105;
                 float y1 = node.Sub.Location.Y + 107;
 
+                //Coordenada x que tendrá la arista si esta finaliza un "circulo de salto"
                 float x1Far = x1 + 20;
 
+                //Recorriendo los hijos del vértice
                 foreach (Edge<GraphNode> child in pensum.OutEdges(node))
                 {
+                    //Coordenadas en las que termina la arista para este hijo
                     float x2 = child.Target.Sub.Location.X + 105;
                     float y2 = child.Target.Sub.Location.Y;
 
+                    //Coordenada x que tendrá la arista si esta inicia un "circulo de salto"
+                    float x2Far = x2 - 20;
+
+                    //Determinando la longitud de la arista
                     double module = Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
 
                     if (module < 1000)
                     {
+                        //Si la arista es corta, simplemente se dibuja como una línea recta
                         e.Graphics.DrawLine(pen, x1, y1, x2, y2);
                     }
                     else
                     {
-                        e.Graphics.DrawLine(pen, x1Far, y1, x1Far, y1 + 20);
-                        x1Far += 20;
+                        //Si la arista es larga, se dibujará usando "círculos de salto"
+
+                        //Dibujando el círculo de salto que sale del padre
+                        Rectangle rect = new Rectangle((int)x1Far - 12, (int)y1 + 10, 25, 25);
+
+                        //tooltips.Add(child.Target.Mat.nombre, rect);
+
+                        e.Graphics.DrawLine(pen, x1Far, y1, x1Far, y1 + 10);
+                        e.Graphics.FillEllipse(Brushes.ForestGreen, rect);
+
+                        float x1String;
+                        //Este if sirve para centrar el contenido del círculo en función de si tiene uno o dos dígitos
+                        if (child.Target.Corr.ToString().Length == 1)
+                        {
+                            x1String = x1Far - 7;
+                        }
+                        else
+                        {
+                            x1String = x1Far - 12;
+                        }
+                        e.Graphics.DrawString(child.Target.Corr.ToString(), lblImLazy.Font, Brushes.White, x1String, y1 + 13);
+                        x1Far += 30;
+
+
+                        //Dibujando el círculo de salto que entra al hijo
+
+                        //Comparando con los círculos que ya han sido dibujados, para ver si el círculo que se dibujará
+                        //no colisiona con uno que ya esté
+                        foreach (Rectangle currRect in occupiedSpaces)
+                        {
+                            //En caso de colisión, el nuevo círculo se colocará a la izquierda de el que ya estaba
+                            if (currRect.Contains(new Point((int)x2Far - 12, (int)y2 - 35)))
+                            {
+                                x2Far -= 30;
+                            }
+                        }
+
+                        //Añadiendo el nuevo círculo a la lista de círculos dibujados
+                        rect = new Rectangle((int)x2Far - 12, (int)y2 - 35, 25, 25);
+                        occupiedSpaces.Add(rect);
+
+                        //tooltips.Add(node.Mat.nombre, rect);
+
+                        //Finalmente, se dibuja el círculo
+                        e.Graphics.DrawLine(pen, x2Far, y2 - 10, x2Far, y2);
+                        e.Graphics.FillEllipse(Brushes.YellowGreen, rect);
+
+                        float x2String;
+                        if (node.Corr.ToString().Length == 1)
+                        {
+                            x2String = x2Far - 7;
+                        }
+                        else
+                        {
+                            x2String = x2Far - 12;
+                        }
+                        e.Graphics.DrawString(node.Corr.ToString(), lblImLazy.Font, Brushes.White, x2String, y2 - 33);
+
                     }
                 }
+                
             }
+
+        }
+
+        private void panelGrafo_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void panelGrafo_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            if (e.Location.X > 20 && e.Location.X < 50 && e.Location.Y > 20 && e.Location.Y < 50)
+            {
+                ToolTip tt = new ToolTip();
+
+                tt.IsBalloon = true;
+                tt.Show("caca", panelGrafo, e.Location, 5000);
+                
+            }
+        }
+
+        private void panelGrafo_MouseEnter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelGrafo_MouseHover(object sender, EventArgs e)
+        {
 
         }
     }

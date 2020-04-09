@@ -39,6 +39,7 @@
             this.panelGrafo = new System.Windows.Forms.Panel();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnCargar = new System.Windows.Forms.Button();
+            this.lblImLazy = new System.Windows.Forms.Label();
             this.panelCiclos.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -136,7 +137,11 @@
             this.panelGrafo.Name = "panelGrafo";
             this.panelGrafo.Size = new System.Drawing.Size(1092, 560);
             this.panelGrafo.TabIndex = 0;
+            this.panelGrafo.Click += new System.EventHandler(this.panelGrafo_Click);
             this.panelGrafo.Paint += new System.Windows.Forms.PaintEventHandler(this.panelGrafo_Paint);
+            this.panelGrafo.MouseEnter += new System.EventHandler(this.panelGrafo_MouseEnter);
+            this.panelGrafo.MouseHover += new System.EventHandler(this.panelGrafo_MouseHover);
+            this.panelGrafo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelGrafo_MouseMove);
             // 
             // btnExport
             // 
@@ -158,11 +163,23 @@
             this.btnCargar.Text = "Cargar progreso de txt";
             this.btnCargar.UseVisualStyleBackColor = true;
             // 
+            // lblImLazy
+            // 
+            this.lblImLazy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblImLazy.Location = new System.Drawing.Point(516, 54);
+            this.lblImLazy.Name = "lblImLazy";
+            this.lblImLazy.Size = new System.Drawing.Size(58, 32);
+            this.lblImLazy.TabIndex = 164;
+            this.lblImLazy.Text = "Título";
+            this.lblImLazy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblImLazy.Visible = false;
+            // 
             // VistaPensum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1136, 691);
+            this.Controls.Add(this.lblImLazy);
             this.Controls.Add(this.btnCargar);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.tabControl1);
@@ -194,5 +211,6 @@
         private System.Windows.Forms.Button btnCargar;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Panel panelGrafo;
+        private System.Windows.Forms.Label lblImLazy;
     }
 }
