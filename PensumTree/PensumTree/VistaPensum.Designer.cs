@@ -152,6 +152,7 @@
             this.btnExport.TabIndex = 162;
             this.btnExport.Text = "Exportar progreso a txt";
             this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnCargar
             // 

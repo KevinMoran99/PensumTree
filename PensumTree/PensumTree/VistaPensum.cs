@@ -15,6 +15,8 @@ using PensumTree.Models;
 using PensumTree.Utils;
 using QuickGraph;
 using static PensumTree.Utils.FormValidators;
+using System.IO;
+using System.Diagnostics;
 
 namespace PensumTree
 {
@@ -576,6 +578,26 @@ namespace PensumTree
         private void panelGrafo_MouseHover(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            //List<string> materiasId = new List<string>();
+            StreamWriter writer = new StreamWriter("muestra.txt",true);
+
+            writer.WriteLine("Pensum Id: " + selectedPensum.id.ToString());
+            writer.WriteLine("Id de Materias:");
+
+            foreach (GraphNode node in pensum.Vertices)
+            {
+                if (node.BackColor == Color.Khaki)
+                {
+                   // materiasId.Add(node.Mat.id.ToString());
+                    writer.WriteLine(node.Mat.id.ToString());
+                }
+            }
+            writer.Close();
+            Process.Start("muestra.txt");
         }
     }
 }
