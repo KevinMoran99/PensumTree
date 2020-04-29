@@ -16,7 +16,6 @@ using PensumTree.Utils;
 using QuickGraph;
 using static PensumTree.Utils.FormValidators;
 using System.IO;
-using System.Diagnostics;
 
 namespace PensumTree
 {
@@ -582,22 +581,88 @@ namespace PensumTree
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            //List<string> materiasId = new List<string>();
-            StreamWriter writer = new StreamWriter("muestra.txt",true);
-
-            writer.WriteLine("Pensum Id: " + selectedPensum.id.ToString());
-            writer.WriteLine("Id de Materias:");
-
-            foreach (GraphNode node in pensum.Vertices)
+          
+            try
             {
-                if (node.BackColor == Color.Khaki)
+                string cadena = "C:\\PED_Pruebas\\muestra" + "_selectedpensum" + selectedPensum.id.ToString() + ".txt";
+                StreamWriter writer = new StreamWriter(cadena, true);
+
+                writer.WriteLine("Pensum Id: " + selectedPensum.id.ToString());
+                writer.WriteLine("Id de Materias:");
+
+                foreach (GraphNode node in pensum.Vertices)
                 {
-                   // materiasId.Add(node.Mat.id.ToString());
-                    writer.WriteLine(node.Mat.id.ToString());
+                    if (node.BackColor == Color.Khaki)
+                    {
+                        writer.WriteLine(node.Mat.id.ToString());
+                    }
                 }
+                writer.Close();
+                MessageBox.Show("Progreso guardado exitosamente", "Éxito",MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            writer.Close();
-            Process.Start("muestra.txt");
+            catch 
+            {
+                MessageBox.Show("Error al guardar progreso", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
+        }
+
+        private void btnCargar_Click(object sender, EventArgs e)
+        {
+            List<long> materias = new List<long>();
+            Archivotxt.InitialDirectory = "C:\\";
+            if (Archivotxt.ShowDialog()== DialogResult.OK)
+            {
+                string cadena = Archivotxt.FileName;
+                StreamReader reader = new StreamReader(cadena);
+                string all = reader.ReadToEnd();
+                string[] lineas= all.Split('\n');
+                MessageBox.Show(all);
+                if (VerificarFormato(all))
+                {
+                    int id =int.Parse( all.Substring(11, 1));
+                    if (id == selectedPensum.id)
+                    {
+                        for (int i = 2; i < lineas.Count()-1; i++)
+                        {
+                            //MessageBox.Show(lineas[i]);
+                            long mat =long.Parse( lineas[i]);
+                            materias.Add(mat);
+
+                            foreach (GraphNode node in pensum.Vertices)
+                            {
+                                if (materias.Contains(node.Mat.id))
+                                {
+                                    node.BackColor = Color.Khaki;
+                                    node.Sub.BackColor = Color.Khaki;
+                                }
+                                else
+                                {
+                                    node.BackColor = Color.White;
+                                    node.Sub.BackColor = Color.White;
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("El formato del txt seleccionado no es el correcto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                reader.Close();
+            }
+        }
+        private bool VerificarFormato(string texto)
+        {
+            if (texto.StartsWith("Pensum Id: ") && texto.Contains("Id de Materias:"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

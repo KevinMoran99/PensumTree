@@ -40,6 +40,7 @@
             this.btnExport = new System.Windows.Forms.Button();
             this.btnCargar = new System.Windows.Forms.Button();
             this.lblImLazy = new System.Windows.Forms.Label();
+            this.Archivotxt = new System.Windows.Forms.OpenFileDialog();
             this.panelCiclos.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -163,6 +164,7 @@
             this.btnCargar.TabIndex = 163;
             this.btnCargar.Text = "Cargar progreso de txt";
             this.btnCargar.UseVisualStyleBackColor = true;
+            this.btnCargar.Click += new System.EventHandler(this.btnCargar_Click);
             // 
             // lblImLazy
             // 
@@ -213,5 +215,6 @@
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Panel panelGrafo;
         private System.Windows.Forms.Label lblImLazy;
+        private System.Windows.Forms.OpenFileDialog Archivotxt;
     }
 }
