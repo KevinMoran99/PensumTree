@@ -25,7 +25,7 @@ namespace PensumTree
 
         private void loadTable()
         {
-            int x = 150;
+            int x = 0;
             int y = 0;
 
             Operation<plan> getPlans = planContoller.getRecords();

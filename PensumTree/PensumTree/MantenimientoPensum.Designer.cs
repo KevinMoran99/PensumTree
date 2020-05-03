@@ -57,6 +57,7 @@
             this.dgvPensum.ReadOnly = true;
             this.dgvPensum.Size = new System.Drawing.Size(922, 474);
             this.dgvPensum.TabIndex = 83;
+            this.dgvPensum.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPensum_CellContentClick);
             // 
             // lblTitulo
             // 

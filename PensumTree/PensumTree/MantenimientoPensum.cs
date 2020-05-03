@@ -15,6 +15,7 @@ namespace PensumTree
 {
     public partial class MantenimientoPensum : Form
     {
+        bool isLoggedAdmin;
         private static PlanController planContoller = new PlanController();
         private List<plan> plans = new List<plan>();
 
@@ -22,7 +23,11 @@ namespace PensumTree
         {
             InitializeComponent();
         }
-
+        public MantenimientoPensum(bool isLogged)
+        {
+            InitializeComponent();
+            isLoggedAdmin = isLogged;
+        }
         private int[] columnsToChange = { 0,2,3,4,5 };
         private int[] columnsToHide = { 1,6 };
         private string[] titlesforColumns = { "ID", "Año de inicio", "Año de fin", "Estado", "Carrera" };
@@ -75,7 +80,7 @@ namespace PensumTree
                 int index = e.RowIndex;
                 if (index >= 0)
                 {
-                    VistaPensum frm = new VistaPensum(plans[index]);
+                    VistaPensum frm = new VistaPensum(plans[index], isLoggedAdmin);
                     frm.Show();
                     this.Hide();
                 }
@@ -86,6 +91,24 @@ namespace PensumTree
             }
 
             
+        }
+
+        private void DgvPensum_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                int index = e.RowIndex;
+                if (index >= 0)
+                {
+                    VistaPensum frm = new VistaPensum(plans[index], isLoggedAdmin);
+                    frm.Show();
+                    this.Hide();
+                }
+            }
+            catch (Exception ex)
+            {
+                FormUtils.defaultErrorMessage(ex);
+            }
         }
     }
 }

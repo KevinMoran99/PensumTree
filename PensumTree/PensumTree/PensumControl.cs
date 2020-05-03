@@ -15,6 +15,7 @@ namespace PensumTree
 {
     public partial class PensumControl : UserControl
     {
+        plan sendPlan;
         public PensumControl()
         {
             InitializeComponent();
@@ -22,11 +23,24 @@ namespace PensumTree
 
         public PensumControl(plan plan): this()
         {
+            sendPlan = plan;
             lblInicio.Text = plan.inicio.ToString();
             lblFin.Text = plan.fin.ToString();
             chbEstado.Checked = plan.estado;
             chbEstado.Text = plan.estado ? "Activo" : "Inactivo";
             lblCarrera.Text = plan.carrera.ToString();
+        }
+
+        private void Panel1_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, this.panel1.ClientRectangle, Color.DarkBlue, ButtonBorderStyle.Solid);
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            VistaPensum frm = new VistaPensum(sendPlan, false);
+            frm.Show();
+            this.Hide();
         }
     }
 }

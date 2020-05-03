@@ -13,10 +13,16 @@ namespace PensumTree
     public partial class Form1 : Form
     {
         //Tutorial Setup EntityFramework: https://www.imaginaformacion.com/tutorial/como-conectar-entity-framework-con-mysql/
-
+        bool isLoggedAdmin;
         public Form1()
         {
             InitializeComponent();
+        }
+
+        public Form1(bool isLogged)
+        {
+            InitializeComponent();
+            isLoggedAdmin = isLogged;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -56,7 +62,7 @@ namespace PensumTree
 
         private void Button6_Click(object sender, EventArgs e)
         {
-            MantenimientoPensum frm = new MantenimientoPensum();
+            MantenimientoPensum frm = new MantenimientoPensum(isLoggedAdmin);
             frm.Show();
             this.Hide();
         }

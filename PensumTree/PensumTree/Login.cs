@@ -12,6 +12,7 @@ namespace PensumTree
 {
     public partial class Login : Form
     {
+        bool isLogged;
         public Login()
         {
             InitializeComponent();
@@ -22,7 +23,8 @@ namespace PensumTree
             if (txtUser.Text == "admin" && txtPassword.Text == "adm1n")
             {
                 MessageBox.Show("Bienvenido admin", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Form1 menuPrincipal = new Form1();
+                isLogged = true;
+                Form1 menuPrincipal = new Form1(isLogged);
                 menuPrincipal.Show();
                 this.Hide();
             }
