@@ -175,6 +175,18 @@
       <DependentUpon>GraphNode.cs</DependentUpon>
     </Compile>
     <Compile Include="IAgregarMateria.cs" />
+    <Compile Include="ListadoPensums.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListadoPensums.Designer.cs">
+      <DependentUpon>ListadoPensums.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
     <Compile Include="MantenimientoCarrera.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -241,6 +253,12 @@
     <Compile Include="ModuloPensum.Designer.cs">
       <DependentUpon>ModuloPensum.cs</DependentUpon>
     </Compile>
+    <Compile Include="PensumControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PensumControl.Designer.cs">
+      <DependentUpon>PensumControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="EntityFramework\tipo_carrera.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
@@ -275,6 +293,12 @@
     <EmbeddedResource Include="Graphics\GraphNode.resx">
       <DependentUpon>GraphNode.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ListadoPensums.resx">
+      <DependentUpon>ListadoPensums.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MantenimientoCarrera.resx">
       <DependentUpon>MantenimientoCarrera.cs</DependentUpon>
     </EmbeddedResource>
@@ -301,6 +325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloPensum.resx">
       <DependentUpon>ModuloPensum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PensumControl.resx">
+      <DependentUpon>PensumControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
