@@ -40,7 +40,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(27, 43);
+            this.label1.Location = new System.Drawing.Point(27, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 19);
             this.label1.TabIndex = 0;
@@ -50,7 +50,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(27, 91);
+            this.label2.Location = new System.Drawing.Point(27, 89);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 19);
             this.label2.TabIndex = 1;
@@ -58,14 +58,14 @@
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(117, 44);
+            this.txtUser.Location = new System.Drawing.Point(117, 42);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(121, 20);
             this.txtUser.TabIndex = 2;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(117, 91);
+            this.txtPassword.Location = new System.Drawing.Point(117, 89);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(121, 20);
             this.txtPassword.TabIndex = 3;
@@ -75,7 +75,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(112, 9);
+            this.label3.Location = new System.Drawing.Point(57, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(126, 26);
             this.label3.TabIndex = 4;
@@ -84,9 +84,9 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(223, 115);
+            this.button1.Location = new System.Drawing.Point(62, 128);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 32);
+            this.button1.Size = new System.Drawing.Size(121, 32);
             this.button1.TabIndex = 5;
             this.button1.Text = "Iniciar sesión";
             this.button1.UseVisualStyleBackColor = true;
@@ -96,7 +96,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 159);
+            this.ClientSize = new System.Drawing.Size(246, 181);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtPassword);

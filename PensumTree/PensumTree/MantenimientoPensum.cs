@@ -75,32 +75,22 @@ namespace PensumTree
 
         private void dgvPensum_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                int index = e.RowIndex;
-                if (index >= 0)
-                {
-                    VistaPensum frm = new VistaPensum(plans[index], isLoggedAdmin);
-                    frm.Show();
-                    this.Hide();
-                }
-            }
-            catch (Exception ex)
-            {
-                FormUtils.defaultErrorMessage(ex);
-            }
 
             
         }
 
         private void DgvPensum_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+        }
+
+        private void dgvPensum_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
             try
             {
                 int index = e.RowIndex;
                 if (index >= 0)
                 {
-                    VistaPensum frm = new VistaPensum(plans[index], isLoggedAdmin);
+                    ModuloPensum frm = new ModuloPensum(plans[index]);
                     frm.Show();
                     this.Hide();
                 }

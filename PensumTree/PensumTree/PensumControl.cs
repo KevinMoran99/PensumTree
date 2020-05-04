@@ -39,8 +39,8 @@ namespace PensumTree
         private void Button1_Click(object sender, EventArgs e)
         {
             VistaPensum frm = new VistaPensum(sendPlan, false);
+            this.Parent.Parent.Hide();
             frm.Show();
-            this.Hide();
         }
     }
 }

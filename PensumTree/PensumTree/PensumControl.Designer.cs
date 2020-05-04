@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.chbEstado = new System.Windows.Forms.CheckBox();
             this.lblCarrera = new System.Windows.Forms.Label();
             this.lblFin = new System.Windows.Forms.Label();
@@ -37,7 +38,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,9 +59,23 @@
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.NavajoWhite;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(22, 27);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(83, 39);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Ver pénsum";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
             // chbEstado
             // 
             this.chbEstado.AutoSize = true;
+            this.chbEstado.Enabled = false;
             this.chbEstado.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chbEstado.Location = new System.Drawing.Point(248, 51);
             this.chbEstado.Name = "chbEstado";
@@ -138,19 +152,6 @@
             this.label1.Size = new System.Drawing.Size(66, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Año inicio:";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.NavajoWhite;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(22, 27);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(83, 39);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Ver pénsum";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // PensumControl
             // 

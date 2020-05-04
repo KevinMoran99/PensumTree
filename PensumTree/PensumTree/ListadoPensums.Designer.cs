@@ -71,7 +71,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblTitulo);
             this.Name = "ListadoPensums";
-            this.Text = "ListadoPensums";
+            this.Text = "Lista de Pensums";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ListadoPensums_FormClosing);
             this.Load += new System.EventHandler(this.ListadoPensums_Load);
             this.ResumeLayout(false);
