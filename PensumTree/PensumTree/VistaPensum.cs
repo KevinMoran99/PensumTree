@@ -43,6 +43,7 @@ namespace PensumTree
         private materia _mat = new materia();
 
         public BidirectionalGraph<GraphNode, Edge<GraphNode>> pensum;
+        bool isLoggedAdmin;
         public GraphNode[,] positionMatrix = new GraphNode[10, 7]; //Matriz que organiza cada materia según su posición lógica en la malla
 
         public GraphNode current = null;
@@ -52,11 +53,12 @@ namespace PensumTree
         {
             InitializeComponent();
         }
-        public VistaPensum(plan currentPensum)
+        public VistaPensum(plan currentPensum, bool isLogged)
         {
             InitializeComponent();
 
             selectedPensum = currentPensum;
+            isLoggedAdmin = isLogged;
         }
 
 
@@ -417,9 +419,18 @@ namespace PensumTree
 
         private void btnRegresar_Click(object sender, EventArgs e)
         {
-            MantenimientoPensum frm = new MantenimientoPensum();
+            if (isLoggedAdmin)
+            {
+            MantenimientoPensum frm = new MantenimientoPensum(true);
             frm.Show();
             this.Hide();
+            }
+            else
+            {
+                ListadoPensums frm = new ListadoPensums();
+                frm.Show();
+                this.Hide();
+            }
         }
 
         private void VistaPensum_FormClosed(object sender, FormClosedEventArgs e)

@@ -57,7 +57,7 @@
             this.dgvPensum.ReadOnly = true;
             this.dgvPensum.Size = new System.Drawing.Size(922, 474);
             this.dgvPensum.TabIndex = 83;
-            this.dgvPensum.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPensum_CellClick);
+            this.dgvPensum.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPensum_CellContentClick);
             // 
             // lblTitulo
             // 
@@ -90,7 +90,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(946, 612);
+            this.ClientSize = new System.Drawing.Size(946, 620);
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.dgvPensum);
             this.Controls.Add(this.lblTitulo);
