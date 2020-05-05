@@ -40,6 +40,8 @@
             this.btnExport = new System.Windows.Forms.Button();
             this.btnCargar = new System.Windows.Forms.Button();
             this.lblImLazy = new System.Windows.Forms.Label();
+            this.Archivotxt = new System.Windows.Forms.OpenFileDialog();
+            this.GArchivotxt = new System.Windows.Forms.SaveFileDialog();
             this.panelCiclos.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -152,6 +154,7 @@
             this.btnExport.TabIndex = 162;
             this.btnExport.Text = "Exportar progreso a txt";
             this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnCargar
             // 
@@ -162,6 +165,7 @@
             this.btnCargar.TabIndex = 163;
             this.btnCargar.Text = "Cargar progreso de txt";
             this.btnCargar.UseVisualStyleBackColor = true;
+            this.btnCargar.Click += new System.EventHandler(this.btnCargar_Click);
             // 
             // lblImLazy
             // 
@@ -173,6 +177,10 @@
             this.lblImLazy.Text = "Título";
             this.lblImLazy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblImLazy.Visible = false;
+            // 
+            // GArchivotxt
+            // 
+            this.GArchivotxt.DefaultExt = "txt";
             // 
             // VistaPensum
             // 
@@ -212,5 +220,7 @@
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Panel panelGrafo;
         private System.Windows.Forms.Label lblImLazy;
+        private System.Windows.Forms.OpenFileDialog Archivotxt;
+        private System.Windows.Forms.SaveFileDialog GArchivotxt;
     }
 }

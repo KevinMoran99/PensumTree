@@ -15,6 +15,7 @@ using PensumTree.Models;
 using PensumTree.Utils;
 using QuickGraph;
 using static PensumTree.Utils.FormValidators;
+using System.IO;
 
 namespace PensumTree
 {
@@ -587,6 +588,109 @@ namespace PensumTree
         private void panelGrafo_MouseHover(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+          
+            try
+            {
+                GArchivotxt.InitialDirectory = "C:\\";
+                if  (GArchivotxt.ShowDialog() == DialogResult.OK)
+                {                   
+                    string cadena = GArchivotxt.FileName;
+                    StreamWriter writer = new StreamWriter(cadena);
+
+                    writer.WriteLine("Pensum Id: " + selectedPensum.id.ToString());
+                    writer.WriteLine("Id de Materias:");
+
+                    foreach (GraphNode node in pensum.Vertices)
+                    {
+                        if (node.BackColor == Color.Khaki)
+                        {
+                            writer.WriteLine(node.Mat.id.ToString());
+                        }
+                    }
+                    writer.Close();
+                    MessageBox.Show("Progreso guardado exitosamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                              
+            }
+            catch 
+            {
+                MessageBox.Show("Error al guardar progreso", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
+        }
+
+        private void btnCargar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<long> materias = new List<long>();
+                Archivotxt.InitialDirectory = "C:\\";
+                Archivotxt.Filter = "txt files (*.txt)|*.txt";
+                if (Archivotxt.ShowDialog() == DialogResult.OK)
+                {
+                    string cadena = Archivotxt.FileName;
+                    StreamReader reader = new StreamReader(cadena);
+                    string all = reader.ReadToEnd();
+                    string[] lineas = all.Split('\n');
+                    if (VerificarFormato(all))
+                    {
+                        int id = int.Parse(all.Substring(11, 1));
+                        if (id == selectedPensum.id)
+                        {
+                            for (int i = 2; i < lineas.Count() - 1; i++)
+                            {
+                                //MessageBox.Show(lineas[i]);
+                                long mat = long.Parse(lineas[i]);
+                                materias.Add(mat);
+
+                                foreach (GraphNode node in pensum.Vertices)
+                                {
+                                    if (materias.Contains(node.Mat.id))
+                                    {
+                                        node.BackColor = Color.Khaki;
+                                        node.Sub.BackColor = Color.Khaki;
+                                    }
+                                    else
+                                    {
+                                        node.BackColor = Color.White;
+                                        node.Sub.BackColor = Color.White;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("El archivo seleccionado no corresponde" +
+                                "\na este pensum", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("El formato del txt seleccionado no es el correcto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    reader.Close();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("El formato del txt seleccionado no es el correcto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private bool VerificarFormato(string texto)
+        {
+            if (texto.StartsWith("Pensum Id: ") && texto.Contains("Id de Materias:"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
