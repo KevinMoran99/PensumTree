@@ -614,53 +614,60 @@ namespace PensumTree
 
         private void btnCargar_Click(object sender, EventArgs e)
         {
-            List<long> materias = new List<long>();
-            Archivotxt.InitialDirectory = "C:\\";
-            Archivotxt.Filter = "txt files (*.txt)|*.txt";
-            if (Archivotxt.ShowDialog()== DialogResult.OK)
+            try
             {
-                string cadena = Archivotxt.FileName;
-                StreamReader reader = new StreamReader(cadena);
-                string all = reader.ReadToEnd();
-                string[] lineas= all.Split('\n');
-                if (VerificarFormato(all))
+                List<long> materias = new List<long>();
+                Archivotxt.InitialDirectory = "C:\\";
+                Archivotxt.Filter = "txt files (*.txt)|*.txt";
+                if (Archivotxt.ShowDialog() == DialogResult.OK)
                 {
-                    int id =int.Parse( all.Substring(11, 1));
-                    if (id == selectedPensum.id)
+                    string cadena = Archivotxt.FileName;
+                    StreamReader reader = new StreamReader(cadena);
+                    string all = reader.ReadToEnd();
+                    string[] lineas = all.Split('\n');
+                    if (VerificarFormato(all))
                     {
-                        for (int i = 2; i < lineas.Count()-1; i++)
+                        int id = int.Parse(all.Substring(11, 1));
+                        if (id == selectedPensum.id)
                         {
-                            //MessageBox.Show(lineas[i]);
-                            long mat =long.Parse( lineas[i]);
-                            materias.Add(mat);
-
-                            foreach (GraphNode node in pensum.Vertices)
+                            for (int i = 2; i < lineas.Count() - 1; i++)
                             {
-                                if (materias.Contains(node.Mat.id))
+                                //MessageBox.Show(lineas[i]);
+                                long mat = long.Parse(lineas[i]);
+                                materias.Add(mat);
+
+                                foreach (GraphNode node in pensum.Vertices)
                                 {
-                                    node.BackColor = Color.Khaki;
-                                    node.Sub.BackColor = Color.Khaki;
-                                }
-                                else
-                                {
-                                    node.BackColor = Color.White;
-                                    node.Sub.BackColor = Color.White;
+                                    if (materias.Contains(node.Mat.id))
+                                    {
+                                        node.BackColor = Color.Khaki;
+                                        node.Sub.BackColor = Color.Khaki;
+                                    }
+                                    else
+                                    {
+                                        node.BackColor = Color.White;
+                                        node.Sub.BackColor = Color.White;
+                                    }
                                 }
                             }
+                        }
+                        else
+                        {
+                            MessageBox.Show("El archivo seleccionado no corresponde" +
+                                "\na este pensum", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("El archivo seleccionado no corresponde" +
-                            "\na este pensum", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("El formato del txt seleccionado no es el correcto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                }
-                else
-                {
-                    MessageBox.Show("El formato del txt seleccionado no es el correcto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
 
-                reader.Close();
+                    reader.Close();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("El formato del txt seleccionado no es el correcto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private bool VerificarFormato(string texto)
