@@ -41,6 +41,7 @@
             this.btnCargar = new System.Windows.Forms.Button();
             this.lblImLazy = new System.Windows.Forms.Label();
             this.Archivotxt = new System.Windows.Forms.OpenFileDialog();
+            this.GArchivotxt = new System.Windows.Forms.SaveFileDialog();
             this.panelCiclos.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -177,6 +178,10 @@
             this.lblImLazy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblImLazy.Visible = false;
             // 
+            // GArchivotxt
+            // 
+            this.GArchivotxt.DefaultExt = "txt";
+            // 
             // VistaPensum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,5 +221,6 @@
         private System.Windows.Forms.Panel panelGrafo;
         private System.Windows.Forms.Label lblImLazy;
         private System.Windows.Forms.OpenFileDialog Archivotxt;
+        private System.Windows.Forms.SaveFileDialog GArchivotxt;
     }
 }
