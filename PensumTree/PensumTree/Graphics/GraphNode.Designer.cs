@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GraphNode));
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblCorr = new System.Windows.Forms.Label();
             this.lblCodigo = new System.Windows.Forms.Label();
@@ -38,9 +39,11 @@
             this.pcbLab = new System.Windows.Forms.PictureBox();
             this.pcbCiclo2 = new System.Windows.Forms.PictureBox();
             this.pcbCiclo1 = new System.Windows.Forms.PictureBox();
+            this.pcbSelective = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pcbLab)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbCiclo2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbCiclo1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbSelective)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNombre
@@ -141,12 +144,24 @@
             this.toolTip1.SetToolTip(this.pcbCiclo1, "Disponible en ciclo Impar");
             this.pcbCiclo1.Click += new System.EventHandler(this.pcbCiclo1_Click);
             // 
-            // TreeNode
+            // pcbSelective
+            // 
+            this.pcbSelective.Image = ((System.Drawing.Image)(resources.GetObject("pcbSelective.Image")));
+            this.pcbSelective.Location = new System.Drawing.Point(80, 67);
+            this.pcbSelective.Name = "pcbSelective";
+            this.pcbSelective.Size = new System.Drawing.Size(20, 20);
+            this.pcbSelective.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pcbSelective.TabIndex = 9;
+            this.pcbSelective.TabStop = false;
+            this.toolTip1.SetToolTip(this.pcbSelective, "Técnica Electiva");
+            // 
+            // GraphNode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.pcbSelective);
             this.Controls.Add(this.pcbLab);
             this.Controls.Add(this.pcbCiclo2);
             this.Controls.Add(this.pcbCiclo1);
@@ -155,13 +170,14 @@
             this.Controls.Add(this.lblCorr);
             this.Controls.Add(this.lblPrerreq);
             this.Controls.Add(this.lblNombre);
-            this.Name = "TreeNode";
+            this.Name = "GraphNode";
             this.Size = new System.Drawing.Size(210, 107);
             this.Click += new System.EventHandler(this.TreeNode_Click);
             this.DoubleClick += new System.EventHandler(this.TreeNode_DoubleClick);
             ((System.ComponentModel.ISupportInitialize)(this.pcbLab)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbCiclo2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbCiclo1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbSelective)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -176,5 +192,6 @@
         private System.Windows.Forms.PictureBox pcbCiclo1;
         private System.Windows.Forms.PictureBox pcbCiclo2;
         private System.Windows.Forms.PictureBox pcbLab;
+        private System.Windows.Forms.PictureBox pcbSelective;
     }
 }

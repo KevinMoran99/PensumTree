@@ -104,15 +104,22 @@ namespace PensumTree.Graphics
                 this.Controls.Remove(pcbCiclo1);
                 pcbCiclo2.Location = new Point(pcbCiclo2.Location.X - 26, pcbCiclo2.Location.Y);
                 pcbLab.Location = new Point(pcbLab.Location.X - 26, pcbLab.Location.Y);
+                pcbSelective.Location = new Point(pcbSelective.Location.X - 26, pcbSelective.Location.Y);
             }
             if (!materia.segundoCiclo)
             {
                 this.Controls.Remove(pcbCiclo2);
                 pcbLab.Location = new Point(pcbLab.Location.X - 26, pcbLab.Location.Y);
+                pcbSelective.Location = new Point(pcbSelective.Location.X - 26, pcbSelective.Location.Y);
             }
             if (!materia.lab)
             {
                 this.Controls.Remove(pcbLab);
+                pcbSelective.Location = new Point(pcbSelective.Location.X - 26, pcbSelective.Location.Y);
+            }
+            if (!materia.electiva)
+            {
+                this.Controls.Remove(pcbSelective);
             }
         }
 
@@ -140,30 +147,56 @@ namespace PensumTree.Graphics
 
         }
 
+        //Constructor para nodos sin objeto materia
+        public GraphNode(VistaPensum parent, string materia, int X, int Y)
+        {
+            InitializeComponent();
+
+            this.parent = parent;
+            lblNombre.Text = materia;
+            lblPrerreq.Text = "*";
+            lblCodigo.Text = "*";
+            lblUv.Text = "*";
+            lblCorr.Text = "*";
+            this.x = X;
+            this.y = Y;
+            sub = new GraphNode();
+            Controls.Remove(pcbCiclo1);
+            Controls.Remove(pcbCiclo2);
+            Controls.Remove(pcbLab);
+            pcbSelective.Location = new Point(4, 67);
+            lblNombre.Font = new Font("Sans Serif", 14);
+        }
+
         private void TreeNode_Click(object sender, EventArgs e)
         {
-            if (this.BackColor == Color.White)
+            //Si no es optativa
+            if (lblCodigo.Text != "*")
             {
-                this.BackColor = Color.Khaki;
-                if(sub != null)
+
+                if (this.BackColor == Color.White)
                 {
-                    this.sub.BackColor = Color.Khaki;
+                    this.BackColor = Color.Khaki;
+                    if (sub != null)
+                    {
+                        this.sub.BackColor = Color.Khaki;
+                    }
+                    else
+                    {
+                        this.main.BackColor = Color.Khaki;
+                    }
                 }
                 else
                 {
-                    this.main.BackColor = Color.Khaki;
-                }
-            }
-            else
-            {
-                this.BackColor = Color.White;
-                if (sub != null)
-                {
-                    this.sub.BackColor = Color.White;
-                }
-                else
-                {
-                    this.main.BackColor = Color.White;
+                    this.BackColor = Color.White;
+                    if (sub != null)
+                    {
+                        this.sub.BackColor = Color.White;
+                    }
+                    else
+                    {
+                        this.main.BackColor = Color.White;
+                    }
                 }
             }
 
@@ -172,22 +205,26 @@ namespace PensumTree.Graphics
 
         private void TreeNode_DoubleClick(object sender, EventArgs e)
         {
-            Color color = Color.White;
-            if (this.BackColor == Color.White)
+            //Si no es optativa
+            if (lblCodigo.Text != "*")
             {
-                color = Color.Khaki;
-            }
-            else
-            {
-                color = Color.White;
-            }
-            if(sub != null)
-            {
-                paintNodeAndParents(this, color);
-            }
-            else
-            {
-                paintNodeAndParents(main, color);
+                Color color = Color.White;
+                if (this.BackColor == Color.White)
+                {
+                    color = Color.Khaki;
+                }
+                else
+                {
+                    color = Color.White;
+                }
+                if (sub != null)
+                {
+                    paintNodeAndParents(this, color);
+                }
+                else
+                {
+                    paintNodeAndParents(main, color);
+                }
             }
         }
 

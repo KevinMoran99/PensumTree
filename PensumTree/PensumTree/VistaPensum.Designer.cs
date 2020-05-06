@@ -42,6 +42,7 @@
             this.lblImLazy = new System.Windows.Forms.Label();
             this.Archivotxt = new System.Windows.Forms.OpenFileDialog();
             this.GArchivotxt = new System.Windows.Forms.SaveFileDialog();
+            this.bntOptativas = new System.Windows.Forms.Button();
             this.panelCiclos.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -170,7 +171,7 @@
             // lblImLazy
             // 
             this.lblImLazy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblImLazy.Location = new System.Drawing.Point(516, 54);
+            this.lblImLazy.Location = new System.Drawing.Point(898, 52);
             this.lblImLazy.Name = "lblImLazy";
             this.lblImLazy.Size = new System.Drawing.Size(58, 32);
             this.lblImLazy.TabIndex = 164;
@@ -182,11 +183,24 @@
             // 
             this.GArchivotxt.DefaultExt = "txt";
             // 
+            // bntOptativas
+            // 
+            this.bntOptativas.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.bntOptativas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bntOptativas.Location = new System.Drawing.Point(485, 54);
+            this.bntOptativas.Name = "bntOptativas";
+            this.bntOptativas.Size = new System.Drawing.Size(204, 30);
+            this.bntOptativas.TabIndex = 165;
+            this.bntOptativas.Text = "Ver materias optativas";
+            this.bntOptativas.UseVisualStyleBackColor = false;
+            this.bntOptativas.Click += new System.EventHandler(this.bntOptativas_Click);
+            // 
             // VistaPensum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1136, 691);
+            this.Controls.Add(this.bntOptativas);
             this.Controls.Add(this.lblImLazy);
             this.Controls.Add(this.btnCargar);
             this.Controls.Add(this.btnExport);
@@ -222,5 +236,6 @@
         private System.Windows.Forms.Label lblImLazy;
         private System.Windows.Forms.OpenFileDialog Archivotxt;
         private System.Windows.Forms.SaveFileDialog GArchivotxt;
+        private System.Windows.Forms.Button bntOptativas;
     }
 }

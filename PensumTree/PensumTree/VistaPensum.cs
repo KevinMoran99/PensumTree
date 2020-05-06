@@ -25,6 +25,7 @@ namespace PensumTree
         private static PlanController planController = new PlanController();
         private static PensumController pensumController = new PensumController();
         private List<pensum> pMaterias = new List<pensum>();
+        public ModuloOptativa ventanaOptativas;
 
         plan selectedPensum = null;
 
@@ -50,6 +51,9 @@ namespace PensumTree
         public GraphNode current = null;
         private int nodeX = 12;
         private int nodeY = 15;
+
+        private GraphNode electiva1, electiva2;
+
         public VistaPensum()
         {
             InitializeComponent();
@@ -60,6 +64,8 @@ namespace PensumTree
 
             selectedPensum = currentPensum;
             isLoggedAdmin = isLogged;
+
+            ventanaOptativas = new ModuloOptativa();
         }
 
 
@@ -80,30 +86,68 @@ namespace PensumTree
 
         private void generatePensumFromList()
         {
-            foreach(pensum mat in pMaterias)
+            foreach (pensum mat in pMaterias)
             {
-                int cont = arrayCont[mat.ciclo - 1];
-                int y = arrayY[mat.ciclo - 1];
-                arrayCont[mat.ciclo - 1]++;
-                arrayY[mat.ciclo - 1] += 115;
+                int cont, y;
+                bool isSelective = mat.materia.electiva;
 
 
-                Panel padre = (Panel)(this.Controls.Find("panelCiclo" + (mat.ciclo), true)[0]);
+
+                if (!isSelective)
+                {
+                    y = arrayY[mat.ciclo - 1];
+                    arrayY[mat.ciclo - 1] += 115;
+                    cont = arrayCont[mat.ciclo - 1];
+                    arrayCont[mat.ciclo - 1]++;
+                }
+                else
+                {
+                    y = ventanaOptativas.arrayY[mat.ciclo - 9];
+                    ventanaOptativas.arrayY[mat.ciclo - 9] += 115;
+                    cont = ventanaOptativas.arrayCont[mat.ciclo - 9];
+                    ventanaOptativas.arrayCont[mat.ciclo - 9]++;
+                }
+
+                Panel padre;
+
+                if (!isSelective)
+                {
+                    padre = (Panel)(this.Controls.Find("panelCiclo" + (mat.ciclo), true)[0]);
+                }
+                else
+                {
+                    padre = (Panel)(this.ventanaOptativas.Controls.Find("panelCiclo" + (mat.ciclo - 8), true)[0]);
+                }
 
 
-                
-                GraphNode nodo = new GraphNode(this, mat.materia, (int)mat.ciclo - 1, arrayCont[mat.ciclo - 1] - 2);
+                GraphNode nodo;
+                if (!isSelective)
+                {
+                    nodo = new GraphNode(this, mat.materia, (int)mat.ciclo - 1, arrayCont[mat.ciclo - 1] - 2);
+                }
+                else
+                {
+                    nodo = new GraphNode(this, mat.materia, (int)mat.ciclo - 9, ventanaOptativas.arrayCont[mat.ciclo - 9] - 1);
+                }
                 nodo.Left = 15;
                 nodo.Top = y;
                 y += 115;
                 cont++;
                 padre.Controls.Add(nodo);
 
+
                 //Añadiendo materia al grafo
                 pensum.AddVertex(nodo);
 
                 //Añadiendo materia a matriz
-                positionMatrix[(int)mat.ciclo - 1, arrayCont[mat.ciclo - 1] - 2] = nodo;
+                if (!isSelective)
+                {
+                    positionMatrix[(int)mat.ciclo - 1, arrayCont[mat.ciclo - 1] - 2] = nodo;
+                }
+                else
+                {
+                    ventanaOptativas.positionMatrixGraphNode[(int)mat.ciclo - 9, ventanaOptativas.arrayCont[mat.ciclo - 9] - 1] = nodo;
+                }
 
                 bool preFound1 = mat.materia.idPrerreq1 == null;
                 bool preFound2 = mat.materia.idPrerreq2 == null;
@@ -149,7 +193,7 @@ namespace PensumTree
                         }
                     }
 
-                    if(preFound1 && preFound2 && preFound3 && preFound4)
+                    if (preFound1 && preFound2 && preFound3 && preFound4)
                     {
                         break;
                     }
@@ -175,6 +219,32 @@ namespace PensumTree
                 {
                     Edge<GraphNode> edge = new Edge<GraphNode>(pre4, nodo);
                     pensum.AddEdge(edge);
+                }
+
+                //Agregando nodos simbólicos de técnicas electivas
+                if (isSelective)
+                {
+                    padre = (Panel)(this.Controls.Find("panelCiclo" + (mat.ciclo), true)[0]);
+                    if (mat.ciclo == 9)
+                    {
+                        if (!padre.Controls.Contains(electiva1))
+                        {
+                            electiva1 = new GraphNode(this, "Técnica Electiva 1", 8, arrayCont[8] - 2);
+                            electiva1.Left = 15;
+                            electiva1.Top = arrayY[8];
+                            padre.Controls.Add(electiva1);
+                        }
+                    }
+                    else
+                    {
+                        if (!padre.Controls.Contains(electiva2))
+                        {
+                            electiva2 = new GraphNode(this, "Técnica Electiva 2", 9, arrayCont[9] - 2);
+                            electiva2.Left = 15;
+                            electiva2.Top = arrayY[9];
+                            padre.Controls.Add(electiva2);
+                        }
+                    }
                 }
 
             }
@@ -387,12 +457,12 @@ namespace PensumTree
             int corr = 1;
 
             //Recorriendo matriz posición
-            for(int x = 0; x < 10; x++)
+            for (int x = 0; x < 10; x++)
             {
-                for(int y = 0; y < 7; y++)
+                for (int y = 0; y < 7; y++)
                 {
                     //Si la posición actual contiene una materia
-                    if(positionMatrix[x,y] != null)
+                    if (positionMatrix[x, y] != null)
                     {
                         //Si el correlativo de la materia ha cambiado
                         if (positionMatrix[x, y].Corr != corr)
@@ -409,6 +479,37 @@ namespace PensumTree
                             }
 
                             positionMatrix[x, y].setCorr(corr, prerreqCorrs); //Actualizando correlativos del nodo
+                        }
+
+
+                        corr++;
+                    }
+                }
+            }
+
+            //Recorriendo matriz posición de materias optativas
+            for (int x = 0; x < 2; x++)
+            {
+                for (int y = 0; y < 3; y++)
+                {
+                    //Si la posición actual contiene una materia
+                    if (ventanaOptativas.positionMatrixGraphNode[x, y] != null)
+                    {
+                        //Si el correlativo de la materia ha cambiado
+                        if (ventanaOptativas.positionMatrixGraphNode[x, y].Corr != corr)
+                        {
+                            //Obteniendo correlativos de los prerrequisitos de la materia
+                            string prerreqCorrs = "";
+                            foreach (Edge<GraphNode> edge in pensum.InEdges(ventanaOptativas.positionMatrixGraphNode[x, y]))
+                            {
+                                prerreqCorrs += edge.Source.Corr + ",";
+                            }
+                            if (!prerreqCorrs.Equals(""))
+                            {
+                                prerreqCorrs = prerreqCorrs.Substring(0, prerreqCorrs.Length - 1); //Eliminando coma del final
+                            }
+
+                            ventanaOptativas.positionMatrixGraphNode[x, y].setCorr(corr, prerreqCorrs); //Actualizando correlativos del nodo
                         }
 
 
@@ -691,6 +792,11 @@ namespace PensumTree
             {
                 return false;
             }
+        }
+
+        private void bntOptativas_Click(object sender, EventArgs e)
+        {
+            ventanaOptativas.ShowDialog();
         }
     }
 }

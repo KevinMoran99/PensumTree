@@ -22,12 +22,33 @@ namespace PensumTree
         public int[] arrayCont = new int[2];
 
         private materia _mat = new materia();
-        public NetNode[,] positionMatrix = new NetNode[2, 4]; 
+        public NetNode[,] positionMatrix = new NetNode[2, 4];
         //La matriz teóricamente debería ser [2,3], pero por la manera en la que está construido el método de eliminar nodo,
         //se necesita que tenga un espacio más en y
 
+        //Versión de la matriz anterior específica para ser usada en el form VistaPensum
+        public GraphNode[,] positionMatrixGraphNode = new GraphNode[2, 4];
+
         private ModuloPensum parent;
 
+        //Contructor que es llamado en el form VistaPensum
+        public ModuloOptativa()
+        {
+            InitializeComponent();
+
+            arrayY[0] = 14;
+            arrayY[1] = 14;
+
+            arrayCont[0] = 0;
+            arrayCont[1] = 0;
+
+            btnCiclo1.Visible = false;
+            btnCiclo2.Visible = false;
+            btnCiclo1.Enabled = false;
+            btnCiclo2.Enabled = false;
+        }
+
+        //Constructor que es llamado en el form ModuloPensum
         public ModuloOptativa(ModuloPensum parent)
         {
             InitializeComponent();

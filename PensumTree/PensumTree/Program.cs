@@ -16,7 +16,7 @@ namespace PensumTree
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MantenimientoPensum());
+            Application.Run(new ListadoPensums());
         }
     }
 }
