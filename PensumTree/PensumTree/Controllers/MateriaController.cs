@@ -53,7 +53,20 @@ namespace PensumTree.Controllers
             }
         }
 
-       
+        public Operation<materia> getActiveRecords(bool selective)
+        {
+            try
+            {
+                List<materia> data = EntitySingleton.Context.materias.Where(x => x.estado && x.electiva == selective).ToList();
+                return FactoryOperation<materia>.getDataOperation(data);
+            }
+            catch (Exception e)
+            {
+                return FactoryOperation<materia>.getFailOperation(e.Message);
+            }
+        }
+
+
         public Operation<materia> updateRecord(materia m)
         {
             try

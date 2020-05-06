@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using PensumTree.Controllers;
+﻿using PensumTree.Controllers;
 using PensumTree.EntityFramework;
 using PensumTree.Graphics;
 using PensumTree.Models;
 using PensumTree.Utils;
 using QuickGraph;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 using static PensumTree.Utils.FormValidators;
 
 namespace PensumTree
@@ -25,38 +20,15 @@ namespace PensumTree
         private static PlanController planController = new PlanController();
         private static PensumController pensumController = new PensumController();
         private List<pensum> pMaterias = new List<pensum>();
+        public ModuloOptativa ventanaOptativas;
 
         plan selectedPensum = null;
 
         //variables de posicion para las materias
         public int[] arrayY = new int[10];
 
-        //Estas variables fueron reemplazadas por arrayY
-        /*private int y1 = 14;
-        private int y2 = 14;
-        private int y3 = 14;
-        private int y4 = 14;
-        private int y5 = 14;
-        private int y6 = 14;
-        private int y7 = 14;
-        private int y8 = 14;
-        private int y9 = 14;
-        private int y10 = 14;*/
-
         //contadoras para el número máximo de materias por ciclo
         public int[] arrayCont = new int[10];
-
-        //Estas variables fueron reemplazadas por arrayCont
-        /*private int cont1 = 1;
-        private int cont2 = 1;
-        private int cont3 = 1;
-        private int cont4 = 1;
-        private int cont5 = 1;
-        private int cont6 = 1;
-        private int cont7 = 1;
-        private int cont8 = 1;
-        private int cont9 = 1;
-        private int cont10 = 1;*/
 
         private int num_lbl = 2;     //Esta variable sirve como contadora para los labels de encabezado de ciclo que genera loadElements
         private int num_panel = 2;   //Esta variable sirve como contadora para los panels de ciclo que genera loadElements
@@ -76,12 +48,14 @@ namespace PensumTree
         public ModuloPensum()
         {
             InitializeComponent();
+            ventanaOptativas = new ModuloOptativa(this);
         }
         public ModuloPensum(plan currentPensum)
         {
             InitializeComponent();
 
             selectedPensum = currentPensum;
+            ventanaOptativas = new ModuloOptativa(this);
         }
 
         private void loadCbx()
@@ -203,7 +177,12 @@ namespace PensumTree
 
                 preOk = preOk1 && preOk2 && preOk3 && preOk4;
             }
-            
+
+            //Validación que verifica que la primera materia agregada a un pensum no tenga prerrequisitos
+            if (preOk)
+            {
+                preOk = !(pensum.VertexCount == 0 && (_mat.materia2 != null || _mat.materia3 != null || _mat.materia4 != null || _mat.materia5 != null));
+            }
 
             if (!preOk)
             {
@@ -255,82 +234,10 @@ namespace PensumTree
                 return;
             }
 
-
-
             cont = arrayCont[matrixX];
             y = arrayY[matrixX];
             arrayCont[matrixX]++;
             arrayY[matrixX] += 115;
-
-            //Al usar arrays en vez de las variables, se puede reemplazar el switch por las cuatro líneas de arriba
-            /*switch (((Button)sender).Name.ToString())  //Este switch registra a que ciclo se tiene que agregar la materia
-            {                                          //Segun el ciclo busca las coordenadas y el número de materias que ya tiene ese ciclo
-                case "btnCiclo1":
-                    cont = cont1;
-                    y = y1;
-                    cont1++;
-                    y1 += 115;
-                    break;
-                case "btnCiclo2":
-                    cont = cont2;
-                    y = y2;
-                    cont2++;
-                    y2 += 115;
-                    break;
-                case "btnCiclo3":
-                    cont = cont3;
-                    y = y3;
-                    cont3++;
-                    y3 += 115;
-                    break;
-                case "btnCiclo4":
-                    cont = cont4;
-                    y = y4;
-                    cont4++;
-                    y4 += 115;
-                    break;
-                case "btnCiclo5":
-                    cont = cont5;
-                    y = y5;
-                    cont5++;
-                    y5 += 115;
-                    break;
-                case "btnCiclo6":
-                    cont = cont6;
-                    y = y6;
-                    cont6++;
-                    y6 += 115;
-                    break;
-                case "btnCiclo7":
-                    cont = cont7;
-                    y = y7;
-                    cont7++;
-                    y7 += 115;
-                    break;
-                case "btnCiclo8":
-                    cont = cont8;
-                    y = y8;
-                    cont8++;
-                    y8 += 115;
-                    break;
-                case "btnCiclo9":
-                    cont = cont9;
-                    y = y9;
-                    cont9++;
-                    y9 += 115;
-                    break;
-                case "btnCiclo10":
-                    cont = cont10;
-                    y = y10;
-                    cont10++;
-                    y10 += 115;
-                    break;
-                default:
-                    MessageBox.Show("Error");
-                    break;
-            }
-
-            matrixY = cont - 1;*/
 
             if (cont < 6)                   //Este if controla que no se sobrepase mas de 5 materias por ciclo
             {
@@ -391,19 +298,52 @@ namespace PensumTree
         {
             foreach(pensum mat in pMaterias)
             {
-                int cont = arrayCont[mat.ciclo - 1];
-                int y = arrayY[mat.ciclo - 1];
-                arrayCont[mat.ciclo - 1]++;
-                arrayY[mat.ciclo - 1] += 115;
+                int cont, y;
+                bool isSelective = mat.materia.electiva;
 
+                
 
-                Panel padre = (Panel)(this.Controls.Find("panelCiclo" + (mat.ciclo), true)[0]);
-                Button currentButton = ((Button)(padre.Controls.Find("btnCiclo" + (mat.ciclo), true)[0]));
-
-
-                if (cont < 6)                   //Este if controla que no se sobrepase mas de 5 materias por ciclo
+                if (!isSelective)
                 {
-                    NetNode nodo = new NetNode(this, mat.materia, (int)mat.ciclo - 1, arrayCont[mat.ciclo - 1] - 2);
+                    y = arrayY[mat.ciclo - 1];
+                    arrayY[mat.ciclo - 1] += 115;
+                    cont = arrayCont[mat.ciclo - 1];
+                    arrayCont[mat.ciclo - 1]++;
+                }
+                else
+                {
+                    y = ventanaOptativas.arrayY[mat.ciclo - 9];
+                    ventanaOptativas.arrayY[mat.ciclo - 9] += 115;
+                    cont = ventanaOptativas.arrayCont[mat.ciclo - 9];
+                    ventanaOptativas.arrayCont[mat.ciclo - 9]++;
+                }
+
+                Panel padre;
+                Button currentButton;
+
+                if (!isSelective)
+                {
+                    padre = (Panel)(this.Controls.Find("panelCiclo" + (mat.ciclo), true)[0]);
+                    currentButton = ((Button)(padre.Controls.Find("btnCiclo" + (mat.ciclo), true)[0]));
+                }
+                else
+                {
+                    padre = (Panel)(this.ventanaOptativas.Controls.Find("panelCiclo" + (mat.ciclo - 8), true)[0]);
+                    currentButton = ((Button)(padre.Controls.Find("btnCiclo" + (mat.ciclo - 8), true)[0]));
+                }
+
+
+                /*if (cont < 6)                   //Este if controla que no se sobrepase mas de 5 materias por ciclo
+                {*/
+                    NetNode nodo;
+                    if (!isSelective)
+                    {
+                        nodo = new NetNode(this, mat.materia, (int)mat.ciclo - 1, arrayCont[mat.ciclo - 1] - 2);
+                    }
+                    else
+                    {
+                        nodo = new NetNode(this, mat.materia, (int)mat.ciclo - 9, ventanaOptativas.arrayCont[mat.ciclo - 9] - 1);
+                    }
                     nodo.Left = 15;
                     nodo.Top = y;
                     y += 115;
@@ -416,7 +356,14 @@ namespace PensumTree
                     pensum.AddVertex(nodo);
 
                     //Añadiendo materia a matriz
-                    positionMatrix[(int)mat.ciclo - 1, arrayCont[mat.ciclo - 1] - 2] = nodo;
+                    if (!isSelective)
+                    {
+                        positionMatrix[(int)mat.ciclo - 1, arrayCont[mat.ciclo - 1] - 2] = nodo;
+                    }
+                    else
+                    {
+                        ventanaOptativas.positionMatrix[(int)mat.ciclo - 9, ventanaOptativas.arrayCont[mat.ciclo - 9] - 1] = nodo;
+                    }
 
                     bool preFound1 = mat.materia.idPrerreq1 == null;
                     bool preFound2 = mat.materia.idPrerreq2 == null;
@@ -492,15 +439,15 @@ namespace PensumTree
 
                     
 
-                    if (cont == 6)
+                    if (cont == 6 || (cont >= 3 && isSelective))
                     {
                         currentButton.Visible = false;
                     }
-                }
+                /*}
                 else
                 {
                     currentButton.Visible = false;
-                }
+                }*/
             }
 
             //Actualizando correlativos
@@ -509,32 +456,6 @@ namespace PensumTree
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /*if (cont1 < 6)
-            {
-
-                Button temp = new Button();
-
-                temp.Height = 107;
-                temp.Width = 210;
-                temp.Location = new Point(10, y1);
-                y1 += 115;
-                temp.Name = "btnBoton" + cont1.ToString();
-                temp.Text = "Materia" + cont1.ToString();
-                cont1++;
-                temp.Click += new EventHandler(agregarMateria_Click);
-                panelCiclo1.Controls.Add(temp);
-
-                button1.Location = new Point(84, y1);
-                if (cont1 == 6)
-                {
-                    button1.Visible = false;
-                }
-            }
-            else
-            {
-                button1.Visible = false;
-            }*/
-
         }
 
         //loadElements es una variable que genera los labels y panels para los ciclos 
@@ -584,7 +505,7 @@ namespace PensumTree
         //Interfaz donde seleccionaremos la materia que queremos agregar
         private void buscarMateria()
         {
-            AddMateria buscarm = new AddMateria(this);
+            AddMateria buscarm = new AddMateria(this, false);
             buscarm.ShowDialog();
         }
 
@@ -677,6 +598,37 @@ namespace PensumTree
                             }
 
                             positionMatrix[x, y].setCorr(corr, prerreqCorrs); //Actualizando correlativos del nodo
+                        }
+
+
+                        corr++;
+                    }
+                }
+            }
+
+            //Recorriendo matriz posición de materias optativas
+            for (int x = 0; x < 2; x++)
+            {
+                for (int y = 0; y < 3; y++)
+                {
+                    //Si la posición actual contiene una materia
+                    if (ventanaOptativas.positionMatrix[x, y] != null)
+                    {
+                        //Si el correlativo de la materia ha cambiado
+                        if (ventanaOptativas.positionMatrix[x, y].Corr != corr)
+                        {
+                            //Obteniendo correlativos de los prerrequisitos de la materia
+                            string prerreqCorrs = "";
+                            foreach (Edge<NetNode> edge in pensum.InEdges(ventanaOptativas.positionMatrix[x, y]))
+                            {
+                                prerreqCorrs += edge.Source.Corr + ",";
+                            }
+                            if (!prerreqCorrs.Equals(""))
+                            {
+                                prerreqCorrs = prerreqCorrs.Substring(0, prerreqCorrs.Length - 1); //Eliminando coma del final
+                            }
+
+                            ventanaOptativas.positionMatrix[x, y].setCorr(corr, prerreqCorrs); //Actualizando correlativos del nodo
                         }
 
 
@@ -803,7 +755,38 @@ namespace PensumTree
                     }
                 }
             }
-            
+
+            //Recorriendo matriz posición de materias electivas
+            for (int x = 0; x < 2; x++)
+            {
+                for (int y = 0; y < 3; y++)
+                {
+                    //Si la posición actual contiene una materia
+                    if (ventanaOptativas.positionMatrix[x, y] != null)
+                    {
+                        pensum tempPensum = new pensum
+                        {
+                            idPlan = selectedPensum.id,
+                            idMateria = ventanaOptativas.positionMatrix[x, y].Mat.id,
+                            corr = ventanaOptativas.positionMatrix[x, y].Corr,
+                            ciclo = ventanaOptativas.positionMatrix[x, y].X + 9,
+                            estado = true
+                        };
+                        Operation<pensum> operation = pensumController.addOrUpdateRecord(tempPensum);
+                        if (operation.State)
+                        {
+                            corr++;
+                        }
+                        else
+                        {
+                            MessageBox.Show(operation.Error, "Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
+                    }
+                }
+            }
+
             //Si se guardaron menos materias de las que se tenía inicialmente, las sobrantes deben ser eliminadas de la BD
             if (pMaterias.Count > 0)
             {
@@ -955,6 +938,11 @@ namespace PensumTree
         private void ModuloPensum_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void bntOptativas_Click(object sender, EventArgs e)
+        {
+            ventanaOptativas.ShowDialog();
         }
     }
 }

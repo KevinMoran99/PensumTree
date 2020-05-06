@@ -23,21 +23,23 @@ namespace PensumTree
         private static MateriaController materiaController = new MateriaController();
         private List<materia> materias = new List<materia>();
         private List<escuela> escuelas = new List<escuela>();
+        private bool selective;
 
         private materia selectedMateria = null;
 
         private int[] columnsToChange = { 0, 1, 2, 3, 4, 5, 6, 7, 13, 14, 16, 18, 20, 22, 23 };
         private int[] columnsToHide = { 8, 9, 10, 11, 12, 15, 17, 19, 21 };
         private string[] titlesforColumns = { "ID", "Nombre", "UV", "Código", "Ciclo Impar", "Ciclo Par", "Laboratorio", "Electiva", "Estado", "Escuela", "Pre-requisito1", "Pre-requisito2", "Pre-requisito3", "Pre-requisito4", "Pensum" };
-        public AddMateria(IAgregarMateria padre)
+        public AddMateria(IAgregarMateria padre, bool selective)
         {
             InitializeComponent();
             caller = padre;
+            this.selective = selective;
         }
 
         private void loadTable()
         {
-            Operation<materia> getMaterias = materiaController.getRecords();
+            Operation<materia> getMaterias = materiaController.getActiveRecords(selective);
             if (getMaterias.State)
             {
                 materias = getMaterias.Data;

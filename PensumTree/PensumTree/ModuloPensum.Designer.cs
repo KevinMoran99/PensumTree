@@ -45,6 +45,7 @@
             this.btnRegresar = new System.Windows.Forms.Button();
             this.panelCiclos = new System.Windows.Forms.Panel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.bntOptativas = new System.Windows.Forms.Button();
             this.panelCiclo1.SuspendLayout();
             this.panelCiclos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -54,7 +55,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(138, 28);
+            this.label1.Location = new System.Drawing.Point(34, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 20);
             this.label1.TabIndex = 0;
@@ -64,7 +65,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(140, 59);
+            this.label2.Location = new System.Drawing.Point(36, 55);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(85, 20);
             this.label2.TabIndex = 1;
@@ -73,7 +74,7 @@
             // txtInicio
             // 
             this.txtInicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInicio.Location = new System.Drawing.Point(244, 24);
+            this.txtInicio.Location = new System.Drawing.Point(140, 20);
             this.txtInicio.Name = "txtInicio";
             this.txtInicio.Size = new System.Drawing.Size(104, 26);
             this.txtInicio.TabIndex = 2;
@@ -81,7 +82,7 @@
             // txtFin
             // 
             this.txtFin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFin.Location = new System.Drawing.Point(244, 56);
+            this.txtFin.Location = new System.Drawing.Point(140, 52);
             this.txtFin.Name = "txtFin";
             this.txtFin.Size = new System.Drawing.Size(104, 26);
             this.txtFin.TabIndex = 3;
@@ -122,7 +123,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(367, 26);
+            this.label3.Location = new System.Drawing.Point(269, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 20);
             this.label3.TabIndex = 5;
@@ -132,7 +133,7 @@
             // 
             this.cmbCarrera.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCarrera.FormattingEnabled = true;
-            this.cmbCarrera.Location = new System.Drawing.Point(439, 22);
+            this.cmbCarrera.Location = new System.Drawing.Point(386, 16);
             this.cmbCarrera.Name = "cmbCarrera";
             this.cmbCarrera.Size = new System.Drawing.Size(299, 28);
             this.cmbCarrera.TabIndex = 6;
@@ -141,7 +142,7 @@
             // 
             this.rdbInactivo.AutoSize = true;
             this.rdbInactivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbInactivo.Location = new System.Drawing.Point(519, 59);
+            this.rdbInactivo.Location = new System.Drawing.Point(415, 55);
             this.rdbInactivo.Name = "rdbInactivo";
             this.rdbInactivo.Size = new System.Drawing.Size(82, 24);
             this.rdbInactivo.TabIndex = 156;
@@ -153,7 +154,7 @@
             this.rdbActivo.AutoSize = true;
             this.rdbActivo.Checked = true;
             this.rdbActivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbActivo.Location = new System.Drawing.Point(443, 58);
+            this.rdbActivo.Location = new System.Drawing.Point(339, 54);
             this.rdbActivo.Name = "rdbActivo";
             this.rdbActivo.Size = new System.Drawing.Size(70, 24);
             this.rdbActivo.TabIndex = 155;
@@ -165,7 +166,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(373, 60);
+            this.label6.Location = new System.Drawing.Point(269, 56);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(64, 20);
             this.label6.TabIndex = 154;
@@ -174,9 +175,9 @@
             // btnGuardar
             // 
             this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.Location = new System.Drawing.Point(773, 26);
+            this.btnGuardar.Location = new System.Drawing.Point(977, 20);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(193, 33);
+            this.btnGuardar.Size = new System.Drawing.Size(147, 33);
             this.btnGuardar.TabIndex = 157;
             this.btnGuardar.Text = "Guardar cambios";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -185,9 +186,9 @@
             // btnRegresar
             // 
             this.btnRegresar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegresar.Location = new System.Drawing.Point(994, 26);
+            this.btnRegresar.Location = new System.Drawing.Point(977, 62);
             this.btnRegresar.Name = "btnRegresar";
-            this.btnRegresar.Size = new System.Drawing.Size(130, 33);
+            this.btnRegresar.Size = new System.Drawing.Size(147, 33);
             this.btnRegresar.TabIndex = 158;
             this.btnRegresar.Text = "Regresar";
             this.btnRegresar.UseVisualStyleBackColor = true;
@@ -198,7 +199,7 @@
             this.panelCiclos.AutoScroll = true;
             this.panelCiclos.Controls.Add(this.lblCiclo1);
             this.panelCiclos.Controls.Add(this.panelCiclo1);
-            this.panelCiclos.Location = new System.Drawing.Point(12, 89);
+            this.panelCiclos.Location = new System.Drawing.Point(12, 101);
             this.panelCiclos.Name = "panelCiclos";
             this.panelCiclos.Size = new System.Drawing.Size(1112, 624);
             this.panelCiclos.TabIndex = 159;
@@ -208,11 +209,24 @@
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
+            // bntOptativas
+            // 
+            this.bntOptativas.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.bntOptativas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bntOptativas.Location = new System.Drawing.Point(750, 25);
+            this.bntOptativas.Name = "bntOptativas";
+            this.bntOptativas.Size = new System.Drawing.Size(168, 54);
+            this.bntOptativas.TabIndex = 160;
+            this.bntOptativas.Text = "Materias optativas";
+            this.bntOptativas.UseVisualStyleBackColor = false;
+            this.bntOptativas.Click += new System.EventHandler(this.bntOptativas_Click);
+            // 
             // ModuloPensum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1136, 716);
+            this.ClientSize = new System.Drawing.Size(1136, 737);
+            this.Controls.Add(this.bntOptativas);
             this.Controls.Add(this.panelCiclos);
             this.Controls.Add(this.btnRegresar);
             this.Controls.Add(this.btnGuardar);
@@ -257,5 +271,6 @@
         private System.Windows.Forms.Button btnCiclo1;
         private System.Windows.Forms.Panel panelCiclos;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Button bntOptativas;
     }
 }

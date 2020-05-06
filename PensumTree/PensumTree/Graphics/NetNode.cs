@@ -149,39 +149,81 @@ namespace PensumTree.Graphics
                 //Eliminando la materia y todas las materias que dependían de ella
                 foreach (NetNode node in nodesToDelete)
                 {
-                    //Obteniendo el nombre del panel padre del nodo actual
-                    Panel parentPanel = (Panel)(parent.Controls.Find("panelCiclo" + (node.X + 1), true)[0]);
-
-                    //Reubicando los controles que estaban bajo el nodo que será eliminado
-                    foreach(Control c in parentPanel.Controls)
+                    //Si la materia no es electiva
+                    if (!node.mat.electiva)
                     {
-                        if (c.Location.Y > node.Location.Y)
-                        {
-                            c.Location = new Point(c.Location.X, c.Location.Y - 115);
-                        }
-                        
-                    }
 
-                    //Reubicando la posición lógica de las materias en la matriz posición
-                    for (int y = node.y; y < 7; y++)
+                        //Obteniendo el nombre del panel padre del nodo actual
+                        Panel parentPanel = (Panel)(parent.Controls.Find("panelCiclo" + (node.X + 1), true)[0]);
+
+                        //Reubicando los controles que estaban bajo el nodo que será eliminado
+                        foreach (Control c in parentPanel.Controls)
+                        {
+                            if (c.Location.Y > node.Location.Y)
+                            {
+                                c.Location = new Point(c.Location.X, c.Location.Y - 115);
+                            }
+
+                        }
+
+                        //Reubicando la posición lógica de las materias en la matriz posición
+                        for (int y = node.y; y < 7; y++)
+                        {
+                            try
+                            {
+                                parent.positionMatrix[node.x, y] = parent.positionMatrix[node.x, y + 1];
+                                parent.positionMatrix[node.x, y].Y = y;
+                            }
+                            catch (Exception ex) { if (true) { } }
+                        }
+
+                        //Disminuyendo las variables helper del método que agrega materias
+                        parent.arrayCont[node.X]--;
+                        parent.arrayY[node.X] -= 115;
+                        //Haciendo visible al botón del panel en caso de que sea invisible
+                        ((Button)(parentPanel.Controls.Find("btnCiclo" + (node.x + 1), true)[0])).Visible = true;
+
+                        //Removiendo la materia del form y del grafo
+                        parentPanel.Controls.Remove(node);
+                        parent.pensum.RemoveVertex(node);
+                    }
+                    //Si la materia es optativa
+                    else
                     {
-                        try
+                        //Obteniendo el nombre del panel padre del nodo actual
+                        Panel parentPanel = (Panel)(parent.ventanaOptativas.Controls.Find("panelCiclo" + (node.X + 1), true)[0]);
+
+                        //Reubicando los controles que estaban bajo el nodo que será eliminado
+                        foreach (Control c in parentPanel.Controls)
                         {
-                            parent.positionMatrix[node.x, y] = parent.positionMatrix[node.x, y + 1];
-                            parent.positionMatrix[node.x, y].Y = y;
+                            if (c.Location.Y > node.Location.Y)
+                            {
+                                c.Location = new Point(c.Location.X, c.Location.Y - 115);
+                            }
+
                         }
-                        catch(Exception ex) { if (true) { } }
+
+                        //Reubicando la posición lógica de las materias en la matriz posición
+                        for (int y = node.y; y < 5; y++)
+                        {
+                            try
+                            {
+                                parent.ventanaOptativas.positionMatrix[node.x, y] = parent.ventanaOptativas.positionMatrix[node.x, y + 1];
+                                parent.ventanaOptativas.positionMatrix[node.x, y].Y = y;
+                            }
+                            catch (Exception ex) { if (true) { } }
+                        }
+
+                        //Disminuyendo las variables helper del método que agrega materias
+                        parent.ventanaOptativas.arrayCont[node.X]--;
+                        parent.ventanaOptativas.arrayY[node.X] -= 115;
+                        //Haciendo visible al botón del panel en caso de que sea invisible
+                        ((Button)(parentPanel.Controls.Find("btnCiclo" + (node.x + 1), true)[0])).Visible = true;
+
+                        //Removiendo la materia del form y del grafo
+                        parentPanel.Controls.Remove(node);
+                        parent.pensum.RemoveVertex(node);
                     }
-
-                    //Disminuyendo las variables helper del método que agrega materias
-                    parent.arrayCont[node.X]--;
-                    parent.arrayY[node.X] -= 115;
-                    //Haciendo visible al botón del panel en caso de que sea invisible
-                    ((Button)(parentPanel.Controls.Find("btnCiclo" + (node.x + 1), true)[0])).Visible = true;
-
-                    //Removiendo la materia del form y del grafo
-                    parentPanel.Controls.Remove(node);
-                    parent.pensum.RemoveVertex(node);
 
                 }
 
